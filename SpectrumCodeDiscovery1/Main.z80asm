@@ -1,0 +1,16 @@
+﻿; Code file
+start: .org #8000
+
+	
+
+	call show_menu		; returns key pressed in a 	
+	cp 0
+;	jp nz, start
+;	ld a, 0				; flags passed to main loop include isDemo etc
+;	call start_game
+	ret
+
+#include "src\\Consts.z80asm"
+#include "src\\Display.z80asm"
+;#include "src\\TitleScreen.z80asm"
+

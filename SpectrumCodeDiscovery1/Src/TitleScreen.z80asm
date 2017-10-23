@@ -1,0 +1,79 @@
+﻿;
+; main title screen consisting of 
+; Options menu, scrolling marquee and logo
+;
+
+;
+; Display the game menu
+;
+
+show_menu
+	call initialize_display
+	call init_marquee
+loop:
+	
+	call display_text
+	call step_marquee
+	call transfer
+
+
+    ld hl,LASTK         	; LAST K system variable.
+   	ld a,(hl)           	; new value of LAST K.
+    cp '1' 		    	; less than "1", bail
+    jp c, loop
+    cp '4'			; greater than 4 bail
+    jp nc, loop
+    sub '1'			; map key relative to 0
+    ld (hl), 0
+    ret                 
+
+
+;
+; clear the screen and set border and bg color to black 
+;
+
+initialize_display
+	ld a, pBlack | white | bright		; initialize the screen to black
+	call cls				; clear screen to black
+	ld a, cyan
+	call BORDER
+	ret
+
+display_text
+	ld IX, title_msg	; FIREMAN FRED
+	call print_message
+
+	ld IX, menu_msg		; MAIN MENU
+	call print_message
+
+	ld ix, start_msg	; 1 PLAY GAME
+	call print_message
+	
+	ld ix, demo_msg		; 2 DEMO MODE
+	call print_message
+
+	ld ix, prac_msg		; 3 PRACTICE MODE
+	call print_message
+
+	ret
+
+
+title_msg: 
+	defb 10, 3,  pBlack | cyan 
+	defm "FIREMAN FRED" + #80
+
+menu_msg: 
+	defb 11, 5,  pBlack | cyan 
+	defm "MAIN MENU" + #80
+
+start_msg: 
+	defb 5, 10,  pBlack | green 
+	defm "1 PLAY GAME" + #80
+
+demo_msg: 
+	defb 5, 12,  pBlack | green
+	defm "2 DEMO MODE" + #80
+
+prac_msg: 
+	defb 5, 14,  pBlack | green
+	defm "3 PRACTICE MODE" + #80
