@@ -9,14 +9,31 @@
     <DisassAnn Include="Annotations.disann" />
     <Rom Include="Rom\ZxSpectrum48.rom" />
     <DisassAnn Include="Rom\ZxSpectrum48.disann" />
-    <Folder Include="TapeFiles" />
     <Folder Include="SavedStates" />
   </ItemGroup>
   <ItemGroup>
-    <Z80Asm Include="Src\Consts.z80asm" />
+    <Z80Asm Include="Src\constants.z80asm" />
     <Z80Asm Include="Main.z80asm" />
-    <Z80Asm Include="Src\Display.z80asm" />
-    <Z80Asm Include="Src\TitleScreen.z80asm" />
+    <Z80Asm Include="Src\game\game_borders.z80asm" />
+    <Z80Asm Include="Src\game\game_loop.z80asm" />
+    <Z80Asm Include="Src\game\game_platforms.z80asm" />
+    <Z80Asm Include="Src\game\platform_renderer.z80asm" />
+    <Z80Asm Include="Src\game\sprite_engine.z80asm" />
+    <Z80Asm Include="Src\game\sprite_move.z80asm" />
+    <Z80Asm Include="Src\game\sprite_storage.z80asm" />
+    <Z80Asm Include="Src\gfx\aliens.z80asm" />
+    <Z80Asm Include="Src\gfx\platforms.z80asm" />
+    <Z80Asm Include="Src\levels\level01.z80asm" />
+    <Z80Asm Include="Src\levels\level02.z80asm" />
+    <Z80Asm Include="Src\back_buffer.z80asm" />
+    <Z80Asm Include="Src\titles\print.z80asm" />
+    <Z80Asm Include="Src\gfx\fonts.z80asm" />
+    <Z80Asm Include="Src\titles\marquee.z80asm" />
+    <Z80Asm Include="Src\titles\title_screen.z80asm" />
+    <Z80Asm Include="TestRunMe.z80asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Tap Include="TapeFiles\fred.tap" />
   </ItemGroup>
   <Import Project="$(CustomProjectExtensionsPath)Spect.Net.CodeDiscover.targets" />
 </Project>

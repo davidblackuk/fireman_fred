@@ -1,0 +1,98 @@
+﻿
+
+level_01:
+	defb black 							; tv border color
+	defb pBlack | white  				; default attributes	
+	defb sp_sid_01, sp_sid_01			; Left, right Side graphic
+	defb sp_bot_01						; Bottom graphic
+	defb red							; side and bottom colors
+
+	; plat x, y, dir, sprite, length, attrs
+
+first_ever_platform:
+	defb 19,  8, horizontal, sp_plt_01, 11, magenta, plt_normal
+
+platform_defn_len: .equ $ - first_ever_platform
+	defb  1,  9, horizontal, sp_plt_01,  9, green,	 plt_normal
+	defb  4, 13, horizontal, sp_plt_01,  9, magenta, plt_normal
+	defb 19, 13, horizontal, sp_plt_01, 11, cyan,	 plt_normal
+	defb  1, 18, horizontal, sp_plt_01, 30, yellow,  plt_normal
+
+	defb  3,  6, vertical, 	 sp_ladder, 15, white,	 plt_ladder
+	
+	defb 21,  6, vertical, 	 sp_ladder,  7, white,   plt_ladder
+	defb 27,  6, vertical, 	 sp_ladder,  7, white,   plt_ladder
+	defb 24, 11, vertical, 	 sp_ladder,  7, white,   plt_ladder
+
+	defb last_definition
+
+
+	; -------------------------------------------------------------------------------------------------------------------------
+	; sprite definitions (upto 8)
+	; start addr, low addr, end addr, sprite no, start frame, path, length, dir, speed, attributes
+	;
+first_spd
+	defw scan_line_088 + 6				; scr address
+	defw scan_line_088 + 4				; lowest scr address
+	defw scan_line_088 + 9				; highest scr address
+	defw alien_bulb + 00				; frame 0
+	defw alien_bulb + 32				; frame 1
+	defw alien_bulb + 64				; frame 2
+	defw alien_bulb + 96				; frame 3
+	defb 0								; start frame 
+	defb green							; attributes
+	defb horizontal						; type
+	defb right							; direction
+spd_len .equ  $ - first_spd
+
+	defw scan_line_088 + 22				; scr address
+	defw scan_line_088 + 22				; lowest scr address
+	defw scan_line_088 + 26				; highest scr address
+	defw alien_bulb + 00				; frame 0
+	defw alien_bulb + 32				; frame 1
+	defw alien_bulb + 64				; frame 2
+	defw alien_bulb + 96				; frame 3
+	defb 0								; start frame 
+	defb cyan							; attributes
+	defb horizontal						; type
+	defb right							; direction
+
+	; -------------------------------------------------------------------------------------------------------------------------
+	; first victim
+
+	defw scan_line_088 + 11				; scr address
+	defw scan_line_088 + 11				; lowest scr address
+	defw scan_line_088 + 11				; highest scr address
+	defw victim_1 + 00					; frame 0
+	defw victim_1 + 32					; frame 1
+	defw victim_1 + 00					; frame 2
+	defw victim_1 + 32					; frame 3
+	defb 0								; start frame 
+	defb white							; attributes
+	defb none							; type
+	defb right							; direction
+
+
+	defw scan_line_088 + 28				; scr address
+	defw scan_line_088 + 28				; lowest scr address
+	defw scan_line_088 + 28				; highest scr address
+	defw victim_2 + 32					; frame 0
+	defw victim_2 + 64					; frame 1
+	defw victim_2 + 32					; frame 2
+	defw victim_2 + 00					; frame 3
+	defb 0								; start frame 
+	defb magenta 						; attributes
+	defb none							; type
+	defb right							; direction
+
+
+
+	defb last_definition	; mark last sprite
+
+
+
+
+
+
+
+

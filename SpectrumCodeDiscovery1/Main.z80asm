@@ -1,16 +1,40 @@
 ﻿; Code file
-start: .org #8000
+ .org #8000
 
-	
 
-	call show_menu		; returns key pressed in a 	
+start:
+	call title_screen		; returns key pressed in a 	
 	cp 0
-;	jp nz, start
-;	ld a, 0				; flags passed to main loop include isDemo etc
-;	call start_game
-	ret
+	jp nz, start
+	ld a, 0					; flags passed to main loop include isDemo etc
+	call start_game	
+    jp start
 
-#include "src\\Consts.z80asm"
-#include "src\\Display.z80asm"
-;#include "src\\TitleScreen.z80asm"
+;
+; Includes for logic
+;
+#include "./src/constants.z80asm"
+#include "./src/titles/print.z80asm"
+#include "./src/titles/title_screen.z80asm"
+#include "./src/titles/marquee.z80asm"
+#include "./src/game/game_loop.z80asm"
+#include "./src/game/game_borders.z80asm"
+#include "./src/game/game_platforms.z80asm"
+#include "./src/game/platform_renderer.z80asm"
+#include "./src/game/sprite_engine.z80asm"
+#include "./src/game/sprite_move.z80asm"
 
+;
+; Includes for level and gfx definitions
+;
+#include "./src/levels/level01.z80asm"
+#include "./src/levels/level02.z80asm"
+#include "./src/gfx/aliens.z80asm"
+#include "./src/gfx/platforms.z80asm"
+#include "./src/gfx/fonts.z80asm"
+
+;
+; Includes for mutable memory regions
+;
+#include "./src/game/sprite_storage.z80asm"
+#include "./src/back_buffer.z80asm"

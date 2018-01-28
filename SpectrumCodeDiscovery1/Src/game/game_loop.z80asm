@@ -1,0 +1,41 @@
+﻿
+start_game:
+
+	ld hl, level_02
+	ld (currentLevel), hl
+	call initialize_level
+	call initialize_sprites
+
+game_loop:
+	call restore_backgrounds
+	
+	call move_sprites
+	call store_backgrounds
+	
+	call draw_sprites	
+	call transfer
+	jp game_loop
+
+
+
+
+
+initialize_level:
+	ld ix, (currentLevel)
+	call initialize_screen
+	call cls_platform_map
+	call draw_borders
+	call draw_platforms
+	ret
+
+initialize_screen:
+	ld a, (ix + i_lvl_attr)				; clear the screen to the required color
+	call cls_physical					; and clear the physical screen
+	call cls_backbuffer
+	ld a, (ix + i_lvl_border)			; set the border color from the level definition
+	call BORDER
+	ret
+
+; address of the current level defn	
+currentLevel: defw 0
+

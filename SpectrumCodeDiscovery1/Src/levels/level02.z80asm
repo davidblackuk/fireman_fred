@@ -1,0 +1,80 @@
+﻿
+level_02:
+	defb blue 							; tv border color
+	defb pBlue | white  				; default attributes	
+	defb sp_sid_02, sp_sid_02			; Left, right Side graphic
+	defb sp_bot_02						; Bottom graphic
+	defb magenta						; side and bottom colors
+
+	; plat x, y, dir, sprite, length, attrs
+	defb  1,  8, horizontal, sp_plt_02,  8, pBlue | green, plt_normal
+	defb  8, 10, horizontal, sp_plt_02,  3, pBlue | cyan, plt_normal
+	defb 12, 12, horizontal, sp_plt_02,  2, pBlue | magenta, plt_normal
+	defb 24, 12, horizontal, sp_plt_02,  5, pBlue | yellow, plt_normal
+	defb 11, 14, horizontal, sp_plt_02, 10, pBlue | red, plt_normal
+	defb 21, 16, horizontal, sp_plt_02, 10, pBlue | magenta, plt_normal
+	defb 14, 18, horizontal, sp_plt_02, 4,  pBlue | green, plt_normal
+
+	defb 13, 15, vertical, 	 sp_ladder,  6, pBlue | white, plt_ladder
+	defb 16, 12, vertical, 	 sp_ladder,  6, pBlue | white, plt_ladder
+	defb 29, 10, vertical, 	 sp_ladder,  7, pBlue | white, plt_ladder
+
+	defb last_definition
+
+	; -------------------------------------------------------------------------------------------------------------------------
+	; sprite definitions (upto 8) 
+	; start addr, low addr, end addr, sprite no, start frame, path, length, dir, speed, attributes
+
+	defw scan_line_088 + 6				; scr address
+	defw scan_line_088 + 4				; lowest scr address
+	defw scan_line_088 + 9				; highest scr address
+	defw alien_bulb + 00				; frame 0
+	defw alien_bulb + 32				; frame 1
+	defw alien_bulb + 64				; frame 2
+	defw alien_bulb + 96				; frame 3
+	defb 0								; start frame 
+	defb pBlue | green					; attributes
+	defb horizontal						; type
+	defb right							; direction
+			
+	defw scan_line_080 + 22				; scr address
+	defw scan_line_080 + 22				; lowest scr address
+	defw scan_line_080 + 26				; highest scr address
+	defw alien_bulb + 00				; frame 0
+	defw alien_bulb + 32				; frame 1
+	defw alien_bulb + 64				; frame 2
+	defw alien_bulb + 96				; frame 3
+	defb 0								; start frame 
+	defb pBlue | cyan					; attributes
+	defb horizontal						; type
+	defb right							; direction
+
+	; -------------------------------------------------------------------------------------------------------------------------
+	; first victim
+
+	defw scan_line_000 + 11				; scr address
+	defw scan_line_000 + 11				; lowest scr address
+	defw scan_line_000 + 11				; highest scr address
+	defw victim_1 + 00					; frame 0
+	defw victim_1 + 32					; frame 1
+	defw victim_1 + 00					; frame 2
+	defw victim_1 + 32					; frame 3
+	defb 0								; start frame 
+	defb pBlue | white					; attributes
+	defb horizontal						; type
+	defb right							; direction
+
+	defb last_definition				; mark last sprite
+
+
+
+
+
+
+
+
+
+
+
+
+

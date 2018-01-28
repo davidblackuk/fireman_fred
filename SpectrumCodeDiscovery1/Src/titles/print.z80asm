@@ -39,17 +39,20 @@ pWhite   equ white  << 3
 
 bright   equ #40			;%1000000
 
-cls:	ld hl, screen_start
-		ld de, screen_start + 1
-		ld bc, screen_size
-		ld (hl), 0
-		ldir
-		ld hl, attr_start
-		ld de, attr_start+1
-		ld bc, attributes_length
-		ld (hl), a
-		ldir
-		ret
+;
+; Clears the physical screen
+;
+cls_physical:	ld hl, screen_start
+				ld de, screen_start + 1
+				ld bc, screen_size -1
+				ld (hl), 0
+				ldir
+				ld hl, attr_start
+				ld de, attr_start + 1
+				ld bc, attributes_length - 1
+				ld (hl), a
+				ldir
+				ret
 
 ;
 ; Print a message to the screen
@@ -67,8 +70,10 @@ print_message:	call get_char_addr		; get the screen address back
 				inc de
 
 				
-print_loop:		ld a, (de)              ; if this is the last char to print clear the upper bit  
-				and a, #7F				
+print_loop:		ld a, (de)              ; get next character to print  
+				or a					; cp 0 in a way more efficient manner
+				ret z					; return if finished. we could save a byte by marking the last char with a set upper bit?
+
 				push hl                 ; save required registers
 				push de
 				push bc
@@ -77,13 +82,9 @@ print_loop:		ld a, (de)              ; if this is the last char to print clear t
 				pop de
 				pop hl
 
-				ld a, (IX + 2)          ; store the attribute in the attribute map
-				ld (bc), a
-
-				ld a, (de)              ; Check current character for end of string
-				bit 7, a                ; last char has upper bit set
-				ret nz
-
+				ld a, (IX + 2)          ; get the attributes for the character
+				ld (bc), a				; store the attributes in the back buffer attribute map
+		
 				inc de                  ; Next character
 				inc hl                  ; next screen address
 				inc bc                  ; next attribute
@@ -94,7 +95,7 @@ print_loop:		ld a, (de)              ; if this is the last char to print clear t
 ;
 ; Given: IX points to x,y
 ; returns: hl => back buffer address of character
-;          bc => attribute address of character ON SCREEN
+;          bc => attribute address of character in backbuffer
 get_char_addr:	ld h, 0                 ; calculate screenLoc = scan_line_00 + ((y*8) * 32)
 				ld l, (IX + 1)          ; get the y coordinate
 
@@ -120,15 +121,17 @@ get_char_addr:	ld h, 0                 ; calculate screenLoc = scan_line_00 + ((
 				ld h, 0                 
 				ld l, (IX + 1)          ; get the y coordinate
 				                
-				add hl, hl              ; hl = y * 8
+				add hl, hl              ; hl = y * 32 (chars wide)
 				add hl, hl              
 				add hl, hl              
 				add hl, hl              
 				add hl, hl              
+			            
+             
 				
 				ld b,0
 				ld c, (ix+0)
-				add hl, bc              ; hl = x + (y * 8)
+				add hl, bc              ; hl = x + (y * 32)
 				ld bc, attr_line_000
 				add hl, bc              ; add the offset to the start of the attribute block
 
@@ -163,12 +166,12 @@ _tryPeriod:		cp "."
 
 _isDigit:		ld bc, system_font_09
 				ld hl, 0
-				sub '0'					; gets offset from '0'
+				sub "0"				; gets offset from '0'
 				jp _offset_char
 
 _isAlpha:		ld bc, system_font_az	; address of first char in the a-z set
 				ld hl, 0
-				sub 'A'					; get offset from A = 0
+				sub "A"					; get offset from A = 0
 
 _offset_char:	ld l, a
 				add hl, hl				; multiply offset by 8

@@ -1,0 +1,137 @@
+﻿
+move_sprites:
+	ld b, sprite_max				; loop for all sprites
+	ld hl, sprt_0					; hl points to first sprite
+mv_loop:
+	push hl
+	push bc
+	call move_sprite
+	pop bc
+	pop hl
+	ld de, sprt_buff_len
+	add hl, de
+	djnz mv_loop
+	ret
+
+move_sprite:
+	ld a, (hl)						; is this sprite active
+	cp 0							; bail if not
+	ret z		
+	push ix
+	push hl
+	pop ix							; ix points to sprite buffer
+
+	ld a, (ix + i_sb_sp_type)		; animation type
+	
+	cp none							; if no move type (static sprite) then done
+	jr z, move_none
+	
+	cp vertical						; if it's not vertical
+	jr nz, move_h
+	
+	call move_vertical
+	jr move_comp
+
+move_h:	call move_horizontal		; it's horizontal
+	jp move_comp
+move_none:							; no movement just inc the frame
+	ld a, (ix + i_sb_anim_fr)		; retrieve frame counter
+	inc a							; inc frame counter
+	and 3							; mask significant bits
+	ld (ix + i_sb_anim_fr), a		; store frame counter
+move_comp:
+	pop ix
+	ret
+
+
+; IN HL and IX point to the sprite buffer
+;
+move_horizontal:
+	ld a, (ix + i_sb_sp_dir)
+	cp left
+	jr z, move_left
+move_right
+	ld a, (ix + i_sb_anim_fr)		; retrieve frame counter
+	inc a							; inc frame counter
+	and 3							; mask significant bits
+	ld (ix + i_sb_anim_fr), a		; store frame counter
+	cp 0							; we move every 4th frame
+	ret nz							; ignore 1,2,3
+	inc hl
+	
+	ld e, (hl)						; Get current screen address into de
+	inc hl
+	ld d, (hl)
+	dec hl							; put hl back this implements ld de, (hl)
+
+	inc de							; move right
+	push hl
+	ld bc, 4
+	add hl, bc						; move hl to last screen address
+
+	
+	ld c, (hl)						; ld bc, (hl)
+	inc hl
+	ld b, (hl)						; we won't bother dec hl as the value is poped below
+	
+	inc bc							; path includes the two end points so inc
+
+	push de
+	pop hl
+
+	sbc hl, bc						; test if we are at the end
+	jp nz, store_pos				; have we hit the right?
+	ld (ix + i_sb_sp_dir), left		; flip to move left
+	ld (ix + i_sb_anim_fr), 3		; start on the third frame
+	dec de
+	jp store_pos
+
+move_left:	
+	ld a, (ix + i_sb_anim_fr)		; retrieve frame counter
+	dec a							; inc frame counter
+	and 3
+	ld (ix + i_sb_anim_fr), a		; store frame counter
+	cp 3							; we move every 4th frame
+	ret nz							; ignore 1,2,3
+	inc hl
+
+	ld e, (hl)						; get current screen address into de
+	inc hl
+	ld d, (hl)
+	dec hl							; put hl back this implements ld de, (hl)
+
+	dec de							; move left
+	push hl
+	ld bc, 2
+	add hl, bc						; move hl to first screen address
+
+	ld c, (hl)						; ld bc, (hl)
+	inc hl
+	ld b, (hl)
+
+	dec bc							; path includes the two end points so dec
+
+	push de
+	pop hl
+
+	sbc hl, bc						; test if we are at the end
+	jp nz, store_pos				; have we hit the right?
+	ld (ix + i_sb_sp_dir), right	; flip to move left
+	ld (ix + i_sb_anim_fr), 1		; start on the third frame
+	inc de
+store_pos
+	pop hl
+	ld (hl), e
+	inc hl
+	ld (hl), d
+	dec hl
+
+;	ld (hl), de
+	ret
+
+;
+; IN HL and IX point to the sprite buffer
+;
+move_vertical:
+	ret;
+
