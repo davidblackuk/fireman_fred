@@ -28,7 +28,7 @@ i_plt_flg	equ 6
 ;
 draw_platform:
 	call get_pixmap_addr
-	call get_char_addr	                            ; hl points to back buffer, bc to attr
+	call get_char_addr								; hl points to back buffer, bc to attr
 	ld (attributes_addr), bc
 	ld b, (ix + i_plt_len)
 
@@ -40,8 +40,8 @@ horiz_loop:
 	ld de, (pixmap_addr)
 	push hl
 	push bc
-	call print_raw		                            ; hl = screen , de = pixmap
-	ld bc, 1    
+	call print_raw									; hl = screen , de = pixmap
+	ld bc, 1	
 	call set_attribute
 	pop bc
 	pop hl
@@ -52,7 +52,7 @@ draw_vert:
 	ld de, (pixmap_addr)
 	push hl
 	push bc
-	call print_raw		                            ; hl = screen , de = pixmap
+	call print_raw									; hl = screen , de = pixmap
 	ld bc, 32
 	call set_attribute
 	pop bc
@@ -76,13 +76,13 @@ set_attribute:
 
 
 get_pixmap_addr: 
-	ld de, first_plt_sprite	                        ; pixmap of first platform sprite
+	ld de, first_plt_sprite							; pixmap of first platform sprite
 	ld h, 0
-	ld l, (IX + i_plt_chr)	                        ; calc platform char code * 8
-	add hl, hl		                                ; * 2
-	add hl, hl		                                ; * 4
-	add hl, hl		                                ; * 8
-	add hl, de		                                ; de = first_plt_sprite + (chr * 8)
+	ld l, (IX + i_plt_chr)							; calc platform char code * 8
+	add hl, hl										; * 2
+	add hl, hl										; * 4
+	add hl, hl										; * 8
+	add hl, de										; de = first_plt_sprite + (chr * 8)
 	ld (pixmap_addr), hl
 	ret
 

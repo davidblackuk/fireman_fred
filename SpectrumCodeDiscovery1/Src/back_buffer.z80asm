@@ -3,8 +3,8 @@
 ;
 
 transfer:
-	HALT            		; Wait for Top Of Scanline, in reality would set up IM2 or something
-	DI              		; Disable Interrupts
+	HALT					; Wait for Top Of Scanline, in reality would set up IM2 or something
+	DI			  		; Disable Interrupts
 	LD (stack_pointer_copy),SP 	; Store Stack Pointer
 	LD SP,screen_map 		; Point SP to our table of source and destination (display) addresses
 
@@ -22,40 +22,40 @@ line_loop:
 	POP HL   		; Get buffer address
 	
 	LDI				; copy 32 bytes from the backbuffer to the screen
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI        
-	LDI	        
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI		
+	LDI			
 
 
-	DEC A    		; Move to next row
+	DEC A			; Move to next row
 	JR NZ,line_loop 	; repeat until all done
 
 	LD SP,(stack_pointer_copy) 	; restore Stack Pointer

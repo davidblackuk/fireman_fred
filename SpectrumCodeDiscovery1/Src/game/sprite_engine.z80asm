@@ -13,8 +13,8 @@ sprite_max equ 8
 ;
 draw_sprites
 		
-	ld b, sprite_max						        ; loop for all sprites
-	ld hl, sprt_0							        ; hl points to first sprite
+	ld b, sprite_max								; loop for all sprites
+	ld hl, sprt_0									; hl points to first sprite
 sp_loop:
 	push hl
 	push bc
@@ -33,105 +33,105 @@ sp_loop:
 draw_sprite:
 	push hl
 	pop ix
-	ld a, (hl)								        ; test if sprite is in use
+	ld a, (hl)										; test if sprite is in use
 	cp 0
-	ret z									        ; return if not
-	inc hl									        ; this is the back buffer location
+	ret z											; return if not
+	inc hl											; this is the back buffer location
 
-	ld e, (hl)								        ; ld de, (hl)
+	ld e, (hl)										; ld de, (hl)
 	inc hl
 	ld d, (hl)
-	dec hl									        ; put hl back this implements ld de, (hl)
+	dec hl											; put hl back this implements ld de, (hl)
 
-	push de									        ; we need this later to set attrs 
+	push de											; we need this later to set attrs 
 	ld bc, 6
-	add hl, bc								        ; address of first frame address
+	add hl, bc										; address of first frame address
 
-	ld a, (ix + i_sb_anim_fr)				        ; get current frame
+	ld a, (ix + i_sb_anim_fr)						; get current frame
 	add a, a
 
 	ld c, a
 	ld b, 0
-	add hl, bc								        ; hl = first_frame address + 2 * frameNo
+	add hl, bc										; hl = first_frame address + 2 * frameNo
 
 
-	ld c, (hl)								        ; get (hl) into bc
+	ld c, (hl)										; get (hl) into bc
 	inc hl
 	ld b, (hl)
-	dec hl									        ; put hl back this implements ld bc, (hl)
+	dec hl											; put hl back this implements ld bc, (hl)
 
 	push bc
 	pop hl
 
-	ld bc, 32								        ; loop for 16 lines * 2 bytes
+	ld bc, 32										; loop for 16 lines * 2 bytes
 str_bg3:	
 
-	ld a, (de)								        ; get back buffer pixels
-	or (hl)									        ; or ours on top
-	ld (de), a								        ; save back
-	inc hl									        ; next pixmap pixel
-	inc de									        ; next buffer pixel
-	dec bc									        ; record move
+	ld a, (de)										; get back buffer pixels
+	or (hl)											; or ours on top
+	ld (de), a										; save back
+	inc hl											; next pixmap pixel
+	inc de											; next buffer pixel
+	dec bc											; record move
 
-	ld a, (de)								        ; get back buffer pixels
-	or (hl)									        ; or ours on top
-	ld (de), a								        ; save back
-	inc hl									        ; next pixmap pixel
-	inc de									        ; next buffer pixel
-	dec bc									        ; record move
+	ld a, (de)										; get back buffer pixels
+	or (hl)											; or ours on top
+	ld (de), a										; save back
+	inc hl											; next pixmap pixel
+	inc de											; next buffer pixel
+	dec bc											; record move
 
 
-	push bc									        ; save count (dec by 2)
-	ld bc, 30								        ; next line offset
+	push bc											; save count (dec by 2)
+	ld bc, 30										; next line offset
 	ex de, hl
-	add hl, bc								        
-	ex de, hl								        ; de = de + 30
-	pop bc									        ; retrieve the count
-	ld a, b									        ; test b against c
+	add hl, bc										
+	ex de, hl										; de = de + 30
+	pop bc											; retrieve the count
+	ld a, b											; test b against c
 	or c
-	jr nz, str_bg3							        ; loop unless both are 0
-set_attr:									        ; set the attribute bytes for our sprite
-	pop hl									        ; retrieve the back buffer address
+	jr nz, str_bg3									; loop unless both are 0
+set_attr:											; set the attribute bytes for our sprite
+	pop hl											; retrieve the back buffer address
 	ld de, scan_line_000
-	sbc hl, de								        ; hl = address of sprt relative to screen top
+	sbc hl, de										; hl = address of sprt relative to screen top
 	ld a, l
-	and %00011111							        ; a = addr & 32 => x coord
-	ld c, a									        ; c =  x coord
+	and %00011111									; a = addr & 32 => x coord
+	ld c, a											; c =  x coord
 
-	ld a, l									        ; remove the xcord portion from the
-	and %11100000							        ; address in hl
+	ld a, l											; remove the xcord portion from the
+	and %11100000									; address in hl
 	ld l, a
 
 	ld d, 8
-	call div_hl_d							        ; hl = hl / 8 (character y)
+	call div_hl_d									; hl = hl / 8 (character y)
 	ld b, 0
-	add hl, bc								        ; hl += x char coord
-	ld bc, attr_line_000					        ; hl = attr start * hl /8
+	add hl, bc										; hl += x char coord
+	ld bc, attr_line_000							; hl = attr start * hl /8
 	add hl, bc
-	ld a, (ix + i_sb_attrs)					        ; get the attrs
-	ld (hl), a								        ; set first attr
+	ld a, (ix + i_sb_attrs)							; get the attrs
+	ld (hl), a										; set first attr
 	inc hl		
-	ld (hl), a								        ; set second attr
-	ld bc, 31								        ; off set to next row
+	ld (hl), a										; set second attr
+	ld bc, 31										; off set to next row
 	add hl, bc	
-	ld (hl), a								        ; set third attr
+	ld (hl), a										; set third attr
 	inc hl
-	ld (hl), a								        ; set 4th attr
+	ld (hl), a										; set 4th attr
 
 	ret
 
-div_hl_d:            						        ; hl = hl ÷ d, a = remainder
-	xor    a         						        ; clear upper eight bits of ahl
-	ld     b, 16     						        ; sixteen bits in dividend
+div_hl_d:											; hl = hl ÷ d, a = remainder
+	xor	a		 								; clear upper eight bits of ahl
+	ld	 b, 16	 								; sixteen bits in dividend
 _loopd:
-	add    hl, hl    						        ; do a sla hl. if the upper bit was 1, the c flag is set
-	rla              						        ; this moves the upper bits of the dividend into a
-	jr     c, _overflow
-	cp     d         						        ; check if we can subtract the divisor
-	jr     c, _skip  						        ; carry means d > a
+	add	hl, hl									; do a sla hl. if the upper bit was 1, the c flag is set
+	rla			  								; this moves the upper bits of the dividend into a
+	jr	 c, _overflow
+	cp	 d		 								; check if we can subtract the divisor
+	jr	 c, _skip  								; carry means d > a
 _overflow:
-	sub    d         						        ; do subtraction for real this time
-	inc    l         						        ; set the next bit of the quotient (currently bit 0)
+	sub	d		 								; do subtraction for real this time
+	inc	l		 								; set the next bit of the quotient (currently bit 0)
 _skip:
 	djnz   _loopd
 	ret
@@ -141,8 +141,8 @@ _skip:
 ; store sprite backgrounds, these are restored before the next render
 ;
 store_backgrounds
-	ld b, sprite_max						        ; loop for all  sprites
-	ld hl, sprt_0							        ; hl points to first sprite
+	ld b, sprite_max								; loop for all  sprites
+	ld hl, sprt_0									; hl points to first sprite
 bg_loop:
 	push hl
 	push bc
@@ -167,30 +167,30 @@ bg_loop:
 ; IN: hl points to the sprite buffer
 ; 
 store_background
-	ld a, (hl)								        ; test if sprite is in use
+	ld a, (hl)										; test if sprite is in use
 	cp 0
-	ret z									        ; return if not
-	inc hl									        ; points to sprite screen address
+	ret z											; return if not
+	inc hl											; points to sprite screen address
 
-	ld e, (hl)								        ; load (hl) into de (screen address)
+	ld e, (hl)										; load (hl) into de (screen address)
 	inc hl
-	ld d, (hl)								        ; de = screen address of sprite
-	dec hl									        ; put hl back this implements ld de, (hl)
+	ld d, (hl)										; de = screen address of sprite
+	dec hl											; put hl back this implements ld de, (hl)
 
-	ld bc, sprt_bg_offset-1					        ; Point HL to the sprite buffers
-	add hl, bc								        ; hl points to the background cache
-	ex de, hl								        ; swap hl and de, hl = screen address, de = buffer address
-	ld bc, 32								        ; loop for 16 lines * 2 bytes
+	ld bc, sprt_bg_offset-1							; Point HL to the sprite buffers
+	add hl, bc										; hl points to the background cache
+	ex de, hl										; swap hl and de, hl = screen address, de = buffer address
+	ld bc, 32										; loop for 16 lines * 2 bytes
 str_bg1:	
-	ldi										        ; copy two bytes
+	ldi												; copy two bytes
 	ldi
-	push bc									        ; save count (dec by 2)
-	ld bc, 30								        ; next line offset
-	add hl, bc								        ; de will already be pointing to next buff
-	pop bc									        ; retrieve the count
-	ld a, b									        ; test b against c
+	push bc											; save count (dec by 2)
+	ld bc, 30										; next line offset
+	add hl, bc										; de will already be pointing to next buff
+	pop bc											; retrieve the count
+	ld a, b											; test b against c
 	or c
-	jr nz, str_bg1							        ; loop unless both are 0
+	jr nz, str_bg1									; loop unless both are 0
 	ret
 
 ;
@@ -199,8 +199,8 @@ str_bg1:
 ;
 restore_backgrounds
 
-	ld b, sprite_max						        ; loop for all 8 sprites
-	ld hl, sprt_0							        ; hl points to first sprite
+	ld b, sprite_max								; loop for all 8 sprites
+	ld hl, sprt_0									; hl points to first sprite
 bg_loop2:
 	push hl
 	push bc
@@ -218,28 +218,28 @@ bg_loop2:
 ; IN: hl points to the sprite buffer
 ; 
 restore_background
-	ld a, (hl)								        ; test if sprite is in use
+	ld a, (hl)										; test if sprite is in use
 	cp 0
-	ret z									        ; return if not
-	inc hl									        ; points to sprite screen address
+	ret z											; return if not
+	inc hl											; points to sprite screen address
 	
-	ld e, (hl)								        ; load (hl) into de (screen address)
+	ld e, (hl)										; load (hl) into de (screen address)
 	inc hl
 	ld d, (hl)
-	dec hl									        ; de = screen address of sprite
+	dec hl											; de = screen address of sprite
 
-	ld bc, sprt_bg_offset-1					        ; Point HL to the sprite buffers
-	add hl, bc								        ; hl = background cache, de = screen address
-	ld bc, 32								        ; loop for 16 lines * 2 bytes
+	ld bc, sprt_bg_offset-1							; Point HL to the sprite buffers
+	add hl, bc										; hl = background cache, de = screen address
+	ld bc, 32										; loop for 16 lines * 2 bytes
 str_bg2:	
-	ldi										        ; copy two bytes
+	ldi												; copy two bytes
 	ldi
-	push bc									        ; save count (dec by 2)
-	ld bc, 30								        ; next line offset
-	ex de, hl								        ; de = de + 30
-	add hl, bc								        
-	ex de, hl								        ; de = de + 30
-	pop bc									        ; retrieve the count
+	push bc											; save count (dec by 2)
+	ld bc, 30										; next line offset
+	ex de, hl										; de = de + 30
+	add hl, bc										
+	ex de, hl										; de = de + 30
+	pop bc											; retrieve the count
 	ld a,b
 	or c
 	jp nz , str_bg2
@@ -267,57 +267,57 @@ reset_sprites:
 ; into the sprite definitions the max 8 sprite definitions
 ;
 initialize_sprites:
-	push ix									        ; hl already points to the first sprite def
-	call reset_sprites						        
-	ld b, 0									        ; initialize bc to the length of a sprite definition
-	ld c, spd_len							        ; this is calculated from the length of sprite def 0 in level 1
+	push ix											; hl already points to the first sprite def
+	call reset_sprites								
+	ld b, 0											; initialize bc to the length of a sprite definition
+	ld c, spd_len									; this is calculated from the length of sprite def 0 in level 1
 	ld a, -1
 init_sprt1:
 	inc a
-	push hl									        ; swap hl and ix
+	push hl											; swap hl and ix
 	pop ix	
 	push af
-	push hl									        ; save the current platform address
-	push bc									        ; and the offset to the next one
-	call initialize_sprite					        ; set up our sprite
-	pop bc									        ; restore offset
-	pop hl									        ; restore address
-	add hl, bc								        ; next platform start
+	push hl											; save the current platform address
+	push bc											; and the offset to the next one
+	call initialize_sprite							; set up our sprite
+	pop bc											; restore offset
+	pop hl											; restore address
+	add hl, bc										; next platform start
 	ld a, (HL)	
-	cp last_definition						        ; is it the end of plat form marker?
-	jr z, done_init							        ; if so, stop
+	cp last_definition								; is it the end of plat form marker?
+	jr z, done_init									; if so, stop
 	pop af
-	jp init_sprt1							        ; rinse and repeat
+	jp init_sprt1									; rinse and repeat
 done_init:
 	inc hl			
 	pop af
 	push hl
 	call store_backgrounds
 	pop hl
-	pop ix									        ; restore the level definition to ix
+	pop ix											; restore the level definition to ix
 	ret	
 
 ;
 ; IN: IX points to sprite definitition
-;     A contains the the sprite buffer number to use 0..7
+;	 A contains the the sprite buffer number to use 0..7
 ;
 initialize_sprite:
-	ld hl, sprt_0							        ; point to first sprite		
+	ld hl, sprt_0									; point to first sprite		
 	cp 0
-	jp z, cont_sprt							        ; avoid the loop if this it sprite 0
-	ld de, sprt_buff_len					        
+	jp z, cont_sprt									; avoid the loop if this it sprite 0
+	ld de, sprt_buff_len							
 	ld b, a
-add_one	add hl, de							        ; skip to the next sprite buffer
-	djnz add_one							        ; loop till 0
+add_one	add hl, de									; skip to the next sprite buffer
+	djnz add_one									; loop till 0
 cont_sprt:
-	ld (hl), 1								        ; mark as in use
-	inc hl									        ; point to attr
+	ld (hl), 1										; mark as in use
+	inc hl											; point to attr
 	push hl	
 	push ix
-	pop hl									        ; hl points to level definition
-	pop de									        ; de points to the sprt_buffer
+	pop hl											; hl points to level definition
+	pop de											; de points to the sprt_buffer
 	ld bc, spd_len
-	ldir									        ; copy the def into the buffer
+	ldir											; copy the def into the buffer
 	ret
 
 

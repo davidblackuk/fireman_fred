@@ -2,20 +2,20 @@
 
 ; char x, pixel y, sprite no, start frame, path, length, dir, speed, attributes
 sprt_0:
-	defb 0							                ; flags
-	defw 0							                ; screen address
-	defw 0							                ; lowest screen address
-	defw 0							                ; highest screen address
-	defw 0							                ; anim_addr 1
-	defw 0							                ; anim_addr 2
-	defw 0							                ; anim_addr 3
-	defw 0							                ; anim_addr 4
-	defb 0							                ; current frame 
-	defb 0							                ; attributes
-	defb 0							                ; type / horiz vs vert
-	defb 0							                ; direction (up/down/left/right)
+	defb 0											; flags
+	defw 0											; screen address
+	defw 0											; lowest screen address
+	defw 0											; highest screen address
+	defw 0											; anim_addr 1
+	defw 0											; anim_addr 2
+	defw 0											; anim_addr 3
+	defw 0											; anim_addr 4
+	defb 0											; current frame 
+	defb 0											; attributes
+	defb 0											; type / horiz vs vert
+	defb 0											; direction (up/down/left/right)
 sprt_bg_offset equ $ - sprt_0
-	defs 32							                ; sprite background
+	defs 32											; sprite background
 sprt_buff_len equ $ - sprt_0
 
 sprite_1: defs sprt_buff_len
