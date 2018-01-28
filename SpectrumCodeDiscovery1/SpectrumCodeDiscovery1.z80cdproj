@@ -30,7 +30,7 @@
     <Z80Asm Include="Src\gfx\fonts.z80asm" />
     <Z80Asm Include="Src\titles\marquee.z80asm" />
     <Z80Asm Include="Src\titles\title_screen.z80asm" />
-    <Z80Asm Include="TestRunMe.z80asm" />
+    <Z80Asm Include="read_me.z80asm" />
   </ItemGroup>
   <ItemGroup>
     <Tap Include="TapeFiles\fred.tap" />
