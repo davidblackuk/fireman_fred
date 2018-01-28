@@ -121,20 +121,20 @@ set_attr:									        ; set the attribute bytes for our sprite
 	ret
 
 div_hl_d:            						        ; hl = hl ÷ d, a = remainder
-    xor    a         						        ; clear upper eight bits of ahl
-    ld     b, 16     						        ; sixteen bits in dividend
+	xor    a         						        ; clear upper eight bits of ahl
+	ld     b, 16     						        ; sixteen bits in dividend
 _loopd:
-    add    hl, hl    						        ; do a sla hl. if the upper bit was 1, the c flag is set
-    rla              						        ; this moves the upper bits of the dividend into a
-    jr     c, _overflow
-    cp     d         						        ; check if we can subtract the divisor
-    jr     c, _skip  						        ; carry means d > a
+	add    hl, hl    						        ; do a sla hl. if the upper bit was 1, the c flag is set
+	rla              						        ; this moves the upper bits of the dividend into a
+	jr     c, _overflow
+	cp     d         						        ; check if we can subtract the divisor
+	jr     c, _skip  						        ; carry means d > a
 _overflow:
-    sub    d         						        ; do subtraction for real this time
-    inc    l         						        ; set the next bit of the quotient (currently bit 0)
+	sub    d         						        ; do subtraction for real this time
+	inc    l         						        ; set the next bit of the quotient (currently bit 0)
 _skip:
-    djnz   _loopd
-    ret
+	djnz   _loopd
+	ret
 
 
 ;
