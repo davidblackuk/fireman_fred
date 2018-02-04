@@ -6,8 +6,16 @@ start:
 	call title_screen		; returns key pressed in a 	
 	cp 0
 	jp nz, start
-	ld a, 0					; flags passed to main loop include isDemo etc
-	call start_game	
+    
+    ld hl, 0
+
+next_level:    
+    push hl
+	call start_game
+    pop hl
+    inc l
+    or a
+    jp nz, next_level
     jp start
 
 ;
@@ -15,6 +23,7 @@ start:
 ;
 #include "./src/constants.z80asm"
 #include "./src/titles/print.z80asm"
+#include "./src/game/keyboard.z80asm"
 #include "./src/titles/title_screen.z80asm"
 #include "./src/titles/marquee.z80asm"
 #include "./src/game/game_loop.z80asm"
@@ -24,14 +33,19 @@ start:
 #include "./src/game/sprite_engine.z80asm"
 #include "./src/game/sprite_move.z80asm"
 
+
 ;
 ; Includes for level and gfx definitions
 ;
 #include "./src/levels/level01.z80asm"
 #include "./src/levels/level02.z80asm"
+#include "./src/levels/level03.z80asm"
+#include "./src/gfx/fonts.z80asm"
+
+#include "./src/gfx/fred.z80asm"
+#include "./src/gfx/victims.z80asm"
 #include "./src/gfx/aliens.z80asm"
 #include "./src/gfx/platforms.z80asm"
-#include "./src/gfx/fonts.z80asm"
 
 ;
 ; Includes for mutable memory regions

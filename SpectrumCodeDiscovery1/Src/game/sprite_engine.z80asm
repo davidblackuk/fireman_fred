@@ -2,6 +2,8 @@
 
 sprite_max equ 8
 
+sprite_height equ 15
+sprite_bytes equ sprite_height*2
 ;
 ; excluding fred and the ambulance we have max 8 sprites on the screen at once
 ;
@@ -48,7 +50,7 @@ draw_sprite:
 	add hl, bc										; address of first frame address
 
 	ld a, (ix + i_sb_anim_fr)						; get current frame
-	add a, a
+	add a, a                                        ; frame 0, 1, 2, 3 => 0, 2, 4 , 6
 
 	ld c, a
 	ld b, 0
@@ -63,7 +65,7 @@ draw_sprite:
 	push bc
 	pop hl
 
-	ld bc, 32										; loop for 16 lines * 2 bytes
+	ld bc, sprite_bytes							    ; loop for 15 lines * 2 bytes
 str_bg3:	
 
 	ld a, (de)										; get back buffer pixels
@@ -120,7 +122,7 @@ set_attr:											; set the attribute bytes for our sprite
 
 	ret
 
-div_hl_d:											; hl = hl ÷ d, a = remainder
+div_hl_d:										; hl = hl ÷ d, a = remainder
 	xor	a		 								; clear upper eight bits of ahl
 	ld	 b, 16	 								; sixteen bits in dividend
 _loopd:
@@ -157,7 +159,7 @@ bg_loop:
 
 
 ;
-;  copies 16 rows of two characters from the screen into 
+;  copies 15 rows of two characters from the screen into 
 ;  the sprites buffer to allow the background to be restored 
 ;  prior to moving the sprite.
 ;
@@ -180,7 +182,7 @@ store_background
 	ld bc, sprt_bg_offset-1							; Point HL to the sprite buffers
 	add hl, bc										; hl points to the background cache
 	ex de, hl										; swap hl and de, hl = screen address, de = buffer address
-	ld bc, 32										; loop for 16 lines * 2 bytes
+	ld bc, sprite_bytes								; loop for 15 lines * 2 bytes
 str_bg1:	
 	ldi												; copy two bytes
 	ldi
@@ -230,7 +232,7 @@ restore_background
 
 	ld bc, sprt_bg_offset-1							; Point HL to the sprite buffers
 	add hl, bc										; hl = background cache, de = screen address
-	ld bc, 32										; loop for 16 lines * 2 bytes
+	ld bc, sprite_bytes								; loop for 15 lines * 2 bytes
 str_bg2:	
 	ldi												; copy two bytes
 	ldi
@@ -268,13 +270,13 @@ reset_sprites:
 ;
 initialize_sprites:
 	push ix											; hl already points to the first sprite def
-	call reset_sprites								
+	call reset_sprites								; ix points to the level defintion
 	ld b, 0											; initialize bc to the length of a sprite definition
-	ld c, spd_len									; this is calculated from the length of sprite def 0 in level 1
+	ld c, sprite_definition_len						; this is calculated from the length of sprite def 0 in level 1
 	ld a, -1
 init_sprt1:
 	inc a
-	push hl											; swap hl and ix
+	push hl											; ix = hl
 	pop ix	
 	push af
 	push hl											; save the current platform address
@@ -316,7 +318,7 @@ cont_sprt:
 	push ix
 	pop hl											; hl points to level definition
 	pop de											; de points to the sprt_buffer
-	ld bc, spd_len
+	ld bc, sprite_definition_len
 	ldir											; copy the def into the buffer
 	ret
 

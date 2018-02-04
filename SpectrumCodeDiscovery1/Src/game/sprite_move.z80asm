@@ -36,10 +36,7 @@ move_sprite:
 move_h:	call move_horizontal						; it's horizontal
 	jp move_comp
 move_none:											; no movement just inc the frame
-	ld a, (ix + i_sb_anim_fr)						; retrieve frame counter
-	inc a											; inc frame counter
-	and 3											; mask significant bits
-	ld (ix + i_sb_anim_fr), a						; store frame counter
+	call animate_frame
 move_comp:
 	pop ix
 	ret
@@ -51,7 +48,7 @@ move_horizontal:
 	ld a, (ix + i_sb_sp_dir)
 	cp left
 	jr z, move_left
-move_right
+move_right:
 	ld a, (ix + i_sb_anim_fr)						; retrieve frame counter
 	inc a											; inc frame counter
 	and 3											; mask significant bits
@@ -134,5 +131,37 @@ store_pos
 ; IN HL and IX point to the sprite buffer
 ;
 move_vertical:
-	ret;
+    call animate_frame
+    ld a, (ix + i_sb_sp_dir)
+	cp down
+	jr z, move_down
+move_up:
 
+move_down:
+	ret
+
+;
+;  Animate to the next frame there are factoirs in play here
+;   - Current frame number (ix + i_sb_anim_fr)
+;   - frame skip (ix+i_sb_sp_const_skip)  const value for the number of frame renders 
+;       to skip before incrementing the animation frame
+;   - current frame skip (ix + i_sb_sp_curr_skip) decremented until the value is 0 
+;       then the next frame is triggered and the value of curr skip is reset to const skip
+
+animate_frame:
+    ld a, (ix + i_sb_sp_curr_skip)                  ; if the frame skip is 0 
+    cp 0
+    jr z, next_frame                                ; calc next frame
+    dec a                                           ; otherwise decrement the frame skip
+    ld (ix + i_sb_sp_curr_skip), a                  ; and just move the sprite if necessary
+    ret
+
+next_frame:
+    ld a, (ix+i_sb_sp_const_skip)                   ; reset the frame skip
+    ld (ix + i_sb_sp_curr_skip), a                  ; store for next time
+
+    ld a, (ix + i_sb_anim_fr)						; retrieve frame counter
+	inc a											; inc frame counter
+	and 3											; mask significant bits
+	ld (ix + i_sb_anim_fr), a						; store frame counter
+    ret

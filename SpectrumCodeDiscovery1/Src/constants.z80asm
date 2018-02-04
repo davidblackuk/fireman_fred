@@ -41,18 +41,21 @@ i_lvl_sprt_atr:		.equ 8
 ;
 ; Sprite buffer offsets
 ;
-i_sb_flags 	equ 0
-i_sb_scr_cur 	equ 1	
-i_sb_scr_low 	equ 3
-i_sb_scr_hig 	equ 5
-i_sb_anim_1 	equ 7
-i_sb_anim_2 	equ 9
-i_sb_anim_3 	equ 11
-i_sb_anim_4 	equ 13
-i_sb_anim_fr 	equ 15
-i_sb_attrs 	equ 16
-i_sb_sp_type 	equ 17
-i_sb_sp_dir 	equ 18
+i_sb_flags 	        equ 0
+i_sb_scr_cur 	    equ 1	
+i_sb_scr_low 	    equ 3
+i_sb_scr_hig 	    equ 5
+i_sb_anim_1 	    equ 7
+i_sb_anim_2 	    equ 9
+i_sb_anim_3 	    equ 11
+i_sb_anim_4 	    equ 13
+i_sb_anim_fr 	    equ 15
+i_sb_attrs 	        equ 16
+i_sb_sp_type 	    equ 17
+i_sb_sp_dir 	    equ 18
+i_sb_sp_const_skip 	equ 19
+i_sb_sp_velocity    equ 20
+i_sb_sp_curr_skip   equ 21
 
 
 ; Plateform flags

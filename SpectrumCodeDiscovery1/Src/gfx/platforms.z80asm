@@ -2,14 +2,19 @@
 ; 8x8 pixel graphics for black, waals and platforms
 ;
 
-sp_blank equ 0
-sp_ladder equ 1
-sp_sid_01 equ 2
-sp_bot_01 equ 3
-sp_plt_01 equ 4
-sp_plt_02 equ 5
-sp_bot_02 equ 6
-sp_sid_02 equ 7
+sp_blank equ   0
+sp_ladder equ  1
+sp_sid_01 equ  2
+sp_bot_01 equ  3
+sp_plt_01 equ  4
+sp_plt_02 equ  5
+sp_bot_02 equ  6
+sp_sid_02 equ  7
+sp_sid_03 equ  8
+sp_plt_03 equ  9
+sp_plt_04 equ 10
+
+
 
 ; blank
 first_plt_sprite:
@@ -42,6 +47,7 @@ second_plt_sprite:
 	defb %10100101
 	defb %11000011
 	defb %11111111
+
 third_plt_sprite:
 	;level1_bottom
 	defb %11111111
@@ -93,8 +99,34 @@ third_plt_sprite:
 	defb %10101011
 	defb %11010101
 
+    ; side and bottom tile level 3 (solid)
+	defb %11111111
+	defb %11111111
+	defb %11111111
+	defb %11111111
+	defb %11111111
+	defb %11111111
+	defb %11111111
+	defb %11111111
 
+	; horizontal platform level 3
+	defb %11111111
+	defb %11111111
+	defb %11111111
+	defb %01010101
+	defb %10101010
+	defb %01010101
+	defb %10101010
+	defb %01010101
 
-
+    ; vertical platfor for level 3
+	defb %10101010
+	defb %01010101
+	defb %10101010
+	defb %01010101
+	defb %10101010
+	defb %01010101
+	defb %10101010
+	defb %01010101
 
 	

@@ -1,10 +1,14 @@
-﻿; short term todos
+﻿;   TODOS
 ;
-;	1: stpre and restore attributes for sprites
-;	2: impelement simple state machine to do level complete sucess and failure etc 
-;	3: implement outline levels
-;	4: get more gfx out of fred original
-;	5: get this into source control
+;	001: store and restore attributes for sprites
+;	002: implement outline levels
+;
+;   ---------------------------------------
+;   TO-DONES :-)
+;
+;	---: get more gfx out of fred original
+;	---: get this into source control
+;	---: impelement simple state machine to do level complete sucess and failure etc 
 ;
 ;
 ;

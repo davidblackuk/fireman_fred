@@ -1,23 +1,53 @@
 ﻿;---------------------------------------------------V--------------------
 
+;
+; hl contains the level number
+;
 start_game:
+    add hl, hl                                      ; hl contains the level number * 2
+    ld de, levels                                   ; level list table start address
+    add hl, de                                      ; move hl to point to the table entry for the current level
+    
+    ld e, (hl)
+    inc hl
+    ld d, (hl)
+    ex de, hl                                       ; hl contains a pointer to the level defintion for the current level
 
-	ld hl, level_02
-	ld (currentLevel), hl
-	call initialize_level
-	call initialize_sprites
+	ld (currentLevel), hl                           ; save the address of the current level
+	call initialize_level                           ; draw borders and other non sprite graphics
+	call initialize_sprites                         ; set up the sprites in their initial positions
 
 game_loop:
+    call read_keys
 	call restore_backgrounds
 	
 	call move_sprites
 	call store_backgrounds
 	
 	call draw_sprites	
-	call transfer
+	
+
+    
+    call transfer
+
+   
+
+    ; fake sucess / failure through key presses
+    ld a, (key_map)
+    bit n_pressed, a
+	jp nz, level_complete_sucess			
+
+    bit m_pressed, a
+	jp nz, level_complete_failed			
+
 	jp game_loop
 
-
+level_complete_sucess:
+    ld a, 0
+    ret
+level_complete_failed:
+    ld a, 1
+    ret
 
 
 
@@ -40,3 +70,4 @@ initialize_screen:
 ; address of the current level defn	
 currentLevel: defw 0
 
+levels: defw level_01, level_02, level_03
