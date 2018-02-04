@@ -132,13 +132,83 @@ store_pos
 ;
 move_vertical:
     call animate_frame
+
+    inc hl                                          ; point to screen address	
+	ld e, (hl)										; Get current screen address into de
+	inc hl
+	ld d, (hl)                                      ; de = screen_address
+	dec hl			                                ; hl = screen_address storage
+
+    ld b, (ix + i_sb_sp_velocity)                   ; get velocity in to b
+    xor a                                           ; zero a
+
+add_next:
+    add a, 32                                       ; calc a * 32, note that menas max velocity is 7 or overflow happens
+    djnz add_next                               
+
+    ld c, a                                         ; bc = screen offset to next point                        
+    ld b, 0
+
     ld a, (ix + i_sb_sp_dir)
 	cp down
 	jr z, move_down
 move_up:
+    ex de, hl                                        ; hl = screen_address, de = screen_address store
+    or a                                             ; reset the carry flag
+    sbc hl, bc                                       ; next line down
+
+    ex de, hl                                        ; hl = screen_address_store, de = screen_address 
+    ld (hl), e                                       ; store new position
+    inc hl
+    ld (hl), d
+   
+    inc hl                                           ; screen low adress store
+
+    ld c, (hl)
+    inc hl
+    ld b, (hl)                                      ; bc = screen low address
+    ex de, hl                                       ; hl = screen address
+
+    or a                                            ; do a 16 bit compare                   
+    sbc hl,bc
+    add hl,bc
+
+    ret nc                                          ; if the new screen address is above the end point flip direction
+
+    ld a, down                                     ; down we go
+    ld (ix + i_sb_sp_dir), a
+
+    ret
 
 move_down:
-	ret
+
+    ex de, hl                                        ; hl = screen_address, de = screen_address store
+    add hl, bc                                       ; next line down
+
+    ex de, hl                                        ; hl = screen_address_store, de = screen_address 
+    ld (hl), e                                       ; store new position
+    inc hl
+    ld (hl), d
+   
+    inc hl                                           ; screen low adress store
+    inc hl
+    inc hl                                           ; screen high address store
+
+    ld c, (hl)
+    inc hl
+    ld b, (hl)                                      ; bc = screen high address
+    ex de, hl                                       ; hl = screen address
+
+    or a                                            ; do a 16 bit compare                   
+    sbc hl,bc
+    add hl,bc
+
+    ret c                                           ; if the new screen address is below the end point flip direction
+
+    ld a, up                                        ; the only way is up
+    ld (ix + i_sb_sp_dir), a
+
+    ret
 
 ;
 ;  Animate to the next frame there are factoirs in play here
@@ -147,7 +217,9 @@ move_down:
 ;       to skip before incrementing the animation frame
 ;   - current frame skip (ix + i_sb_sp_curr_skip) decremented until the value is 0 
 ;       then the next frame is triggered and the value of curr skip is reset to const skip
-
+;
+;   IN - HL = sprite buffer
+;        DE = current screen position
 animate_frame:
     ld a, (ix + i_sb_sp_curr_skip)                  ; if the frame skip is 0 
     cp 0

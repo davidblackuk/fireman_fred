@@ -95,7 +95,8 @@ str_bg3:
 set_attr:											; set the attribute bytes for our sprite
 	pop hl											; retrieve the back buffer address
 	ld de, scan_line_000
-	sbc hl, de										; hl = address of sprt relative to screen top
+  
+	sbc hl, de										; hl = offset of sprt relative to screen top
 	ld a, l
 	and %00011111									; a = addr & 32 => x coord
 	ld c, a											; c =  x coord
@@ -104,8 +105,13 @@ set_attr:											; set the attribute bytes for our sprite
 	and %11100000									; address in hl
 	ld l, a
 
+    ld d, 32
+	call div_hl_d									; hl = hl / 32 (character y)
+
 	ld d, 8
-	call div_hl_d									; hl = hl / 8 (character y)
+	call div_hl_d									; hl = hl / 32 (character y)
+
+
 	ld b, 0
 	add hl, bc										; hl += x char coord
 	ld bc, attr_line_000							; hl = attr start * hl /8

@@ -42,7 +42,9 @@ level_03:
 	; sprite definitions (upto 8) 
 	; start addr, low addr, end addr, sprite no, start frame, path, length, dir, speed, attributes
 
-	defw scan_line_104 + 5							; scr address
+
+  
+	defw scan_line_068 + 5							; scr address
 	defw scan_line_068 + 5							; lowest scr address
 	defw scan_line_106 + 5							; highest scr address
 	defw alien_bottle + sprite_bytes * 0			; frame 0
@@ -50,7 +52,7 @@ level_03:
 	defw alien_bottle + sprite_bytes * 2			; frame 2
 	defw alien_bottle + sprite_bytes * 3			; frame 3
 	defb 0											; start frame 
-	defb pBlue | green								; attributes
+	defb pBlack | green								; attributes
 	defb vertical									; type
 	defb down										; direction
     defb 0                                          ; frame skip

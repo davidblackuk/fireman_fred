@@ -2,6 +2,7 @@
 ;
 ;	001: store and restore attributes for sprites
 ;	002: implement outline levels
+;   003: implement move skip to slow velocity
 ;
 ;   ---------------------------------------
 ;   TO-DONES :-)

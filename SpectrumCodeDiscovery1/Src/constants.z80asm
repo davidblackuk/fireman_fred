@@ -8,6 +8,17 @@ PRINT_AT:			.equ 22
 	
 LASTK:				.equ 23560
 
+screen_width_pixels: 	.equ 256
+screen_height_pixels: 	.equ 192
+screen_width_chars: 	.equ 32
+screen_height_chars: 	.equ 24
+
+screen_start: 			.equ #4000
+screen_size: 			.equ screen_width_chars * screen_height_pixels
+attr_start:				.equ #5800
+attributes_length: 		.equ screen_width_chars * screen_height_chars
+
+
 
 ; platform / sprite direction
 horizontal:			.equ 0
