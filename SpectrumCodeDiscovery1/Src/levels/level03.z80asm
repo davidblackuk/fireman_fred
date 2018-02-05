@@ -52,7 +52,7 @@ level_03:
 	defw alien_bottle + sprite_bytes * 2			; frame 2
 	defw alien_bottle + sprite_bytes * 3			; frame 3
 	defb 0											; start frame 
-	defb pBlack | green								; attributes
+	defb pBlue | green								; attributes
 	defb vertical									; type
 	defb down										; direction
     defb 0                                          ; frame skip
@@ -104,9 +104,9 @@ level_03:
     ; -------------------------------------------------------------------------------------------------------------------------
 	; first victim
 
-    defw scan_line_081 + 1							; scr address
-	defw scan_line_081 + 1							; lowest scr address
-	defw scan_line_081 + 1							; highest scr address
+    defw scan_line_080 + 1							; scr address
+	defw scan_line_080 + 1							; lowest scr address
+	defw scan_line_080 + 1							; highest scr address
 	defw victim_3 + sprite_bytes * 0		    	; frame 0
 	defw victim_3 + sprite_bytes * 1		    	; frame 1
 	defw victim_3 + sprite_bytes * 2		    	; frame 2
@@ -118,9 +118,9 @@ level_03:
     defb 2                                          ; frame skip
     defb 0                                          ; velocity (vertical)
 
-    defw scan_line_081 + 29							; scr address
-	defw scan_line_081 + 29							; lowest scr address
-	defw scan_line_081 + 29							; highest scr address
+    defw scan_line_080 + 29							; scr address
+	defw scan_line_080 + 29							; lowest scr address
+	defw scan_line_080 + 29							; highest scr address
 	defw victim_2 + sprite_bytes * 0		    	; frame 0
 	defw victim_2 + sprite_bytes * 1		    	; frame 1
 	defw victim_2 + sprite_bytes * 2		    	; frame 2

@@ -30,9 +30,9 @@ platform_defn_len: .equ $ - first_ever_platform
 	        ; sprite definitions (upto 8)
 	        ; start addr, low addr, end addr, sprite no, start frame, path, length, dir, speed, attributes
 	        ;
-first_spd:  defw scan_line_089 + 6							; scr address
-	        defw scan_line_089 + 4							; lowest scr address
-	        defw scan_line_089 + 9							; highest scr address
+first_spd:  defw scan_line_088 + 6							; scr address
+	        defw scan_line_088 + 4							; lowest scr address
+	        defw scan_line_088 + 9							; highest scr address
 	        defw alien_bulb + sprite_bytes * 0  			; frame 0
 	        defw alien_bulb + sprite_bytes * 1      		; frame 1
 	        defw alien_bulb + sprite_bytes * 2      		; frame 2
@@ -41,13 +41,13 @@ first_spd:  defw scan_line_089 + 6							; scr address
 	        defb green										; attributes
 	        defb horizontal									; type
 	        defb right										; direction
-            defb 0                                          ; frame skip
+            defb 4                                          ; frame skip
             defb 1                                          ; velocity (vertical)
 sprite_definition_len .equ  $ - first_spd			
 
-	        defw scan_line_089 + 22							; scr address
-	        defw scan_line_089 + 22							; lowest scr address
-	        defw scan_line_089 + 26							; highest scr address
+	        defw scan_line_088 + 22							; scr address
+	        defw scan_line_088 + 22							; lowest scr address
+	        defw scan_line_088 + 26							; highest scr address
 	        defw alien_bulb + sprite_bytes * 0  			; frame 0
 	        defw alien_bulb + sprite_bytes * 1      		; frame 1
 	        defw alien_bulb + sprite_bytes * 2      		; frame 2
@@ -62,9 +62,9 @@ sprite_definition_len .equ  $ - first_spd
 	        ; -------------------------------------------------------------------------------------------------------------------------
 	        ; first victim
 
-	        defw scan_line_089 + 11							; scr address
-	        defw scan_line_089 + 11							; lowest scr address
-	        defw scan_line_089 + 11							; highest scr address
+	        defw scan_line_088 + 11							; scr address
+	        defw scan_line_088 + 11							; lowest scr address
+	        defw scan_line_088 + 11							; highest scr address
 	        defw victim_1 + sprite_bytes * 0			    ; frame 0
 	        defw victim_1 + sprite_bytes * 1    		    ; frame 1
 	        defw victim_1 + sprite_bytes * 2    		    ; frame 2
@@ -77,9 +77,9 @@ sprite_definition_len .equ  $ - first_spd
             defb 0                                          ; velocity (vertical)
 		
 			
-	        defw scan_line_089 + 28							; scr address
-	        defw scan_line_089 + 28							; lowest scr address
-	        defw scan_line_089 + 28							; highest scr address
+	        defw scan_line_088 + 28							; scr address
+	        defw scan_line_088 + 28							; lowest scr address
+	        defw scan_line_088 + 28							; highest scr address
 	        defw victim_2 + sprite_bytes * 0			    ; frame 0
 	        defw victim_2 + sprite_bytes * 1    		    ; frame 1
 	        defw victim_2 + sprite_bytes * 2    		    ; frame 2

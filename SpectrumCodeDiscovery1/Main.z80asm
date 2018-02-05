@@ -7,7 +7,7 @@ start:
 	cp 0
 	jp nz, start
     
-    ld hl, 2
+    ld hl, 0
 
 next_level:    
     push hl

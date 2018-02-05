@@ -15,7 +15,12 @@ start_game:
 
 	ld (currentLevel), hl                           ; save the address of the current level
 	call initialize_level                           ; draw borders and other non sprite graphics
+
+    ;call checkerboard                               ; debug call
+
+
     call store_attributes                           ; store the non sprite attributes once per leve
+
 
 	call initialize_sprites                         ; set up the sprites in their initial positions
 
@@ -32,6 +37,8 @@ game_loop:
     
     call transfer
 
+
+
     call restore_attributes                         ; remove the effects of the sprite render to the initial attribute map
    
 
@@ -44,9 +51,9 @@ game_loop:
 	jp nz, level_complete_failed			
 
 
-    ld b,100            ; time to pause.
-delay  halt                ; wait for an interrupt.
-       djnz delay  
+;    ld b,100            ; time to pause.
+;delay  halt                ; wait for an interrupt.
+;       djnz delay  
 
 	jp game_loop
 

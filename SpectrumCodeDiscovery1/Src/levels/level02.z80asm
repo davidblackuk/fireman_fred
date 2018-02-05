@@ -55,9 +55,9 @@ level_02:
     defb 0                                          ; frame skip
     defb 0                                          ; velocity (vertical)
 
-	defw scan_line_153 + 4							; scr address
-	defw scan_line_153 + 3							; lowest scr address
-	defw scan_line_153 + 10							; highest scr address
+	defw scan_line_152 + 4							; scr address
+	defw scan_line_152 + 3							; lowest scr address
+	defw scan_line_152 + 10							; highest scr address
 	defw alien_invader1 + sprite_bytes * 0			; frame 0
 	defw alien_invader1 + sprite_bytes * 1			; frame 1
 	defw alien_invader1 + sprite_bytes * 2			; frame 2
@@ -73,9 +73,9 @@ level_02:
 	 ; -------------------------------------------------------------------------------------------------------------------------
 	 ; first victim
 
-	defw scan_line_114 + 26							; scr address
-	defw scan_line_114 + 26							; lowest scr address
-	defw scan_line_114 + 26							; highest scr address
+	defw scan_line_112 + 26							; scr address
+	defw scan_line_112 + 26							; lowest scr address
+	defw scan_line_112 + 26							; highest scr address
 	defw victim_2 + sprite_bytes * 0			    ; frame 0
 	defw victim_2 + sprite_bytes * 1    		    ; frame 1
 	defw victim_2 + sprite_bytes * 2    		    ; frame 2
@@ -87,9 +87,9 @@ level_02:
     defb 2                                          ; frame skip
     defb 0                                          ; velocity (vertical)
 		
-	defw scan_line_153 + 5							; scr address
-	defw scan_line_153 + 5							; lowest scr address
-	defw scan_line_153 + 5							; highest scr address
+	defw scan_line_152 + 5							; scr address
+	defw scan_line_152 + 5							; lowest scr address
+	defw scan_line_152 + 5							; highest scr address
 	defw victim_3 + sprite_bytes * 0			    ; frame 0
 	defw victim_3 + sprite_bytes * 1    		    ; frame 1
 	defw victim_3 + sprite_bytes * 2    		    ; frame 2
@@ -101,9 +101,9 @@ level_02:
     defb 2                                          ; frame skip
     defb 0                                          ; velocity (vertical)
 		
-    defw scan_line_082 + 26							; scr address
-	defw scan_line_082 + 26							; lowest scr address
-	defw scan_line_082 + 26							; highest scr address
+    defw scan_line_080 + 26							; scr address
+	defw scan_line_080 + 26							; lowest scr address
+	defw scan_line_080 + 26							; highest scr address
 	defw victim_1 + sprite_bytes * 0			    ; frame 0
 	defw victim_1 + sprite_bytes * 1    		    ; frame 1
 	defw victim_1 + sprite_bytes * 2    		    ; frame 2

@@ -1,6 +1,6 @@
 ﻿;   TODOS
 ;
-;	001: store and restore attributes for sprites
+;	001: frame skip for horizontal sprites
 ;	002: implement outline levels
 ;   003: implement move skip to slow velocity
 ;
@@ -10,6 +10,7 @@
 ;	---: get more gfx out of fred original
 ;	---: get this into source control
 ;	---: impelement simple state machine to do level complete sucess and failure etc 
+;	---: store and restore attributes for sprites
 ;
 ;
 ;

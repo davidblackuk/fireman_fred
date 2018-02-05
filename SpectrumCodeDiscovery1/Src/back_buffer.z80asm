@@ -34,10 +34,10 @@ restore_attributes:
 ;
 
 transfer:
-	HALT					; Wait for Top Of Scanline, in reality would set up IM2 or something
-	DI			  		; Disable Interrupts
+	HALT					    ; Wait for Top Of Scanline, in reality would set up IM2 or something
+	DI			  		        ; Disable Interrupts
 	LD (stack_pointer_copy),SP 	; Store Stack Pointer
-	LD SP,screen_map 		; Point SP to our table of source and destination (display) addresses
+	LD SP,screen_map 		    ; Point SP to our table of source and destination (display) addresses
 
 	; Wait for scan line
 	LD BC,#0320 ; 800
@@ -111,9 +111,44 @@ cls_backbuffer:
 	ld bc, attributes_length-1 
 	ld (hl), a
 	ldir
-
-
 	ret
+
+;
+; add attribute checkers to the screen to aid placement
+;
+checkerboard:
+    push hl
+    
+    ld hl, attr_line_000
+    ld de, %0011100000000000
+    ld b, screen_height_chars 
+yloop:    
+    ld c, b
+    ld b, screen_width_chars
+xloop:
+    ld a, (hl)
+    bit 0, l
+    jr nz, hitattr
+    and %111
+    or d
+    jr doneattr
+hitattr:
+    and %111
+    or e
+doneattr:
+    ld (hl), a
+    inc hl
+    djnz xloop
+    ld a, d
+    ld d, e
+    ld e, a
+
+    ld b, c
+    djnz yloop
+
+    
+    pop hl
+    ret
 
 stack_pointer_copy:
 	.defw 0
