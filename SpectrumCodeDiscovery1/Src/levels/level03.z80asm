@@ -2,41 +2,41 @@
 ;---------------------------------------------------V--------------------
 
 level_03:
-	defb blue 							            ; tv border color
-	defb pBlue | white  				            ; default attributes	
-	defb sp_sid_03, sp_sid_03			            ; Left, right Side graphic
-	defb sp_sid_03						            ; Bottom graphic
-	defb magenta						            ; side and bottom colors
+	.byte blue 							            ; tv border color
+	.byte pBlue | white  				            ; default attributes	
+	.byte sp_sid_03, sp_sid_03			            ; Left, right Side graphic
+	.byte sp_sid_03						            ; Bottom graphic
+	.byte magenta						            ; side and bottom colors
 
 	; plat x, y, dir, sprite, length, attrs
-	defb  1,  12, horizontal, sp_plt_03,  4, pBlue | cyan, plt_normal
-	defb  4,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-	defb  4,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	defb  7,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+	.byte  1,  12, horizontal, sp_plt_03,  4, pBlue | cyan, plt_normal
+	.byte  4,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+	.byte  4,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
+	.byte  7,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
 	
-    defb  7,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
-	defb  11,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-	defb  11,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	defb  14,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+    .byte  7,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
+	.byte  11,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+	.byte  11,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
+	.byte  14,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
 	
 
-    defb  14,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
-	defb  18,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-	defb  18,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	defb  21,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+    .byte  14,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
+	.byte  18,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+	.byte  18,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
+	.byte  21,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
 	
-    defb  21,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
-    defb  25,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-    defb  25,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	defb  28,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+    .byte  21,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
+    .byte  25,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+    .byte  25,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
+	.byte  28,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
 
 
-    defb  28,  12, horizontal, sp_plt_03,  3, pBlue | cyan, plt_normal
+    .byte  28,  12, horizontal, sp_plt_03,  3, pBlue | cyan, plt_normal
 
-    defb 16, 10, vertical, 	 sp_ladder,  11, pBlue | white,   plt_ladder
+    .byte 16, 10, vertical, 	 sp_ladder,  11, pBlue | white,   plt_ladder
 
 
-	defb last_definition
+	.byte last_definition
 
 	; -------------------------------------------------------------------------------------------------------------------------
 	; sprite definitions (upto 8) 
@@ -44,95 +44,95 @@ level_03:
 
 
   
-	defw scan_line_068 + 5							; scr address
-	defw scan_line_068 + 5							; lowest scr address
-	defw scan_line_106 + 5							; highest scr address
-	defw alien_bottle + sprite_bytes * 0			; frame 0
-	defw alien_bottle + sprite_bytes * 1			; frame 1
-	defw alien_bottle + sprite_bytes * 2			; frame 2
-	defw alien_bottle + sprite_bytes * 3			; frame 3
-	defb 0											; start frame 
-	defb pBlue | green								; attributes
-	defb vertical									; type
-	defb down										; direction
-    defb 0                                          ; frame skip
-    defb 2                                          ; velocity (vertical)
+	 .word scan_line_068 + 5							; scr address
+	 .word scan_line_068 + 5							; lowest scr address
+	 .word scan_line_106 + 5							; highest scr address
+	 .word alien_bottle + sprite_bytes * 0			; frame 0
+	 .word alien_bottle + sprite_bytes * 1			; frame 1
+	 .word alien_bottle + sprite_bytes * 2			; frame 2
+	 .word alien_bottle + sprite_bytes * 3			; frame 3
+	.byte 0											; start frame 
+	.byte pBlue | green								; attributes
+	.byte vertical									; type
+	.byte down										; direction
+    .byte 0                                          ; frame skip
+    .byte 2                                          ; velocity (vertical)
 
-	defw scan_line_106 + 12							; scr address
-	defw scan_line_068 + 12							; lowest scr address
-	defw scan_line_106 + 12							; highest scr address
-	defw alien_bottle + sprite_bytes * 0			; frame 0
-	defw alien_bottle + sprite_bytes * 1			; frame 1
-	defw alien_bottle + sprite_bytes * 2			; frame 2
-	defw alien_bottle + sprite_bytes * 3			; frame 3
-	defb 2											; start frame 
-	defb pBlue | cyan								; attributes
-	defb vertical									; type
-	defb up										    ; direction
-    defb 1                                          ; frame skip
-    defb 1                                          ; velocity (vertical)
+	 .word scan_line_106 + 12							; scr address
+	 .word scan_line_068 + 12							; lowest scr address
+	 .word scan_line_106 + 12							; highest scr address
+	 .word alien_bottle + sprite_bytes * 0			; frame 0
+	 .word alien_bottle + sprite_bytes * 1			; frame 1
+	 .word alien_bottle + sprite_bytes * 2			; frame 2
+	 .word alien_bottle + sprite_bytes * 3			; frame 3
+	.byte 2											; start frame 
+	.byte pBlue | cyan								; attributes
+	.byte vertical									; type
+	.byte up										    ; direction
+    .byte 1                                          ; frame skip
+    .byte 1                                          ; velocity (vertical)
 
-    defw scan_line_070 + 19							; scr address
-	defw scan_line_068 + 19							; lowest scr address
-	defw scan_line_106 + 19							; highest scr address
-	defw alien_bottle + sprite_bytes * 0			; frame 0
-	defw alien_bottle + sprite_bytes * 1			; frame 1
-	defw alien_bottle + sprite_bytes * 2			; frame 2
-	defw alien_bottle + sprite_bytes * 3			; frame 3
-	defb 0											; start frame 
-	defb pBlue | yellow								; attributes
-	defb vertical									; type
-	defb down										; direction
-    defb 1                                          ; frame skip
-    defb 1                                          ; velocity (vertical)
+     .word scan_line_070 + 19							; scr address
+	 .word scan_line_068 + 19							; lowest scr address
+	 .word scan_line_106 + 19							; highest scr address
+	 .word alien_bottle + sprite_bytes * 0			; frame 0
+	 .word alien_bottle + sprite_bytes * 1			; frame 1
+	 .word alien_bottle + sprite_bytes * 2			; frame 2
+	 .word alien_bottle + sprite_bytes * 3			; frame 3
+	.byte 0											; start frame 
+	.byte pBlue | yellow								; attributes
+	.byte vertical									; type
+	.byte down										; direction
+    .byte 1                                          ; frame skip
+    .byte 1                                          ; velocity (vertical)
 
-    defw scan_line_104 + 26							; scr address
-	defw scan_line_068 + 26							; lowest scr address
-	defw scan_line_106 + 26							; highest scr address
-	defw alien_bottle + sprite_bytes * 0			; frame 0
-	defw alien_bottle + sprite_bytes * 1			; frame 1
-	defw alien_bottle + sprite_bytes * 2			; frame 2
-	defw alien_bottle + sprite_bytes * 3			; frame 3
-	defb 0											; start frame 
-	defb pBlue | white								; attributes
-	defb vertical									; type
-	defb up 										; direction
-    defb 0                                          ; frame skip
-    defb 2                                          ; velocity (vertical)
+     .word scan_line_104 + 26							; scr address
+	 .word scan_line_068 + 26							; lowest scr address
+	 .word scan_line_106 + 26							; highest scr address
+	 .word alien_bottle + sprite_bytes * 0			; frame 0
+	 .word alien_bottle + sprite_bytes * 1			; frame 1
+	 .word alien_bottle + sprite_bytes * 2			; frame 2
+	 .word alien_bottle + sprite_bytes * 3			; frame 3
+	.byte 0											; start frame 
+	.byte pBlue | white								; attributes
+	.byte vertical									; type
+	.byte up 										; direction
+    .byte 0                                          ; frame skip
+    .byte 2                                          ; velocity (vertical)
 
 
     ; -------------------------------------------------------------------------------------------------------------------------
 	; first victim
 
-    defw scan_line_080 + 1							; scr address
-	defw scan_line_080 + 1							; lowest scr address
-	defw scan_line_080 + 1							; highest scr address
-	defw victim_3 + sprite_bytes * 0		    	; frame 0
-	defw victim_3 + sprite_bytes * 1		    	; frame 1
-	defw victim_3 + sprite_bytes * 2		    	; frame 2
-	defw victim_3 + sprite_bytes * 3		    	; frame 3
-	defb 0											; start frame 
-	defb pBlue | magenta							; attributes
-	defb none  									    ; type
-	defb none										; direction
-    defb 2                                          ; frame skip
-    defb 0                                          ; velocity (vertical)
+     .word scan_line_080 + 1							; scr address
+	 .word scan_line_080 + 1							; lowest scr address
+	 .word scan_line_080 + 1							; highest scr address
+	 .word victim_3 + sprite_bytes * 0		    	; frame 0
+	 .word victim_3 + sprite_bytes * 1		    	; frame 1
+	 .word victim_3 + sprite_bytes * 2		    	; frame 2
+	 .word victim_3 + sprite_bytes * 3		    	; frame 3
+	.byte 0											; start frame 
+	.byte pBlue | magenta							; attributes
+	.byte none  									    ; type
+	.byte none										; direction
+    .byte 2                                          ; frame skip
+    .byte 0                                          ; velocity (vertical)
 
-    defw scan_line_080 + 29							; scr address
-	defw scan_line_080 + 29							; lowest scr address
-	defw scan_line_080 + 29							; highest scr address
-	defw victim_2 + sprite_bytes * 0		    	; frame 0
-	defw victim_2 + sprite_bytes * 1		    	; frame 1
-	defw victim_2 + sprite_bytes * 2		    	; frame 2
-	defw victim_2 + sprite_bytes * 3		    	; frame 3
-	defb 0											; start frame 
-	defb pBlue | magenta							; attributes
-	defb none									    ; type
-	defb none										; direction
-	defb 3                                         ; frame skip
-    defb 0                                          ; velocity (vertical)
+     .word scan_line_080 + 29							; scr address
+	 .word scan_line_080 + 29							; lowest scr address
+	 .word scan_line_080 + 29							; highest scr address
+	 .word victim_2 + sprite_bytes * 0		    	; frame 0
+	 .word victim_2 + sprite_bytes * 1		    	; frame 1
+	 .word victim_2 + sprite_bytes * 2		    	; frame 2
+	 .word victim_2 + sprite_bytes * 3		    	; frame 3
+	.byte 0											; start frame 
+	.byte pBlue | magenta							; attributes
+	.byte none									    ; type
+	.byte none										; direction
+	.byte 3                                         ; frame skip
+    .byte 0                                          ; velocity (vertical)
 		
-	defb last_definition							; mark last sprite
+	.byte last_definition							; mark last sprite
 			
 
 

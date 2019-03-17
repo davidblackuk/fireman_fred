@@ -17,13 +17,13 @@
 ;   65022   G, F, D, S, A
 ;   65278   V, C, X, Z, Caps Shift
 
-jump_pressed:     equ 0
-left_pressed:     equ 1
-right_pressed:    equ 2
-up_pressed:       equ 3
-down_pressed:     equ 4
-n_pressed:        equ 5
-m_pressed:        equ 6
+jump_pressed:     .equ 0
+left_pressed:     .equ 1
+right_pressed:    .equ 2
+up_pressed:       .equ 3
+down_pressed:     .equ 4
+n_pressed:        .equ 5
+m_pressed:        .equ 6
 
 read_keys:
     ld e, 0                                         ; build up ytthe mask in e
@@ -72,5 +72,5 @@ test_complete:
      ld (hl), e
     ret
 
-key_map: defb 0
+key_map: .byte 0
 

@@ -1,9 +1,10 @@
 ﻿;---------------------------------------------------V--------------------
 
-sprite_max equ 8
+sprite_max: .equ 8
 
-sprite_height equ 15
-sprite_bytes equ sprite_height*2
+sprite_height: .equ 15
+sprite_bytes: .equ sprite_height*2
+
 ;
 ; excluding fred and the ambulance we have max 8 sprites on the screen at once
 ;

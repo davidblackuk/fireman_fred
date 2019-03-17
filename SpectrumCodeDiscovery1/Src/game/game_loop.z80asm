@@ -83,8 +83,8 @@ initialize_screen:
 	ret
 
 ; address of the current level defn	
-currentLevel: defw 0
+currentLevel:  .word 0
 
 
 
-levels: defw level_01, level_02, level_03
+levels:  .word level_01, level_02, level_03
