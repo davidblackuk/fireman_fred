@@ -4,15 +4,24 @@
 
 sp_blank:  .equ  0
 sp_ladder: .equ  1
+
 sp_sid_01: .equ  2
 sp_bot_01: .equ  3
 sp_plt_01: .equ  4
+
 sp_plt_02: .equ  5
 sp_bot_02: .equ  6
 sp_sid_02: .equ  7
+
 sp_sid_03: .equ  8
 sp_plt_03: .equ  9
-sp_plt_04: .equ 10
+sp_plt_03_1: .equ 10
+
+sp_lsid_04: .equ 11
+sp_rsid_04: .equ 12
+sp_bot_04: .equ 13
+sp_plt_04: .equ 14
+
 
 
 
@@ -119,7 +128,7 @@ third_plt_sprite:
 	.byte %10101010
 	.byte %01010101
 
-    ; vertical platfor for level 3
+    ; vertical platform for level 3
 	.byte %10101010
 	.byte %01010101
 	.byte %10101010
@@ -129,4 +138,45 @@ third_plt_sprite:
 	.byte %10101010
 	.byte %01010101
 
+	
+    ; left vertical side wall for level 4
+	.byte %11100111
+	.byte %10000111
+	.byte %10000111
+	.byte %11100111
+	.byte %11100111
+	.byte %11100001
+	.byte %11100001
+	.byte %11100111
+
+    ; right vertical side wall for level 4
+	.byte %11100111
+	.byte %11100001
+	.byte %11100001
+	.byte %11100111
+	.byte %11100111
+	.byte %10000111
+	.byte %10000111
+	.byte %11100111
+
+
+    ; horizontal bottom wall for level 4
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11100111
+	.byte %11100111
+	.byte %10000001
+	.byte %10000001
+	.byte %11111111
+	
+	; platform for level 4
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %10011001
+	.byte %10011001
+	.byte %10111101
+	.byte %01000010
+	.byte %00111110
 	

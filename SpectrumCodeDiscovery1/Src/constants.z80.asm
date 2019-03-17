@@ -1,4 +1,10 @@
-﻿PR_STRING:			.equ $203C
+﻿;---------------------------------------------------V--------------------
+;
+; File: constants.z80.asm
+; Desc: Constants used across the application
+;
+
+PR_STRING:			.equ $203C
 CHAN_OPEN:			.equ $1601	
 UPPER_CHAN:			.equ $2
 BORDER:				.equ $229b
@@ -83,3 +89,18 @@ sprite_max: .equ 8
 
 sprite_height: .equ 15
 sprite_bytes: .equ sprite_height*2
+
+
+; --------------------------------------
+; Constants for keys on the title screen 
+; --------------------------------------
+
+key_play:       .equ 0
+key_demo:       .equ 1
+key_practice:   .equ 2
+
+; --------------------------------------
+; Game constants 
+; --------------------------------------
+
+max_level:      .equ 4

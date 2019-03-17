@@ -1,7 +1,7 @@
 ﻿;---------------------------------------------------V--------------------
 
 ;
-; hl contains the level number
+; IN: hl contains the level number
 ;
 start_game:
     add hl, hl                                      ; hl contains the level number * 2
@@ -87,4 +87,4 @@ currentLevel:  .word 0
 
 
 
-levels:  .word level_01, level_02, level_03
+levels:  .word level_01, level_02, level_03, level_04

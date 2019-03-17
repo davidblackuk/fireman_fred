@@ -10,25 +10,25 @@ level_03:
 
 	; plat x, y, dir, sprite, length, attrs
 	.byte  1,  12, horizontal, sp_plt_03,  4, pBlue | cyan, plt_normal
-	.byte  4,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-	.byte  4,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	.byte  7,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+	.byte  4,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
+	.byte  4,  16, horizontal, sp_plt_03_1,  4, pBlue | cyan, plt_normal
+	.byte  7,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
 	
     .byte  7,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
-	.byte  11,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-	.byte  11,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	.byte  14,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+	.byte  11,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
+	.byte  11,  16, horizontal, sp_plt_03_1,  4, pBlue | cyan, plt_normal
+	.byte  14,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
 	
 
     .byte  14,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
-	.byte  18,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-	.byte  18,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	.byte  21,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+	.byte  18,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
+	.byte  18,  16, horizontal, sp_plt_03_1,  4, pBlue | cyan, plt_normal
+	.byte  21,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
 	
     .byte  21,  12, horizontal, sp_plt_03,  5, pBlue | cyan, plt_normal
-    .byte  25,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
-    .byte  25,  16, horizontal, sp_plt_04,  4, pBlue | cyan, plt_normal
-	.byte  28,  13, vertical, sp_plt_04,  3, pBlue | cyan, plt_normal
+    .byte  25,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
+    .byte  25,  16, horizontal, sp_plt_03_1,  4, pBlue | cyan, plt_normal
+	.byte  28,  13, vertical, sp_plt_03_1,  3, pBlue | cyan, plt_normal
 
 
     .byte  28,  12, horizontal, sp_plt_03,  3, pBlue | cyan, plt_normal
