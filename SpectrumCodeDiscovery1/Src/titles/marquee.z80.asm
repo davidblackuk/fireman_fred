@@ -5,7 +5,7 @@
 ; is then rended to screen as characters
 
 ;use the screen to store this too
-position_in_string: .equ scan_line_007
+position_in_string: .word 0
 last_char_in_buffer: .equ scan_line_001 + 3
 
 marquee_length .equ 32
@@ -24,7 +24,7 @@ init_marquee:
 	ld (de), a			
 
 	ld ix, scan_line_000							; store the prefix data
-	ld (ix), 0										; x coord of marquee
+	ld (ix+0), 0										; x coord of marquee
 	ld (ix+1), 22									; y coord of marquee
 	ld (ix+2), pBlack | white						; colors
 
@@ -83,5 +83,5 @@ print_marquee:
 
 	
 marquee:
-	defm "FIREMAN FRED RETURNS IN THIS NEW IMPLEMENTATION OF THE ORIGINAL TITLE.     \0" 
+	.byte "FIREMAN FRED RETURNS IN THIS NEW IMPLEMENTATION OF THE ORIGINAL TITLE.     ", 0 
 

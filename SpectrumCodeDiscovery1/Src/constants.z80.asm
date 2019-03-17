@@ -76,3 +76,10 @@ plt_normal:  .equ $02	; can jump through and walk through, but will land on
 plt_ladder:  .equ $04	; it's a ladder
 
 last_definition: .equ $88
+
+
+// sprite system stuff
+sprite_max: .equ 8
+
+sprite_height: .equ 15
+sprite_bytes: .equ sprite_height*2

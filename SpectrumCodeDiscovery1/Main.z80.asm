@@ -2,7 +2,16 @@
 ; File: Main.z80.asm
 ; Desc: Main entry point for the application, bootstraps the game
 ;
- .org #8000
+
+ //Setup for ZX Spectrum (Z80 CPU mode)
+    .target "z80"
+
+    .setting "OutputFileType", "tap"    //TAP output format for ZX Spectrum 48KB
+    .setting "TapStart", Start          //The start address of the program.
+    .setting "TapClear", $5fff          //The CLEAR VAL address in the BASIC
+                                        //loader which clears up the RAM
+                                        //before the binary code loads.
+    .org $8000
 
 
 start:
@@ -21,39 +30,40 @@ next_level:
     jp nz, next_level
     jp start
 
+.include "./src/constants.z80.asm"
+
+
+.include "./src/back_buffer.z80.asm"
+
+.include "./src/levels/level01.z80.asm"
+.include "./src/levels/level02.z80.asm"
+.include "./src/levels/level03.z80.asm"
+.include "./src/gfx/fonts.z80.asm"
+
+.include "./src/gfx/fred.z80.asm"
+.include "./src/gfx/victims.z80.asm"
+.include "./src/gfx/aliens.z80.asm"
+.include "./src/gfx/platforms.z80.asm"
+
+.include "./src/game/sprite_storage.z80.asm"
+
 ;
 ; Includes for logic
 ;
-.include "./src/constants.z80asm"
-.include "./src/titles/print.z80asm"
-.include "./src/game/keyboard.z80asm"
-.include "./src/titles/title_screen.z80asm"
-.include "./src/titles/marquee.z80asm"
-.include "./src/game/game_loop.z80asm"
-.include "./src/game/game_borders.z80asm"
-.include "./src/game/game_platforms.z80asm"
-.include "./src/game/platform_renderer.z80asm"
-.include "./src/game/sprite_engine.z80asm"
-.include "./src/game/sprite_move.z80asm"
+
+.include "./src/titles/print.z80.asm"
+.include "./src/game/keyboard.z80.asm"
+.include "./src/titles/title_screen.z80.asm"
+.include "./src/titles/marquee.z80.asm"
+.include "./src/game/game_loop.z80.asm"
+.include "./src/game/game_borders.z80.asm"
+.include "./src/game/game_platforms.z80.asm"
+.include "./src/game/platform_renderer.z80.asm"
+.include "./src/game/sprite_engine.z80.asm"
+.include "./src/game/sprite_move.z80.asm"
 
 
-;
-; Includes for level and gfx definitions
-;
-.include "./src/levels/level01.z80asm"
-.include "./src/levels/level02.z80asm"
-.include "./src/levels/level03.z80asm"
-.include "./src/gfx/fonts.z80asm"
 
-.include "./src/gfx/fred.z80asm"
-.include "./src/gfx/victims.z80asm"
-.include "./src/gfx/aliens.z80asm"
-.include "./src/gfx/platforms.z80asm"
 
-;
-; Includes for mutable memory regions
-;
-.include "./src/game/sprite_storage.z80asm"
-.include "./src/back_buffer.z80asm"
 
-z_total_bytes: .equ $-start
+z_total_bytes: .equ *-start
