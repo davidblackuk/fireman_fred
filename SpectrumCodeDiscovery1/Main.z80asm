@@ -1,4 +1,7 @@
-﻿; Code file
+﻿;
+; File: Main.z80asm
+; Desc: Main entry point for the application, bootstraps the game
+;
  .org #8000
 
 
@@ -52,3 +55,5 @@ next_level:
 ;
 #include "./src/game/sprite_storage.z80asm"
 #include "./src/back_buffer.z80asm"
+
+z_total_bytes: .equ $-start

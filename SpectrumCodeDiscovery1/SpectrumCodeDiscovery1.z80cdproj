@@ -12,6 +12,7 @@
     <Folder Include="SavedStates" />
   </ItemGroup>
   <ItemGroup>
+    <Z80Asm Include="Adhoc.z80asm" />
     <Z80Asm Include="Src\constants.z80asm" />
     <Z80Asm Include="Main.z80asm" />
     <Z80Asm Include="Src\game\game_borders.z80asm" />

@@ -11,7 +11,7 @@
 title_screen:	call init_display
 
 				call init_marquee
-loop:			
+next_step:			
 
 				call display_text
 				
@@ -22,11 +22,11 @@ loop:
 
 				ld hl,LASTK		 					; LAST K system variable.
 			   	ld a,(hl)		   					; new value of LAST K.
-				cp "1" 								; less than "1", continue
-				jp c, loop			
-				cp "4"								; greater than 4 continue
-				jp nc, loop			
-				sub "1"								; map key relative to 0
+				cp '1' 								; less than '1', continue
+				jp c, next_step			
+				cp '4'								; greater than 4 continue
+				jp nc, next_step			
+				sub '1'								; map key relative to 0
 				ld (hl), 0
 				ret				 
 

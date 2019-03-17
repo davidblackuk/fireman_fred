@@ -17,7 +17,7 @@ init_marquee:
 	ld hl, scan_line_000 + 3						; clear to all spaces, this will overflow 
 	ld de, scan_line_000 + 4						; onto scan line two because of the three byte
 	ld bc, marquee_length-1							; header for print_message
-	ld (hl), " "			
+	ld (hl), ' '			
 	ldir											; scan_line_0 + 3 + 32 is 0 terminator
 
 	xor a											; zero terminator

@@ -1,5 +1,4 @@
 ﻿;---------------------------------------------------V--------------------
-
 ;
 ; IN IX Points to the level definiton
 ; OUT HL Points to the start of the sprite definitions
@@ -17,7 +16,7 @@ draw_plat1:
 	pop ix	
 	push hl											; save the current platform address
 	push bc											; and the offset to the next one
-	call draw_platform							  	; render our platform
+	call draw_platform								; render our platform
 	pop bc											; restore offset
 	pop hl											; restore address
 	add hl, bc										; next platform start
