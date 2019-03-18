@@ -18,11 +18,13 @@ start_game:
 
     ;call checkerboard                               ; debug call
 
-
     call store_attributes                           ; store the non sprite attributes once per leve
 
 
+	; TODO: def crashes in here!
 	call initialize_sprites                         ; set up the sprites in their initial positions
+
+
 
 game_loop:
     call read_keys
@@ -67,11 +69,13 @@ level_complete_failed:
 
 
 initialize_level:
+
 	ld ix, (currentLevel)
 	call initialize_screen
 	call cls_platform_map
 	call draw_borders
-	call draw_platforms
+	call draw_platform
+	call initialize_ambulance
 	ret
 
 initialize_screen:

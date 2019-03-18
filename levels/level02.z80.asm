@@ -2,11 +2,14 @@
 ;---------------------------------------------------V--------------------
 
 level_02:
-	.byte blue 							; tv border color
-	.byte pBlue | white  				; default attributes	
-	.byte sp_sid_02, sp_sid_02			; Left, right Side graphic
-	.byte sp_bot_02						; Bottom graphic
-	.byte magenta						; side and bottom colors
+	.byte blue 										; tv border color
+	.byte pBlue | white  							; default attributes	
+	.byte sp_sid_02, sp_sid_02						; Left, right Side graphic
+	.byte sp_bot_02									; Bottom graphic
+	.byte magenta									; side and bottom colors
+	
+	.word char_line_19 + 5							; ambulance start position
+	.word char_line_19 + 22							; ambulance end position
 
 	; plat x, y, dir, sprite, length, attrs
 	.byte  1,  8, horizontal, sp_plt_02,  8, pBlue | green, plt_normal

@@ -2,11 +2,14 @@
 ;---------------------------------------------------V--------------------
 
 level_04:
-	.byte black 							            ; tv border color
+	.byte black 							        ; tv border color
 	.byte pBlack | white  				            ; default attributes	
-	.byte sp_lsid_04, sp_rsid_04			            ; Left, right Side graphic
+	.byte sp_lsid_04, sp_rsid_04					; Left, right Side graphic
 	.byte sp_bot_04						            ; Bottom graphic
-	.byte cyan						            ; side and bottom colors
+	.byte cyan						            	; side and bottom colors
+	
+	.word char_line_19 + 5							; ambulance start position
+	.word char_line_19 + 22							; ambulance end position
 
 	; plat x, y, dir, sprite, length, attrs
 	.byte  1,  18, horizontal, sp_plt_04,  30, pBlack | cyan, plt_normal

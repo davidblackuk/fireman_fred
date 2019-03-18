@@ -4,8 +4,6 @@
 ; Desc: Constants used across the application
 ;
 
-PR_STRING:			.equ $203C
-CHAN_OPEN:			.equ $1601	
 UPPER_CHAN:			.equ $2
 BORDER:				.equ $229b
 PRINT_SET_PAPER:	.equ 17
@@ -44,6 +42,8 @@ i_lvl_l_bord_chr:	.equ 2
 i_lvl_r_bord_chr:	.equ 3
 i_lvl_b_bord_chr:	.equ 4
 i_lvl_bord_color:	.equ 5
+
+
 	
 i_lvl_sprt_x: 		.equ 0
 i_lvl_sprt_y: 		.equ 1
@@ -87,7 +87,7 @@ last_definition: .equ $88
 // sprite system stuff
 sprite_max: .equ 8
 
-sprite_height: .equ 15
+sprite_height: .equ 16
 sprite_bytes: .equ sprite_height*2
 
 

@@ -7,7 +7,7 @@ draw_platforms:
 	push ix											; swap ix with hl
 	pop hl
 	ld b, 0											; initialize bc to the length of a platform definition
-	ld c, 6											; gap from level definition to first platform   		
+	ld c, first_platform_defn_gap					; gap from level definition to first platform   		
 	add hl, bc	
 													; gap from one platform to another
 	ld c, platform_defn_len							; this is calculated from the length of platform 0 in level 1
