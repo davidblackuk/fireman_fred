@@ -4,7 +4,7 @@
 ; Desc: Main entry point for the application, bootstraps the game
 ;
 
-.include "./src/constants.z80.asm"
+.include "./constants.z80.asm"
 
  //Setup for ZX Spectrum (Z80 CPU mode)
     .target "z80"
@@ -45,12 +45,12 @@ next_level:
 
 
 
-.include "./src/back_buffer.z80.asm"
+.include "./back_buffer.z80.asm"
 
-.include "./src/levels/level01.z80.asm"
-.include "./src/levels/level02.z80.asm"
-.include "./src/levels/level03.z80.asm"
-.include "./src/levels/level04.z80.asm"
+.include "./levels/level01.z80.asm"
+.include "./levels/level02.z80.asm"
+.include "./levels/level03.z80.asm"
+.include "./levels/level04.z80.asm"
 
 ;
 ; add new levels to this, the list of all levels
@@ -58,25 +58,25 @@ next_level:
 levels:  .word level_01, level_02, level_03, level_04
 
 
-.include "./src/gfx/fonts.z80.asm"
+.include "./gfx/fonts.z80.asm"
 
-.include "./src/gfx/fred.z80.asm"
-.include "./src/gfx/victims.z80.asm"
-.include "./src/gfx/aliens.z80.asm"
-.include "./src/gfx/platforms.z80.asm"
+.include "./gfx/fred.z80.asm"
+.include "./gfx/victims.z80.asm"
+.include "./gfx/aliens.z80.asm"
+.include "./gfx/platforms.z80.asm"
 
-.include "./src/game/sprite_storage.z80.asm"
+.include "./game/sprite_storage.z80.asm"
 
-.include "./src/titles/print.z80.asm"
-.include "./src/game/keyboard.z80.asm"
-.include "./src/titles/title_screen.z80.asm"
-.include "./src/titles/marquee.z80.asm"
-.include "./src/game/game_loop.z80.asm"
-.include "./src/game/game_borders.z80.asm"
-.include "./src/game/game_platforms.z80.asm"
-.include "./src/game/platform_renderer.z80.asm"
-.include "./src/game/sprite_engine.z80.asm"
-.include "./src/game/sprite_move.z80.asm"
+.include "./titles/print.z80.asm"
+.include "./game/keyboard.z80.asm"
+.include "./titles/title_screen.z80.asm"
+.include "./titles/marquee.z80.asm"
+.include "./game/game_loop.z80.asm"
+.include "./game/game_borders.z80.asm"
+.include "./game/game_platforms.z80.asm"
+.include "./game/platform_renderer.z80.asm"
+.include "./game/sprite_engine.z80.asm"
+.include "./game/sprite_move.z80.asm"
 
 
 
