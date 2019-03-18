@@ -87,4 +87,3 @@ currentLevel:  .word 0
 
 
 
-levels:  .word level_01, level_02, level_03, level_04

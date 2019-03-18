@@ -14,6 +14,7 @@
     .setting "TapClear", $5fff                      ;The CLEAR VAL address in the BASIC
                                                     ;loader which clears up the RAM
                                                     ;before the binary code loads.
+    .setting "LaunchCommand", "D:\\emulation\\emulators\\Fuse\\fuse.exe {0}"
     .org $8000
 
 
@@ -50,6 +51,13 @@ next_level:
 .include "./src/levels/level02.z80.asm"
 .include "./src/levels/level03.z80.asm"
 .include "./src/levels/level04.z80.asm"
+
+;
+; add new levels to this, the list of all levels
+;
+levels:  .word level_01, level_02, level_03, level_04
+
+
 .include "./src/gfx/fonts.z80.asm"
 
 .include "./src/gfx/fred.z80.asm"
