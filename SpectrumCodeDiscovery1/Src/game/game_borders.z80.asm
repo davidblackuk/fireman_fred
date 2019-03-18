@@ -29,15 +29,15 @@ draw_borders:
 ; we store a draw platform commands for the edges
 ; X, Y, direction (horizontal or vertical), sprite character, length, char attrs,flags 
 ;
-left_border:	defb 0, 0, vertical
-left_char:		defb 0, screen_height_chars-2 
-left_back:		defb	pBlack | red, plt_blocker
+left_border:	.byte 0, 0, vertical
+left_char:		.byte 0, screen_height_chars-2 
+left_back:		.byte	pBlack | red, plt_blocker
 
-right_border:	defb screen_width_chars-1, 0, vertical
-right_char:		defb 0, screen_height_chars-2 
-right_back:		defb pBlack | red, plt_blocker
+right_border:	.byte screen_width_chars-1, 0, vertical
+right_char:		.byte 0, screen_height_chars-2 
+right_back:		.byte pBlack | red, plt_blocker
 
-bottom_border:	defb 1, screen_height_chars-3, horizontal
-bot_char:		defb 0,  screen_width_chars-2
-bot_back:		defb pBlack | red, plt_blocker
+bottom_border:	.byte 1, screen_height_chars-3, horizontal
+bot_char:		.byte 0,  screen_width_chars-2
+bot_back:		.byte pBlack | red, plt_blocker
 

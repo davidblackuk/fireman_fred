@@ -1,7 +1,7 @@
 ﻿;---------------------------------------------------V--------------------
 
 ;
-; hl contains the level number
+; IN: hl contains the level number
 ;
 start_game:
     add hl, hl                                      ; hl contains the level number * 2
@@ -83,8 +83,7 @@ initialize_screen:
 	ret
 
 ; address of the current level defn	
-currentLevel: defw 0
+currentLevel:  .word 0
 
 
 
-levels: defw level_01, level_02, level_03

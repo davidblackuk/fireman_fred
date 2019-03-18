@@ -5,13 +5,13 @@
 ; cell. Cells can block movement, be conveyers, ladders etc.
 ;
 
-i_plt_x 	equ 0
-i_plt_y 	equ 1
-i_plt_dir 	equ 2
-i_plt_chr	equ 3
-i_plt_len	equ 4
-i_plt_att	equ 5
-i_plt_flg	equ 6
+i_plt_x:	.equ 0
+i_plt_y:	.equ 1
+i_plt_dir:	.equ 2
+i_plt_chr:	.equ 3
+i_plt_len:	.equ 4
+i_plt_att:	.equ 5
+i_plt_flg:	.equ 6
 
 ;
 ; Renders a single platform and manages the platform map.
@@ -100,9 +100,9 @@ cls_platform_map:
 	ldir
 	ret
 
-	pixmap_addr: defw 0
-attributes_addr: defw 0
+	pixmap_addr:  .word 0
+attributes_addr:  .word 0
 
 
 ; TODO: Move me into upper memory
-platform_map: defs screen_width_chars * screen_height_chars
+platform_map: .storage screen_width_chars * screen_height_chars

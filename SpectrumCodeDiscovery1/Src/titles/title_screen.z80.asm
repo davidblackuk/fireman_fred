@@ -60,17 +60,17 @@ display_text:	ld IX, title_msg	; FIREMAN FRED
 				ret
 
 
-title_msg:		defb 8, 3,  pBlack | cyan 
-				defm "FIREMAN F.R.E.D\0"
+title_msg:		.byte 8, 3,  pBlack | cyan 
+				.byte "FIREMAN F.R.E.D\0"
 
-menu_msg: 		defb 11, 5,  pBlack | cyan 
-				defm "MAIN MENU\0"
+menu_msg: 		.byte 11, 5,  pBlack | cyan 
+				.byte "MAIN MENU\0"
 
-start_msg:		defb 8, 10,  pBlack | green 
-				defm "1 PLAY GAME\0" 
+start_msg:		.byte 8, 10,  pBlack | green 
+				.byte "1 PLAY GAME\0" 
 
-demo_msg: 		defb 8, 12,  pBlack | green
-				defm "2 DEMO MODE\0"
+demo_msg: 		.byte 8, 12,  pBlack | green
+				.byte "2 DEMO MODE\0"
 
-prac_msg:		defb 8, 14,  pBlack | green
-				defm "3 PRACTICE MODE\0"
+prac_msg:		.byte 8, 14,  pBlack | green
+				.byte "3 PRACTICE MODE\0"

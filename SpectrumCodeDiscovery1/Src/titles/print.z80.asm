@@ -11,25 +11,25 @@
 ; %0-0-000-000
 ; flash-bright-paper-ink where:
 
-black   equ %000000
-blue	equ %000001
-red	 	equ %000010
-magenta equ %000011
-green   equ %000100
-cyan	equ %000101
-yellow  equ %000110
-white   equ %000111
+black   .equ %000000
+blue	.equ %000001
+red	 	.equ %000010
+magenta .equ %000011
+green   .equ %000100
+cyan	.equ %000101
+yellow  .equ %000110
+white   .equ %000111
 
-pBlack 		equ black << 3
-pBlue		equ blue  << 3
-pRed		equ red  << 3
-pMagenta 	equ magenta  << 3
-pGreen   	equ green  << 3
-pCyan		equ cyan  << 3
-pYellow  	equ yellow  << 3
-pWhite   	equ white  << 3
+pBlack 		.equ black << 3
+pBlue		.equ blue  << 3
+pRed		.equ red  << 3
+pMagenta 	.equ magenta  << 3
+pGreen   	.equ green  << 3
+pCyan		.equ cyan  << 3
+pYellow  	.equ yellow  << 3
+pWhite   	.equ white  << 3
 
-bright   	equ %1000000
+bright   	.equ %1000000
 
 ;
 ; Clears the physical screen
