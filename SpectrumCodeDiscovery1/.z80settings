@@ -1,5 +1,0 @@
-{
-  "DefaultTapeFile": "TapeFiles\\fred.tap",
-  "DefaultAnnotationFile": null,
-  "DefaultCodeFile": "Main.z80asm"
-}
