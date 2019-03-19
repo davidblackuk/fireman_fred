@@ -14,8 +14,13 @@
     .setting "TapClear", $5fff                      ;The CLEAR VAL address in the BASIC
                                                     ;loader which clears up the RAM
                                                     ;before the binary code loads.
-    .setting "LaunchCommand", "D:\\emulation\\emulators\\Fuse\\fuse.exe {0}"
-    .org $8000
+    ; my windows box launch settings
+    ; .setting "LaunchCommand", "D:\\emulation\\emulators\\Fuse\\fuse.exe {0}"xdgopn --help
+
+    ; my linux  box launch settings
+    .setting "LaunchCommand", "{0}"
+
+     .org $8000
 
 
 start:

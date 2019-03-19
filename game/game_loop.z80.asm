@@ -74,7 +74,7 @@ initialize_level:
 	call initialize_screen
 	call cls_platform_map
 	call draw_borders
-	call draw_platform
+	call draw_platforms
 	call initialize_ambulance
 	ret
 
