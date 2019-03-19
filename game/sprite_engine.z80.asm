@@ -12,7 +12,7 @@
 ; loop for all sprites, 
 ;
 draw_sprites
-		
+
 	ld b, sprite_max + 3							; loop for all sprites
 	ld hl, sprt_0									; hl points to first sprite
 sp_loop:
