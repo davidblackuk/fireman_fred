@@ -18,11 +18,12 @@ start_game:
 
     ;call checkerboard                               ; debug call
 
-
     call store_attributes                           ; store the non sprite attributes once per leve
 
+	call initialize_fred							; get the check chappy in place and ready to rock
 
 	call initialize_sprites                         ; set up the sprites in their initial positions
+
 
 game_loop:
     call read_keys
@@ -48,8 +49,10 @@ game_loop:
 	jp nz, level_complete_sucess			
 
     bit m_pressed, a
-	jp nz, level_complete_failed			
+	jp nz, level_complete_failed	
 
+	bit down_pressed, a		
+	call nz, start_ambulance
 
 ;    ld b,100            ; time to pause.
 ;delay  halt                ; wait for an interrupt.
@@ -67,11 +70,13 @@ level_complete_failed:
 
 
 initialize_level:
+
 	ld ix, (currentLevel)
 	call initialize_screen
 	call cls_platform_map
 	call draw_borders
 	call draw_platforms
+	call initialize_ambulance
 	ret
 
 initialize_screen:

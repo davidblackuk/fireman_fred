@@ -4,6 +4,9 @@
 ; The platform map contains flags describing the behaviour of each platform 
 ; cell. Cells can block movement, be conveyers, ladders etc.
 ;
+; This code is common to the game border renderer and the platform renderer
+;
+
 
 i_plt_x:	.equ 0
 i_plt_y:	.equ 1

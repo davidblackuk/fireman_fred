@@ -4,8 +4,6 @@
 ; Desc: Constants used across the application
 ;
 
-PR_STRING:			.equ $203C
-CHAN_OPEN:			.equ $1601	
 UPPER_CHAN:			.equ $2
 BORDER:				.equ $229b
 PRINT_SET_PAPER:	.equ 17
@@ -36,24 +34,18 @@ right:				.equ 2
 up:					.equ 1
 down:				.equ 2
 
-
+;
 ; game level IX offsets
-i_lvl_border:		.equ 0
-i_lvl_attr:			.equ 1
-i_lvl_l_bord_chr:	.equ 2
-i_lvl_r_bord_chr:	.equ 3
-i_lvl_b_bord_chr:	.equ 4
-i_lvl_bord_color:	.equ 5
-	
-i_lvl_sprt_x: 		.equ 0
-i_lvl_sprt_y: 		.equ 1
-i_lvl_sprt_no:		.equ 2
-i_lvl_sprt_frm: 	.equ 3
-i_lvl_sprt_pth:		.equ 4
-i_lvl_sprt_len:		.equ 5
-i_lvl_sprt_dir:		.equ 6
-i_lvl_sprt_spd:		.equ 7
-i_lvl_sprt_atr:		.equ 8
+;
+i_lvl_border:		.equ 0                          ; tv border color
+i_lvl_attr:			.equ 1                          ; bacground attributes
+i_lvl_l_bord_chr:	.equ 2                          ; left border char
+i_lvl_r_bord_chr:	.equ 3                          ; right border char
+i_lvl_b_bord_chr:	.equ 4                          ; bottom border char
+i_lvl_bord_color:	.equ 5                          ; border char color
+i_lvl_amb_start:    .equ 6                          ; start x of the ambulance
+i_lvl_amb_end:      .equ 8                          ; end x of the ambulance
+i_lvl_fred_start    .equ 10                         ; freds starting position
 
 ;
 ; Sprite buffer offsets
@@ -85,9 +77,9 @@ last_definition: .equ $88
 
 
 // sprite system stuff
-sprite_max: .equ 8
+sprite_max: .equ 8 + 3                              ; = 8 enemy/victim sprites and 3 system sprites (fred _ ambulance)
 
-sprite_height: .equ 15
+sprite_height: .equ 16
 sprite_bytes: .equ sprite_height*2
 
 

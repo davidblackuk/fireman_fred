@@ -12,15 +12,15 @@
 ; loop for all sprites, 
 ;
 draw_sprites
-		
-	ld b, sprite_max								; loop for all sprites
+
+	ld b, sprite_max 								; loop for all sprites
 	ld hl, sprt_0									; hl points to first sprite
 sp_loop:
-	push hl
+	push hl											
 	push bc
-	call draw_sprite
-	pop bc
-	pop hl
+	call draw_sprite								; this is always called even if there are only 3
+	pop bc											; sprites defined as fred and the bulance are at 
+	pop hl											; the end of the 8 level ddesigend sprintes
 	ld de, sprt_buff_len
 	add hl, de
 	djnz sp_loop
@@ -300,7 +300,8 @@ str_bg2:
 	ret
 
 ;
-; Wipe all 8 sprite buffers
+; Wipe all 8 sprite buffers setting them to all zeros, a
+; zero in the first byte indicates an unused sprite
 ;
 ; IN : None
 ; Trashes: de, bc

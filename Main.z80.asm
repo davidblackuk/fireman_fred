@@ -14,8 +14,13 @@
     .setting "TapClear", $5fff                      ;The CLEAR VAL address in the BASIC
                                                     ;loader which clears up the RAM
                                                     ;before the binary code loads.
-    .setting "LaunchCommand", "D:\\emulation\\emulators\\Fuse\\fuse.exe {0}"
-    .org $8000
+    ; my windows box launch settings
+    .setting "LaunchCommand", "D:\\emulation\\emulators\\Fuse\\fuse.exe --no {0}"
+
+    ; my linux  box launch settings
+    ; .setting "LaunchCommand", "{0}"
+
+     .org $8000
 
 
 start:
@@ -57,7 +62,7 @@ next_level:
 ;
 levels:  .word level_01, level_02, level_03, level_04
 
-
+.include "functions.z80.asm"
 .include "./gfx/fonts.z80.asm"
 
 .include "./gfx/fred.z80.asm"
@@ -77,6 +82,8 @@ levels:  .word level_01, level_02, level_03, level_04
 .include "./game/platform_renderer.z80.asm"
 .include "./game/sprite_engine.z80.asm"
 .include "./game/sprite_move.z80.asm"
+.include "./game/ambulance.z80.asm"
+.include "./game/fred_initialization.z80.asm"
 
 
 

@@ -2,11 +2,15 @@
 ;---------------------------------------------------V--------------------
 
 level_02:
-	.byte blue 							; tv border color
-	.byte pBlue | white  				; default attributes	
-	.byte sp_sid_02, sp_sid_02			; Left, right Side graphic
-	.byte sp_bot_02						; Bottom graphic
-	.byte magenta						; side and bottom colors
+	.byte blue 										; tv border color
+	.byte pBlue | white  							; default attributes	
+	.byte sp_sid_02, sp_sid_02						; Left, right Side graphic
+	.byte sp_bot_02									; Bottom graphic
+	.byte magenta									; side and bottom colors
+	
+	.word char_line_19 + 15							; ambulance start position
+	.word char_line_19 + 27							; ambulance end position
+	.word char_line_06 + 8							; Fred's starting position
 
 	; plat x, y, dir, sprite, length, attrs
 	.byte  1,  8, horizontal, sp_plt_02,  8, pBlue | green, plt_normal
@@ -15,10 +19,10 @@ level_02:
 	.byte 24, 12, horizontal, sp_plt_02,  5, pBlue | yellow, plt_normal
 	.byte 11, 14, horizontal, sp_plt_02, 10, pBlue | red, plt_normal
 	.byte 21, 16, horizontal, sp_plt_02, 10, pBlue | magenta, plt_normal
-	.byte 14, 18, horizontal, sp_plt_02, 4,  pBlue | green, plt_normal
+	.byte 14, 17, horizontal, sp_plt_02, 4,  pBlue | green, plt_normal
 
 	.byte 13, 15, vertical, 	 sp_ladder,  6, pBlue | white, plt_ladder
-	.byte 16, 12, vertical, 	 sp_ladder,  6, pBlue | white, plt_ladder
+	.byte 16, 12, vertical, 	 sp_ladder,  5, pBlue | white, plt_ladder
 	.byte 29, 10, vertical, 	 sp_ladder,  7, pBlue | white, plt_ladder
 
 	.byte last_definition
