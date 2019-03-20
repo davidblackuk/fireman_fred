@@ -1,33 +1,36 @@
 ﻿;---------------------------------------------------V--------------------
 
-level_01:   .byte black 							; tv border color
-	        .byte pBlack | white  					; default attributes	
-	        .byte sp_sid_01, sp_sid_01				; Left, right Side graphic
-	        .byte sp_bot_01							; Bottom graphic
-	        .byte red								; side and bottom colors
+level_01:   
+	.byte black 							; tv border color
+	.byte pBlack | white  					; default attributes	
+	.byte sp_sid_01, sp_sid_01				; Left, right Side graphic
+	.byte sp_bot_01							; Bottom graphic
+	.byte red								; side and bottom colors
 
-			.word char_line_19 + 5					; ambulance start position
-			.word char_line_19 + 27					; ambulance end position
+	.word char_line_19 + 5					; ambulance start position
+	.word char_line_19 + 27					; ambulance end position
+	.word char_line_16 + 11					; Fred's starting position
+			
 
 first_platform_defn_gap: .equ * - level_01			; defines the offset used by the patform renderer
 	        ; plat x, y, dir, sprite, length, attrs
 
 first_ever_platform:
-	        .byte 19,  8, horizontal, sp_plt_01, 11, magenta, plt_normal
+	.byte 19,  8, horizontal, sp_plt_01, 11, magenta, plt_normal
 
 platform_defn_len: .equ * - first_ever_platform
-	        .byte  1,  9, horizontal, sp_plt_01,  9, green,	 plt_normal
-	        .byte  4, 13, horizontal, sp_plt_01,  9, magenta, plt_normal
-	        .byte 19, 13, horizontal, sp_plt_01, 11, cyan,	 plt_normal
-	        .byte  1, 18, horizontal, sp_plt_01, 30, yellow,  plt_normal
+	.byte  1,  9, horizontal, sp_plt_01,  9, green,	 plt_normal
+	.byte  4, 13, horizontal, sp_plt_01,  9, magenta, plt_normal
+	.byte 19, 13, horizontal, sp_plt_01, 11, cyan,	 plt_normal
+	.byte  1, 18, horizontal, sp_plt_01, 30, yellow,  plt_normal
 
-	        .byte  3,  6, vertical, 	 sp_ladder, 15, white,	 plt_ladder
-	
-	        .byte 21,  6, vertical, 	 sp_ladder,  7, white,   plt_ladder
-	        .byte 27,  6, vertical, 	 sp_ladder,  7, white,   plt_ladder
-	        .byte 24, 11, vertical, 	 sp_ladder,  7, white,   plt_ladder
+	.byte  3,  6, vertical, 	 sp_ladder, 15, white,	 plt_ladder
 
-	        .byte last_definition
+	.byte 21,  6, vertical, 	 sp_ladder,  7, white,   plt_ladder
+	.byte 27,  6, vertical, 	 sp_ladder,  7, white,   plt_ladder
+	.byte 24, 11, vertical, 	 sp_ladder,  7, white,   plt_ladder
+
+	.byte last_definition
 
 
 	        ; -------------------------------------------------------------------------------------------------------------------------

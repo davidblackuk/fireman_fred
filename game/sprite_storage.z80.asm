@@ -27,18 +27,16 @@ ambulance_sprite_data_1:
 ambulance_1_current_address: .word 0                ; currennt screeen address
 ambulance_1_lowest_address:  .word 0             	; lowest screen address
 ambulance_1_highest_address: .word 0                ; highest screen address
-ambulance_1_sprite_addrress1: .word 0     			; frame 0
-ambulance_1_sprite_addrress2: .word 0     			; frame 1
-ambulance_1_sprite_addrress3: .word 0     			; frame 2
-ambulance_1_sprite_addrress4: .word 0     			; frame 3
+ambulance_1_sprite_address1: .word 0     			; frame 0
+ambulance_1_sprite_address2: .word 0     			; frame 1
+ambulance_1_sprite_address3: .word 0     			; frame 2
+ambulance_1_sprite_address4: .word 0     			; frame 3
 ambulance_1_current_frame:    .byte 0				; current frame 
 ambulance_1_sprite_attrs: .byte white				; attributes
-ambulance_1_type:
-    .byte horizontal                                ; type always horizontal
+ambulance_1_type: .byte horizontal                  ; type always horizontal
 ambulance_1_direction: .byte right                  ; direction 
     .byte 0                                         ; frame skip
     .byte 1                                         ; velocity 
-
 	.byte 0											; current frame skip
 	.storage sprite_bytes							; copy of background
 
@@ -48,10 +46,10 @@ ambulance_sprite_data_2:
 ambulance_2_current_address: .word 0                ; currennt screeen address
 ambulance_2_lowest_address:  .word 0             	; lowest screen address
 ambulance_2_highest_address: .word 0                ; highest screen address
-ambulance_2_sprite_addrress1: .word 0     			; frame 0
-ambulance_2_sprite_addrress2: .word 0     			; frame 1
-ambulance_2_sprite_addrress3: .word 0     			; frame 2
-ambulance_2_sprite_addrress4: .word 0     			; frame 3
+ambulance_2_sprite_address1: .word 0     			; frame 0
+ambulance_2_sprite_address2: .word 0     			; frame 1
+ambulance_2_sprite_address3: .word 0     			; frame 2
+ambulance_2_sprite_address4: .word 0     			; frame 3
 ambulance_2_current_frame:    .byte 0				; current frame 
 ambulance_2_sprite_attrs: .byte white				; attributes
 ambulance_2_type: .byte none                        ; type
@@ -62,22 +60,22 @@ ambulance_2_direction: .byte right                  ; direction
 	.byte 0											; current frame skip
 	.storage sprite_bytes							; copy of background
 
-fred_sprite_data:
+
+
+fred_sprite:
 	.byte 1											; flags: 0 = off 1 = in use
-
-    .word scan_line_100 + 8							; scr address
-    .word scan_line_100 + 8							; lowest scr address
-    .word scan_line_100 + 8							; highest scr address
-    .word fred_right_1 + sprite_bytes * 0  			; frame 0
-    .word fred_right_1 + sprite_bytes * 1      		; frame 1
-    .word fred_right_1 + sprite_bytes * 2      		; frame 2
-    .word fred_right_1 + sprite_bytes * 3      		; frame 3
-    .byte 0											; start frame 
-    .byte white										; attributes
-    .byte none	        							; type
-    .byte none										; direction
-    .byte 4                                         ; frame skip
-    .byte 1                                         ; velocity (vertical)
-
+fred_current_address: .word scan_line_100           ; current screen address
+fred_lowest_address:  .word scan_line_100           ; lowest screen address
+fred_highest_address: .word scan_line_100           ; highest screen address
+fred_sprite_address1: .word fred_right_1            ; frame 0
+fred_sprite_address2: .word fred_right_1            ; frame 1
+fred_sprite_address3: .word fred_right_1            ; frame 2
+fred_sprite_address4: .word fred_right_1            ; frame 3
+fred_current_frame:    .byte 0				        ; current frame 
+fred_sprite_attrs: .byte white				        ; attributes
+fred_type: .byte none                               ; type none, we control all movement
+fred_direction: .byte right                         ; direction 
+    .byte 0                                         ; frame skip
+    .byte 1                                         ; velocity 
 	.byte 0											; current frame skip
 	.storage sprite_bytes							; copy of background

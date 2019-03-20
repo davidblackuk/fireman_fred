@@ -9,6 +9,7 @@ level_04:
 	
 	.word char_line_05 + 9							; ambulance start position
 	.word char_line_05 + 27							; ambulance end position
+	.word char_line_05 + 5							; Fred's starting position
 
 	; plat x, y, dir, sprite, length, attrs
 	.byte  1,  18, horizontal, sp_plt_04,  30, pBlack | cyan, plt_normal

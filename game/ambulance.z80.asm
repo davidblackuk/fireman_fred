@@ -13,10 +13,6 @@
 ;
 initialize_ambulance:
     push hl
-    ; i_lvl_amb_start:
-    ; i_lvl_amb_end:  
-
-    ld IY, ambulance_sprite_data_1
 
     ld a, 1
     ld (ambulance_sprite_data_1), a                         ; sprite enabled
@@ -45,17 +41,17 @@ initialize_ambulance:
 
     ; set sprite 1 to use the same frame all the time
     ld hl, ambulance_1 
-    ld (ambulance_1_sprite_addrress1), hl
-    ld (ambulance_1_sprite_addrress2), hl
-    ld (ambulance_1_sprite_addrress3), hl
-    ld (ambulance_1_sprite_addrress4), hl
+    ld (ambulance_1_sprite_address1), hl
+    ld (ambulance_1_sprite_address2), hl
+    ld (ambulance_1_sprite_address3), hl
+    ld (ambulance_1_sprite_address4), hl
 
     ; set sprite 2 to use the same frame all the time
     ld hl, ambulance_2 
-    ld (ambulance_2_sprite_addrress1), hl
-    ld (ambulance_2_sprite_addrress2), hl
-    ld (ambulance_2_sprite_addrress3), hl
-    ld (ambulance_2_sprite_addrress4), hl
+    ld (ambulance_2_sprite_address1), hl
+    ld (ambulance_2_sprite_address2), hl
+    ld (ambulance_2_sprite_address3), hl
+    ld (ambulance_2_sprite_address4), hl
 
     ; copy the background color of the level into our ambulance
     ; may need to mask bg and add white fg?
@@ -88,23 +84,23 @@ start_ambulance:
 
     ; set the animation frames to the real 4
     ld hl, ambulance_1 + sprite_bytes * 0
-    ld (ambulance_1_sprite_addrress1), hl
+    ld (ambulance_1_sprite_address1), hl
 
     ld hl, ambulance_1 + sprite_bytes * 1
-    ld (ambulance_1_sprite_addrress2), hl
+    ld (ambulance_1_sprite_address2), hl
     ld hl, ambulance_1 + sprite_bytes * 2
-    ld (ambulance_1_sprite_addrress3), hl
+    ld (ambulance_1_sprite_address3), hl
     ld hl, ambulance_1 + sprite_bytes * 3
-    ld (ambulance_1_sprite_addrress4), hl
+    ld (ambulance_1_sprite_address4), hl
 
     ld hl, ambulance_2 + sprite_bytes * 0
-    ld (ambulance_2_sprite_addrress1), hl
+    ld (ambulance_2_sprite_address1), hl
     ld hl, ambulance_2 + sprite_bytes * 1
-    ld (ambulance_2_sprite_addrress2), hl
+    ld (ambulance_2_sprite_address2), hl
     ld hl, ambulance_2 + sprite_bytes * 2
-    ld (ambulance_2_sprite_addrress3), hl
+    ld (ambulance_2_sprite_address3), hl
     ld hl, ambulance_2 + sprite_bytes * 3
-    ld (ambulance_2_sprite_addrress4), hl
+    ld (ambulance_2_sprite_address4), hl
 ret
 
 set_ambulance_state 

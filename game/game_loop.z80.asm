@@ -20,10 +20,9 @@ start_game:
 
     call store_attributes                           ; store the non sprite attributes once per leve
 
+	call initialize_fred							; get the check chappy in place and ready to rock
 
-	; TODO: def crashes in here!
 	call initialize_sprites                         ; set up the sprites in their initial positions
-
 
 
 game_loop:

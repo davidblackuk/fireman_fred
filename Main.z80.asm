@@ -15,10 +15,10 @@
                                                     ;loader which clears up the RAM
                                                     ;before the binary code loads.
     ; my windows box launch settings
-    ; .setting "LaunchCommand", "D:\\emulation\\emulators\\Fuse\\fuse.exe {0}"xdgopn --help
+    .setting "LaunchCommand", "D:\\emulation\\emulators\\Fuse\\fuse.exe --no {0}"
 
     ; my linux  box launch settings
-    .setting "LaunchCommand", "{0}"
+    ; .setting "LaunchCommand", "{0}"
 
      .org $8000
 
@@ -83,6 +83,7 @@ levels:  .word level_01, level_02, level_03, level_04
 .include "./game/sprite_engine.z80.asm"
 .include "./game/sprite_move.z80.asm"
 .include "./game/ambulance.z80.asm"
+.include "./game/fred_initialization.z80.asm"
 
 
 
