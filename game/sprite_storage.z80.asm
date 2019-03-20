@@ -69,8 +69,8 @@ fred_sprite_data:
     .word scan_line_100 + 8							; highest scr address
     .word fred_right_1 + sprite_bytes * 0  			; frame 0
     .word fred_right_1 + sprite_bytes * 1      		; frame 1
-    .word fred_right_1 + sprite_bytes * 0      		; frame 2
-    .word fred_right_1 + sprite_bytes * 1      		; frame 3
+    .word fred_right_1 + sprite_bytes * 2      		; frame 2
+    .word fred_right_1 + sprite_bytes * 3      		; frame 3
     .byte 0											; start frame 
     .byte white										; attributes
     .byte none	        							; type

@@ -7,7 +7,7 @@ level_01:   .byte black 							; tv border color
 	        .byte red								; side and bottom colors
 
 			.word char_line_19 + 5					; ambulance start position
-			.word char_line_19 + 22					; ambulance end position
+			.word char_line_19 + 27					; ambulance end position
 
 first_platform_defn_gap: .equ * - level_01			; defines the offset used by the patform renderer
 	        ; plat x, y, dir, sprite, length, attrs
