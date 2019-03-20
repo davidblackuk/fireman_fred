@@ -62,7 +62,7 @@ next_level:
 ;
 levels:  .word level_01, level_02, level_03, level_04
 
-
+.include "functions.z80.asm"
 .include "./gfx/fonts.z80.asm"
 
 .include "./gfx/fred.z80.asm"
