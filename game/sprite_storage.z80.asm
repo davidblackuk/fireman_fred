@@ -24,40 +24,39 @@ sprite_7: .storage sprt_buff_len
 
 ambulance_sprite_data_1:
 	.byte 1											; flags: 0 = off 1 = in use
-
-    .word scan_line_088 + 6							; scr address
-    .word scan_line_088 + 6							; lowest scr address
-    .word scan_line_088 + 6							; highest scr address
-    .word ambulance_1 + sprite_bytes * 0  			; frame 0
-    .word ambulance_1 + sprite_bytes * 1      		; frame 1
-    .word ambulance_1 + sprite_bytes * 0      		; frame 2
-    .word ambulance_1 + sprite_bytes * 1      		; frame 3
+ambulance_1_current_address: .word 0                ; currennt screeen address
+ambulance_1_lowest_address:  .word 0             	; lowest screen address
+ambulance_1_highest_address: .word 0                ; highest screen address
+ambulance_1_sprite_addrress1: .word 0     			; frame 0
+ambulance_1_sprite_addrress2: .word 0     			; frame 1
+ambulance_1_sprite_addrress3: .word 0     			; frame 2
+ambulance_1_sprite_addrress4: .word 0     			; frame 3
     .byte 0											; start frame 
-    .byte green										; attributes
-    .byte none								; type
-    .byte none										; direction
+    .byte white										; attributes
+ambulance_1_type:
+    .byte horizontal								        ; type
+    .byte right										; direction
     .byte 0                                         ; frame skip
-    .byte 1                                         ; velocity (vertical)
+    .byte 1                                         ; velocity 
 
 	.byte 0											; current frame skip
 	.storage sprite_bytes							; copy of background
 
 ambulance_sprite_data_2:
 	.byte 1											; flags: 0 = off 1 = in use
-
-    .word scan_line_088 + 8							; scr address
-    .word scan_line_088 + 8							; lowest scr address
-    .word scan_line_088 + 8							; highest scr address
-    .word ambulance_2 + sprite_bytes * 0  			; frame 0
-    .word ambulance_2 + sprite_bytes * 1      		; frame 1
-    .word ambulance_2 + sprite_bytes * 0      		; frame 2
-    .word ambulance_2 + sprite_bytes * 1      		; frame 3
+ambulance_2_current_address: .word 0                ; currennt screeen address
+ambulance_2_lowest_address:  .word 0             	; lowest screen address
+ambulance_2_highest_address: .word 0                ; highest screen address
+ambulance_2_sprite_addrress1: .word 0     			; frame 0
+ambulance_2_sprite_addrress2: .word 0     			; frame 1
+ambulance_2_sprite_addrress3: .word 0     			; frame 2
+ambulance_2_sprite_addrress4: .word 0     			; frame 3
     .byte 0											; start frame 
-    .byte green										; attributes
-    .byte none	        							; type
-    .byte none										; direction
+    .byte white										; attributes
+ambulance_2_type: .byte none                        ; type
+ambulance_2_direction: .byte right                  ; direction
     .byte 0                                         ; frame skip
-    .byte 1                                         ; velocity (vertical)
+    .byte 1                                         ; velocity (horizontal)
 
 	.byte 0											; current frame skip
 	.storage sprite_bytes							; copy of background
@@ -73,7 +72,7 @@ fred_sprite_data:
     .word fred_right_1 + sprite_bytes * 0      		; frame 2
     .word fred_right_1 + sprite_bytes * 1      		; frame 3
     .byte 0											; start frame 
-    .byte green										; attributes
+    .byte white										; attributes
     .byte none	        							; type
     .byte none										; direction
     .byte 4                                         ; frame skip

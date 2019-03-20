@@ -50,8 +50,10 @@ game_loop:
 	jp nz, level_complete_sucess			
 
     bit m_pressed, a
-	jp nz, level_complete_failed			
+	jp nz, level_complete_failed	
 
+	bit down_pressed, a		
+	call nz, start_ambulance
 
 ;    ld b,100            ; time to pause.
 ;delay  halt                ; wait for an interrupt.
