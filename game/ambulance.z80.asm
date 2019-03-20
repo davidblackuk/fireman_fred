@@ -19,7 +19,8 @@ initialize_ambulance:
     ld IY, ambulance_sprite_data_1
 
     ld a, 1
-    ld (IY + i_sb_flags), a                         ; sprite enabled
+    ld (ambulance_sprite_data_1), a                         ; sprite enabled
+    ld (ambulance_sprite_data_2), a                         ; sprite enabled
 
     ; sprite the first
     ; set low and current address to the definiton
@@ -55,6 +56,22 @@ initialize_ambulance:
     ld (ambulance_2_sprite_addrress2), hl
     ld (ambulance_2_sprite_addrress3), hl
     ld (ambulance_2_sprite_addrress4), hl
+
+    ; copy the background color of the level into our ambulance
+    ; may need to mask bg and add white fg?
+    ld a, (ix + i_lvl_attr);
+    ld (ambulance_1_sprite_attrs), a
+    ld (ambulance_2_sprite_attrs), a
+
+    ; make sure to reset to start at frame 0
+    ; could be set from previous level
+    xor a
+    ld (ambulance_1_current_frame), a
+    ld (ambulance_2_current_frame), a
+
+    ld a, right 
+    ld (ambulance_1_direction), a
+    ld (ambulance_2_direction), a
 
     ; set type is non to disable movement
     ld a, none

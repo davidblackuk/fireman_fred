@@ -211,7 +211,7 @@ move_down:
     ret
 
 ;
-;  Animate to the next frame there are factoirs in play here
+;  Animate to the next frame there are factors in play here
 ;   - Current frame number (ix + i_sb_anim_fr)
 ;   - frame skip (ix+i_sb_sp_const_skip)  const value for the number of frame renders 
 ;       to skip before incrementing the animation frame

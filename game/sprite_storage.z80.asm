@@ -31,16 +31,17 @@ ambulance_1_sprite_addrress1: .word 0     			; frame 0
 ambulance_1_sprite_addrress2: .word 0     			; frame 1
 ambulance_1_sprite_addrress3: .word 0     			; frame 2
 ambulance_1_sprite_addrress4: .word 0     			; frame 3
-    .byte 0											; start frame 
-    .byte white										; attributes
+ambulance_1_current_frame:    .byte 0				; current frame 
+ambulance_1_sprite_attrs: .byte white				; attributes
 ambulance_1_type:
-    .byte horizontal								        ; type
-    .byte right										; direction
+    .byte horizontal                                ; type always horizontal
+ambulance_1_direction: .byte right                  ; direction 
     .byte 0                                         ; frame skip
     .byte 1                                         ; velocity 
 
 	.byte 0											; current frame skip
 	.storage sprite_bytes							; copy of background
+
 
 ambulance_sprite_data_2:
 	.byte 1											; flags: 0 = off 1 = in use
@@ -51,8 +52,8 @@ ambulance_2_sprite_addrress1: .word 0     			; frame 0
 ambulance_2_sprite_addrress2: .word 0     			; frame 1
 ambulance_2_sprite_addrress3: .word 0     			; frame 2
 ambulance_2_sprite_addrress4: .word 0     			; frame 3
-    .byte 0											; start frame 
-    .byte white										; attributes
+ambulance_2_current_frame:    .byte 0				; current frame 
+ambulance_2_sprite_attrs: .byte white				; attributes
 ambulance_2_type: .byte none                        ; type
 ambulance_2_direction: .byte right                  ; direction
     .byte 0                                         ; frame skip
