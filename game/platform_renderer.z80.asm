@@ -32,7 +32,8 @@ i_plt_flg:	.equ 6
 draw_platform:
 	call get_pixmap_addr
 	call get_char_addr								; hl points to back buffer, bc to attr
-	ld (attributes_addr), bc
+	ld (attributes_addr), bc						; store the start address of the platform in the attribute map
+	call initialize_platform_map_addr				; store the start address of the platform in the platform map
 	ld b, (ix + i_plt_len)
 
 	ld a, (IX + i_plt_dir)
@@ -45,7 +46,8 @@ horiz_loop:
 	push bc
 	call print_raw									; hl = screen , de = pixmap
 	ld bc, 1	
-	call set_attribute
+	call set_attribute								; set the attributes for the platform
+	call set_platform_map							; store the flags for this platform
 	pop bc
 	pop hl
 	inc hl
@@ -57,7 +59,8 @@ draw_vert:
 	push bc
 	call print_raw									; hl = screen , de = pixmap
 	ld bc, 32
-	call set_attribute
+	call set_attribute								; set the attributes for the platform
+	call set_platform_map								; store the flags for this platform
 	pop bc
 	pop hl
 	ld de, screen_width_chars * 8
@@ -77,6 +80,17 @@ set_attribute:
 	ld (attributes_addr), hl
 	ret
 
+;
+; Set the platform map flags for a platform
+; IN: bc contains the offset to add to get to the next attribute (1 or 32 = h or v) 
+; OUT: Trashes HL, A
+set_platform_map: 
+	ld hl, (platrom_map_addr)
+	ld a, (ix + i_plt_flg)
+	ld (hl), a
+	add hl, bc
+	ld (platrom_map_addr), hl
+	ret
 
 get_pixmap_addr: 
 	ld de, first_plt_sprite							; pixmap of first platform sprite
@@ -88,8 +102,6 @@ get_pixmap_addr:
 	add hl, de										; de = first_plt_sprite + (chr * 8)
 	ld (pixmap_addr), hl
 	ret
-
-
 
 ;
 ; clears the platform map.
@@ -103,9 +115,33 @@ cls_platform_map:
 	ldir
 	ret
 
-	pixmap_addr:  .word 0
-attributes_addr:  .word 0
+;
+; Stores the initial offset for the platform flag map ready to allow the creation of the map.
+; IN: BC contains the attribute address of the platfor relative to the background attribute map
+; OUT: BC is toast
+initialize_platform_map_addr:
+	push hl											; store used registers
+	push de
+
+	ld h, b											; hl = bc
+	ld l, c
+	ld de, attr_line_000							; de = start of attribute map
+	or a											; reset the carry flag
+	sbc hl, de										; hl = offset into the attribute map of original bc positio
+
+	ld de, platform_map								; set DE to the platformmap
+	add hl, de										; HL = address in the platform_map corresponding to the initial character
+	ld (platrom_map_addr), hl						; save it for later
+	pop de											; restore registers
+	pop hl
+ret
+
+
+	pixmap_addr:  	.word 0
+attributes_addr:  	.word 0
+platrom_map_addr:  	.word 0
 
 
 ; TODO: Move me into upper memory
-platform_map: .storage screen_width_chars * screen_height_chars
+platform_map: .storage attributes_length
+
