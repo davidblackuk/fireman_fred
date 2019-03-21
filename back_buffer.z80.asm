@@ -34,10 +34,10 @@ restore_attributes:
 ;
 
 transfer:
-	HALT					    ; Wait for Top Of Scanline, in reality would set up IM2 or something
-	DI			  		        ; Disable Interrupts
-	LD (stack_pointer_copy),SP 	; Store Stack Pointer
-	LD SP,screen_map 		    ; Point SP to our table of source and destination (display) addresses
+	HALT					    					; Wait for Top Of Scanline, in reality would set up IM2 or something
+	DI			  		        					; Disable Interrupts
+	LD (stack_pointer_copy),SP 						; Store Stack Pointer
+	LD SP,screen_map 		    					; Point SP to our table of source and destination (display) addresses
 
 	; Wait for scan line
 	LD BC, $0320 ; 800
@@ -47,12 +47,12 @@ transfer:
 	OR C
 	JR NZ,@loop_beam
 
-	LD A,192 		; iterate over all screen lines
+	LD A,192 										; iterate over all screen lines
 @line_loop:
-	POP DE   		; Get screen address
-	POP HL   		; Get buffer address
+	POP DE   										; Get screen address
+	POP HL   										; Get buffer address
 	
-	LDI				; copy 32 bytes from the backbuffer to the screen
+	LDI												; copy 32 bytes from the backbuffer to the screen
 	LDI		
 	LDI		
 	LDI		
@@ -86,18 +86,23 @@ transfer:
 	LDI			
 
 
-	DEC A			; Move to next row
-	JR NZ,@line_loop 	; repeat until all done
+	DEC A											; Move to next row
+	JR NZ,@line_loop 								; repeat until all done
 
-	LD SP,(stack_pointer_copy) 	; restore Stack Pointer
+	LD SP,(stack_pointer_copy) 						; restore Stack Pointer
 
-	ld hl, attr_line_000		; hack blit of the attributes
+	ld hl, attr_line_000							;  blit of the attributes
 	ld de, attr_start
 	ld bc, attributes_length
 	ldir
 
-	EI ; enable interrupts
+	EI 												; enable interrupts
 	ret
+
+;
+;	Clears the back buffer pixels a 0 and the attributes to the value in a
+;
+;	IN: A contains the attributes to clear to 
 
 cls_backbuffer:
 	ld hl, char_line_00
@@ -182,67 +187,14 @@ char_line_22:	.storage 32 * 8
 char_line_23:	.storage 32 * 8
 
 
-attr_line_000: 	.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-				.word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+attr_line_000: 	.storage attributes_length
 
 ;
 ; Once the platforms are rendered we copy the attribute map  here, it
 ; is restored every frame befor the sprites are rendered. Easier than 
 ; having possibly a per sprite and fred attribute store
 ;
-attributes_restore_point: 
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-               .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-
-attributes_restore_end: .equ * 
-
-off_by_one: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-
-
+attributes_restore_point: .storage attributes_length
 
 ;
 ; Foreach scan line we store a pair that represent the address of the 
