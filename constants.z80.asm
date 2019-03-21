@@ -66,8 +66,13 @@ i_sb_sp_const_skip: .equ 19
 i_sb_sp_velocity:   .equ 20
 i_sb_sp_curr_skip:  .equ 21
 
+;
+; Sprite buffer flags
+;
+sprite_enabled      .equ %00000001                  ; sprite is anabled move and animate
+sprite_owned        .equ %10000000                  ; sprite is moved and animated by the owner (ie fred)
 
-; Plateform flags
+; Platform flags
 plt_empty:   .equ 0	; no platform at this position
 plt_blocker: .equ $01	; this character cell block movement into it from any dir
 plt_normal:  .equ $02	; can jump through and walk through, but will land on
@@ -81,6 +86,8 @@ sprite_max: .equ 8 + 3                              ; = 8 enemy/victim sprites a
 
 sprite_height: .equ 16
 sprite_bytes: .equ sprite_height*2
+
+
 
 
 ; --------------------------------------

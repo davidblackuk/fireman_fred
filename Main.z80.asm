@@ -84,6 +84,7 @@ levels:  .word level_01, level_02, level_03, level_04
 .include "./game/sprite_move.z80.asm"
 .include "./game/ambulance.z80.asm"
 .include "./game/fred_initialization.z80.asm"
+.include "./game/fred_move.z80.asm"
 
 
 

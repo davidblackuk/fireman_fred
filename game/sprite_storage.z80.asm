@@ -23,7 +23,7 @@ sprite_7: .storage sprt_buff_len
 ; --------------------------------
 
 ambulance_sprite_data_1:
-	.byte 1											; flags: 0 = off 1 = in use
+	.byte sprite_enabled							; flags: 0 = off 1 = in use
 ambulance_1_current_address: .word 0                ; currennt screeen address
 ambulance_1_lowest_address:  .word 0             	; lowest screen address
 ambulance_1_highest_address: .word 0                ; highest screen address
@@ -42,7 +42,7 @@ ambulance_1_direction: .byte right                  ; direction
 
 
 ambulance_sprite_data_2:
-	.byte 1											; flags: 0 = off 1 = in use
+	.byte sprite_enabled							; flags: 0 = off 1 = in use
 ambulance_2_current_address: .word 0                ; currennt screeen address
 ambulance_2_lowest_address:  .word 0             	; lowest screen address
 ambulance_2_highest_address: .word 0                ; highest screen address
@@ -63,7 +63,7 @@ ambulance_2_direction: .byte right                  ; direction
 
 
 fred_sprite:
-	.byte 1											; flags: 0 = off 1 = in use
+	.byte sprite_enabled | sprite_owned				; flags: 0 = off 1 = in use
 fred_current_address: .word 0           			; current screen address
 fred_lowest_address:  .word 0           			; lowest screen address
 fred_highest_address: .word 0           			; highest screen address
