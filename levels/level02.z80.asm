@@ -31,9 +31,9 @@ level_02:
 	; sprite definitions (upto 8) 
 	; start addr, low addr, end addr, sprite no, start frame, path, length, dir, speed, attributes
 
-	 .word scan_line_112 + 22							; scr address
-	 .word scan_line_112 + 21							; lowest scr address
-	 .word scan_line_112 + 24							; highest scr address
+	 .word char_line_14 + 22							; scr address
+	 .word char_line_14 + 21							; lowest scr address
+	 .word char_line_14 + 24							; highest scr address
 	 .word alien_invader1 + sprite_bytes * 0			; frame 0
 	 .word alien_invader1 + sprite_bytes * 1			; frame 1
 	 .word alien_invader1 + sprite_bytes * 2			; frame 2
@@ -45,9 +45,9 @@ level_02:
     .byte 0                                          ; frame skip
     .byte 0                                          ; velocity (vertical)
 
-	 .word scan_line_112 + 27							; scr address
-	 .word scan_line_112 + 28							; lowest scr address
-	 .word scan_line_112 + 29							; highest scr address
+	 .word char_line_14 + 27							; scr address
+	 .word char_line_14 + 28							; lowest scr address
+	 .word char_line_14 + 29							; highest scr address
 	 .word alien_invader1 + sprite_bytes * 0			; frame 0
 	 .word alien_invader1 + sprite_bytes * 1			; frame 1
 	 .word alien_invader1 + sprite_bytes * 2			; frame 2
@@ -59,9 +59,9 @@ level_02:
     .byte 0                                          ; frame skip
     .byte 0                                          ; velocity (vertical)
 
-	 .word scan_line_152 + 4							; scr address
-	 .word scan_line_152 + 3							; lowest scr address
-	 .word scan_line_152 + 10							; highest scr address
+	 .word char_line_19 + 4							; scr address
+	 .word char_line_19 + 3							; lowest scr address
+	 .word char_line_19 + 10							; highest scr address
 	 .word alien_invader1 + sprite_bytes * 0			; frame 0
 	 .word alien_invader1 + sprite_bytes * 1			; frame 1
 	 .word alien_invader1 + sprite_bytes * 2			; frame 2
@@ -77,9 +77,9 @@ level_02:
 	 ; -------------------------------------------------------------------------------------------------------------------------
 	 ; first victim
 
-	 .word scan_line_112 + 26							; scr address
-	 .word scan_line_112 + 26							; lowest scr address
-	 .word scan_line_112 + 26							; highest scr address
+	 .word char_line_14 + 26							; scr address
+	 .word char_line_14 + 26							; lowest scr address
+	 .word char_line_14 + 26							; highest scr address
 	 .word victim_2 + sprite_bytes * 0			    ; frame 0
 	 .word victim_2 + sprite_bytes * 1    		    ; frame 1
 	 .word victim_2 + sprite_bytes * 2    		    ; frame 2
@@ -91,9 +91,9 @@ level_02:
     .byte 2                                          ; frame skip
     .byte 0                                          ; velocity (vertical)
 		
-	 .word scan_line_152 + 5							; scr address
-	 .word scan_line_152 + 5							; lowest scr address
-	 .word scan_line_152 + 5							; highest scr address
+	 .word char_line_19 + 5							; scr address
+	 .word char_line_19 + 5							; lowest scr address
+	 .word char_line_19 + 5							; highest scr address
 	 .word victim_3 + sprite_bytes * 0			    ; frame 0
 	 .word victim_3 + sprite_bytes * 1    		    ; frame 1
 	 .word victim_3 + sprite_bytes * 2    		    ; frame 2
@@ -105,9 +105,9 @@ level_02:
     .byte 2                                          ; frame skip
     .byte 0                                          ; velocity (vertical)
 		
-     .word scan_line_080 + 26							; scr address
-	 .word scan_line_080 + 26							; lowest scr address
-	 .word scan_line_080 + 26							; highest scr address
+     .word char_line_10 + 26							; scr address
+	 .word char_line_10 + 26							; lowest scr address
+	 .word char_line_10 + 26							; highest scr address
 	 .word victim_1 + sprite_bytes * 0			    ; frame 0
 	 .word victim_1 + sprite_bytes * 1    		    ; frame 1
 	 .word victim_1 + sprite_bytes * 2    		    ; frame 2

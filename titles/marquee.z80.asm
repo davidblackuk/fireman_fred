@@ -6,7 +6,7 @@
 
 ;use the screen to store this too
 position_in_string: .word 0
-last_char_in_buffer: .equ scan_line_001 + 3
+last_char_in_buffer: .equ char_line_00 + 32 + 3
 
 marquee_length .equ 32
 
@@ -14,17 +14,17 @@ marquee_length .equ 32
 ; an x,y and color, so the line overflows into the nextscan line . (though not out of character row 0)
 ;
 init_marquee:
-	ld hl, scan_line_000 + 3						; clear to all spaces, this will overflow 
-	ld de, scan_line_000 + 4						; onto scan line two because of the three byte
+	ld hl, char_line_00 + 3							; clear to all spaces, this will overflow 
+	ld de, char_line_00 + 4							; onto scan line two because of the three byte
 	ld bc, marquee_length-1							; header for print_message
 	ld (hl), ' '
-	ldir											; scan_line_0 + 3 + 32 is 0 terminator
+	ldir											; char_line_00 + 3 + 32 is 0 terminator
 
 	xor a											; zero terminator
 	ld (de), a			
 
-	ld ix, scan_line_000							; store the prefix data
-	ld (ix+0), 0										; x coord of marquee
+	ld ix, char_line_00								; store the prefix data
+	ld (ix+0), 0									; x coord of marquee
 	ld (ix+1), 22									; y coord of marquee
 	ld (ix+2), pBlack | white						; colors
 
@@ -52,8 +52,8 @@ step_marquee:
 	ret
 
 scroll_message:
-	ld hl, scan_line_000 + 4						; one char in
-	ld de, scan_line_000 + 3						; position of first char
+	ld hl, char_line_00 + 4							; one char in
+	ld de, char_line_00 + 3							; position of first char
 	ld b, marquee_length-1							; move 31 characters and leav  the last
 scroll_loop:			
 	ld a, (hl)			
@@ -73,11 +73,11 @@ get_next_character:
 no_overflow:			
 	inc hl											; point to char for next loop
 	ld (position_in_string), hl						; save the pointer
-	ld (scan_line_000+3+31), a						; store the char at the end of the buffer
+	ld (char_line_00+3+31), a						; store the char at the end of the buffer
 	ret
 
 print_marquee:
-	ld ix, scan_line_000
+	ld ix, char_line_00
 	call print_message
 	ret
 

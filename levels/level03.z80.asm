@@ -48,9 +48,9 @@ level_03:
 
 
   
-	 .word scan_line_068 + 5							; scr address
-	 .word scan_line_068 + 5							; lowest scr address
-	 .word scan_line_106 + 5							; highest scr address
+	 .word char_line_08 + 5							; scr address
+	 .word char_line_08 + 5							; lowest scr address
+	 .word char_line_14 + 5							; highest scr address
 	 .word alien_bottle + sprite_bytes * 0			; frame 0
 	 .word alien_bottle + sprite_bytes * 1			; frame 1
 	 .word alien_bottle + sprite_bytes * 2			; frame 2
@@ -62,9 +62,9 @@ level_03:
     .byte 0                                          ; frame skip
     .byte 2                                          ; velocity (vertical)
 
-	 .word scan_line_106 + 12							; scr address
-	 .word scan_line_068 + 12							; lowest scr address
-	 .word scan_line_106 + 12							; highest scr address
+	 .word char_line_13 + 12							; scr address
+	 .word char_line_08 + 12							; lowest scr address
+	 .word char_line_14 + 12							; highest scr address
 	 .word alien_bottle + sprite_bytes * 0			; frame 0
 	 .word alien_bottle + sprite_bytes * 1			; frame 1
 	 .word alien_bottle + sprite_bytes * 2			; frame 2
@@ -76,9 +76,9 @@ level_03:
     .byte 1                                          ; frame skip
     .byte 1                                          ; velocity (vertical)
 
-     .word scan_line_070 + 19							; scr address
-	 .word scan_line_068 + 19							; lowest scr address
-	 .word scan_line_106 + 19							; highest scr address
+     .word char_line_09 + 19							; scr address
+	 .word char_line_08 + 19							; lowest scr address
+	 .word char_line_14 + 19							; highest scr address
 	 .word alien_bottle + sprite_bytes * 0			; frame 0
 	 .word alien_bottle + sprite_bytes * 1			; frame 1
 	 .word alien_bottle + sprite_bytes * 2			; frame 2
@@ -90,9 +90,9 @@ level_03:
     .byte 1                                          ; frame skip
     .byte 1                                          ; velocity (vertical)
 
-     .word scan_line_104 + 26							; scr address
-	 .word scan_line_068 + 26							; lowest scr address
-	 .word scan_line_106 + 26							; highest scr address
+     .word char_line_13 + 26							; scr address
+	 .word char_line_08 + 26							; lowest scr address
+	 .word char_line_14 + 26							; highest scr address
 	 .word alien_bottle + sprite_bytes * 0			; frame 0
 	 .word alien_bottle + sprite_bytes * 1			; frame 1
 	 .word alien_bottle + sprite_bytes * 2			; frame 2
@@ -108,9 +108,9 @@ level_03:
     ; -------------------------------------------------------------------------------------------------------------------------
 	; first victim
 
-     .word scan_line_080 + 1							; scr address
-	 .word scan_line_080 + 1							; lowest scr address
-	 .word scan_line_080 + 1							; highest scr address
+     .word char_line_10 + 1							; scr address
+	 .word char_line_10 + 1							; lowest scr address
+	 .word char_line_10 + 1							; highest scr address
 	 .word victim_3 + sprite_bytes * 0		    	; frame 0
 	 .word victim_3 + sprite_bytes * 1		    	; frame 1
 	 .word victim_3 + sprite_bytes * 2		    	; frame 2
@@ -122,9 +122,9 @@ level_03:
     .byte 2                                          ; frame skip
     .byte 0                                          ; velocity (vertical)
 
-     .word scan_line_080 + 29							; scr address
-	 .word scan_line_080 + 29							; lowest scr address
-	 .word scan_line_080 + 29							; highest scr address
+     .word char_line_10 + 29							; scr address
+	 .word char_line_10 + 29							; lowest scr address
+	 .word char_line_10 + 29							; highest scr address
 	 .word victim_2 + sprite_bytes * 0		    	; frame 0
 	 .word victim_2 + sprite_bytes * 1		    	; frame 1
 	 .word victim_2 + sprite_bytes * 2		    	; frame 2

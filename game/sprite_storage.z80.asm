@@ -64,9 +64,9 @@ ambulance_2_direction: .byte right                  ; direction
 
 fred_sprite:
 	.byte 1											; flags: 0 = off 1 = in use
-fred_current_address: .word scan_line_100           ; current screen address
-fred_lowest_address:  .word scan_line_100           ; lowest screen address
-fred_highest_address: .word scan_line_100           ; highest screen address
+fred_current_address: .word 0           			; current screen address
+fred_lowest_address:  .word 0           			; lowest screen address
+fred_highest_address: .word 0           			; highest screen address
 fred_sprite_address1: .word fred_right_1            ; frame 0
 fred_sprite_address2: .word fred_right_1            ; frame 1
 fred_sprite_address3: .word fred_right_1            ; frame 2

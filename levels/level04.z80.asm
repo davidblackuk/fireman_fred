@@ -33,9 +33,9 @@ level_04:
 
 
   
-	 .word scan_line_091 + 6							; scr address
-	 .word scan_line_068 + 6							; lowest scr address
-	 .word scan_line_124 + 6							; highest scr address
+	 .word char_line_11 + 6							; scr address
+	 .word char_line_09 + 6							; lowest scr address
+	 .word char_line_15 + 6							; highest scr address
 	 .word alien_smoke + sprite_bytes * 0			; frame 0
 	 .word alien_smoke + sprite_bytes * 1			; frame 1
 	 .word alien_smoke + sprite_bytes * 2			; frame 2
@@ -47,9 +47,9 @@ level_04:
     .byte 0                                          ; frame skip
     .byte 1                                          ; velocity (vertical)
 
-	 .word scan_line_091 + 12							; scr address
-	 .word scan_line_068 + 12							; lowest scr address
-	 .word scan_line_124 + 12							; highest scr address
+	 .word char_line_11 + 12							; scr address
+	 .word char_line_09 + 12							; lowest scr address
+	 .word char_line_15 + 12							; highest scr address
 	 .word alien_smoke + sprite_bytes * 0			; frame 0
 	 .word alien_smoke + sprite_bytes * 1			; frame 1
 	 .word alien_smoke + sprite_bytes * 2			; frame 2
@@ -61,9 +61,9 @@ level_04:
     .byte 1                                          ; frame skip
     .byte 1                                          ; velocity (vertical)
 
-     .word scan_line_070 + 20							; scr address
-	 .word scan_line_068 + 20							; lowest scr address
-	 .word scan_line_124 + 20							; highest scr address
+     .word char_line_09 + 20							; scr address
+	 .word char_line_09 + 20							; lowest scr address
+	 .word char_line_15 + 20							; highest scr address
 	 .word alien_smoke + sprite_bytes * 0			; frame 0
 	 .word alien_smoke + sprite_bytes * 1			; frame 1
 	 .word alien_smoke + sprite_bytes * 2			; frame 2
@@ -75,9 +75,9 @@ level_04:
     .byte 1                                          ; frame skip
     .byte 1                                          ; velocity (vertical)
 
-     .word scan_line_088 + 24							; scr address
-	 .word scan_line_088 + 22							; lowest scr address
-	 .word scan_line_088 + 29							; highest scr address
+     .word char_line_11 + 24							; scr address
+	 .word char_line_11 + 22							; lowest scr address
+	 .word char_line_11 + 29							; highest scr address
 	 .word alien_bounce_ball + sprite_bytes * 0			; frame 0
 	 .word alien_bounce_ball + sprite_bytes * 1			; frame 1
 	 .word alien_bounce_ball + sprite_bytes * 2			; frame 2
@@ -93,9 +93,9 @@ level_04:
     ; -------------------------------------------------------------------------------------------------------------------------
 	; first victim
 
-     .word scan_line_128 + 2							; scr address
-	 .word scan_line_128 + 2							; lowest scr address
-	 .word scan_line_128 + 2							; highest scr address
+     .word char_line_16 + 2							; scr address
+	 .word char_line_16 + 2							; lowest scr address
+	 .word char_line_16 + 2							; highest scr address
 	 .word victim_cat1 + sprite_bytes * 0		    	; frame 0
 	 .word victim_cat1 + sprite_bytes * 1		    	; frame 1
 	 .word victim_cat1 + sprite_bytes * 2		    	; frame 2

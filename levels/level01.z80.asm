@@ -39,9 +39,9 @@ platform_defn_len: .equ * - first_ever_platform
 			; if we change sprite definition,  change all others including the bulance and fred
 			;
 	        ; start addr, low addr, end addr, sprite no, start frame, path, length, dir, speed, attributes
-first_spd:   .word scan_line_088 + 6							; scr address
-	         .word scan_line_088 + 4							; lowest scr address
-	         .word scan_line_088 + 9							; highest scr address
+first_spd:   .word char_line_11 + 6							; scr address
+	         .word char_line_11 + 4							; lowest scr address
+	         .word char_line_11 + 9							; highest scr address
 	         .word alien_bulb + sprite_bytes * 0  			; frame 0
 	         .word alien_bulb + sprite_bytes * 1      		; frame 1
 	         .word alien_bulb + sprite_bytes * 2      		; frame 2
@@ -55,9 +55,9 @@ first_spd:   .word scan_line_088 + 6							; scr address
 
 sprite_definition_len: .equ  * - first_spd			
 
-	         .word scan_line_088 + 22							; scr address
-	         .word scan_line_088 + 22							; lowest scr address
-	         .word scan_line_088 + 26							; highest scr address
+	         .word char_line_11 + 22							; scr address
+	         .word char_line_11 + 22							; lowest scr address
+	         .word char_line_11 + 26							; highest scr address
 	         .word alien_bulb + sprite_bytes * 0  			; frame 0
 	         .word alien_bulb + sprite_bytes * 1      		; frame 1
 	         .word alien_bulb + sprite_bytes * 2      		; frame 2
@@ -72,9 +72,9 @@ sprite_definition_len: .equ  * - first_spd
 	        ; -------------------------------------------------------------------------------------------------------------------------
 	        ; first victim
 
-	         .word scan_line_088 + 11							; scr address
-	         .word scan_line_088 + 11							; lowest scr address
-	         .word scan_line_088 + 11							; highest scr address
+	         .word char_line_11 + 11							; scr address
+	         .word char_line_11 + 11							; lowest scr address
+	         .word char_line_11 + 11							; highest scr address
 	         .word victim_1 + sprite_bytes * 0			    ; frame 0
 	         .word victim_1 + sprite_bytes * 1    		    ; frame 1
 	         .word victim_1 + sprite_bytes * 2    		    ; frame 2
@@ -87,9 +87,9 @@ sprite_definition_len: .equ  * - first_spd
             .byte 0                                          ; velocity (vertical)
 		
 			
-	         .word scan_line_088 + 28							; scr address
-	         .word scan_line_088 + 28							; lowest scr address
-	         .word scan_line_088 + 28							; highest scr address
+	         .word char_line_11 + 28							; scr address
+	         .word char_line_11 + 28							; lowest scr address
+	         .word char_line_11 + 28							; highest scr address
 	         .word victim_2 + sprite_bytes * 0			    ; frame 0
 	         .word victim_2 + sprite_bytes * 1    		    ; frame 1
 	         .word victim_2 + sprite_bytes * 2    		    ; frame 2

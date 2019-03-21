@@ -88,7 +88,7 @@ print_loop:		ld a, (de)			  				; get next character to print
 ; Given: IX points to x,y
 ; returns: hl => back buffer address of character
 ;		  bc => attribute address of character in backbuffer
-get_char_addr:	ld h, 0				 				; calculate screenLoc = scan_line_00 + ((y*8) * 32)
+get_char_addr:	ld h, 0				 				; calculate screenLoc = char_line_00 + ((y*8) * 32)
 				ld l, (IX + 1)		  				; get the y coordinate
 
 				add hl, hl			  				; multiply it by 32*8 to get the row start
@@ -100,11 +100,11 @@ get_char_addr:	ld h, 0				 				; calculate screenLoc = scan_line_00 + ((y*8) * 3
 				add hl, hl
 				add hl, hl
 
-				ld bc, scan_line_000				; top of screen
-				add hl, bc			  				; scan_line_00 + (y * 8 * with)
+				ld bc, char_line_00					; top of screen
+				add hl, bc			  				; char_line_00 + (y * 8 * with)
 				ld b, 0			
 				ld c, (IX + 0)			
-				add hl, bc			  				; scan_line_00 + (y * with) + x
+				add hl, bc			  				; char_line_00 + (y * with) + x
 
 				;
 				; calculate attribute location = attributes start +x + (y*8)

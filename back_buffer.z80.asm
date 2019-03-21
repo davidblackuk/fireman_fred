@@ -100,8 +100,8 @@ line_loop:
 	ret
 
 cls_backbuffer:
-	ld hl, scan_line_000
-	ld de, scan_line_000 + 1
+	ld hl, char_line_00
+	ld de, char_line_00 + 1
 	ld bc, screen_size-1 
 	ld (hl), 0
 	ldir
@@ -461,7 +461,7 @@ off_by_one: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ;
 ; Foreach scan line we store a pair that represent the address of the 
 ; start of a row in the physical screen and the matching row start in the back buffer
-; for Screen address 0 ($4000) maps to scan_line_0 contained in here
+; for Screen address 0 ($4000) maps to char_line_00 contained in here
 ;
 screen_map:		
 	.word $4000, scan_line_000, $4100, scan_line_001, $4200, scan_line_002, $4300, scan_line_003
