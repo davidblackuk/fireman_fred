@@ -29,20 +29,16 @@ game_loop:
     call read_keys
 	call restore_backgrounds
 	
-
+	call move_fred
 	call move_sprites
 	call store_backgrounds
 	
 	call draw_sprites	
-	
-    
+	    
     call transfer
-
-
 
     call restore_attributes                         ; remove the effects of the sprite render to the initial attribute map
    
-
     ; fake sucess / failure through key presses
     ld a, (key_map)
     bit n_pressed, a
@@ -53,10 +49,6 @@ game_loop:
 
 	bit down_pressed, a		
 	call nz, start_ambulance
-
-;    ld b,100            ; time to pause.
-;delay  halt                ; wait for an interrupt.
-;       djnz delay  
 
 	jp game_loop
 

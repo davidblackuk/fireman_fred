@@ -18,6 +18,10 @@ move_sprite:
 	ld a, (hl)										; is this sprite active
 	cp 0											; bail if not
 	ret z		
+
+	and sprite_owned
+	ret nz
+
 	push ix
 	push hl
 	pop ix											; ix points to sprite buffer

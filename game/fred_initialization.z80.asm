@@ -7,8 +7,8 @@
 initialize_fred:
     push hl
 
-    ld a, 1
-    ld (fred_sprite), a                         ; sprite enabled
+    ld a, sprite_owned | sprite_enabled             ; Enabled for drawing, but we own the
+ld (fred_sprite), a                                 ; update process for frames and position
 
     ; set low and current address to the definiton
     ld l, (IX + i_lvl_fred_start)
@@ -32,6 +32,31 @@ initialize_fred:
     ld a, right 
     ld (fred_direction), a
 
+    ; set the sprites to the right facing ones
+    call set_fred_facing_right
+
     pop hl
     ret
-t
+
+
+set_fred_facing_right:
+    ld hl, fred_right_1
+    ld (fred_sprite_address1), hl
+    ld hl, fred_right_1 + 32
+    ld (fred_sprite_address2), hl
+    ld hl, fred_right_1 + 64
+    ld (fred_sprite_address3), hl
+    ld hl, fred_right_1 + 96
+    ld (fred_sprite_address4), hl
+ret
+
+set_fred_facing_left:
+    ld hl, fred_left_1
+    ld (fred_sprite_address1), hl
+    ld hl, fred_left_1 + 32
+    ld (fred_sprite_address2), hl
+    ld hl, fred_left_1 + 64
+    ld (fred_sprite_address3), hl
+    ld hl, fred_left_1 + 96
+    ld (fred_sprite_address4), hl
+ret

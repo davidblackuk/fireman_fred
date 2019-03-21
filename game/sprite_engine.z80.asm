@@ -94,7 +94,7 @@ set_attr:											; set the attribute bytes for our sprite
 
 ; var offset = screenAddress - screenBufferStart;
 	pop hl											; retrieve the back buffer address
-	ld de, scan_line_000                            ; hl = offset of sprt relative to screen top
+	ld de, char_line_00                            	; hl = offset of sprt relative to screen top
 	sbc hl, de										
 
     push hl                                         ; save hl
@@ -365,7 +365,7 @@ initialize_sprite:
 add_one	add hl, de									; skip to the next sprite buffer
 	djnz add_one									; loop till 0
 cont_sprt:
-	ld (hl), 1										; mark as in use
+	ld (hl), sprite_enabled							; mark as in use
 	inc hl											; point to attr
 	push hl	
 	push ix

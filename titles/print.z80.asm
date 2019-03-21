@@ -88,7 +88,7 @@ print_loop:		ld a, (de)			  				; get next character to print
 ; Given: IX points to x,y
 ; returns: hl => back buffer address of character
 ;		  bc => attribute address of character in backbuffer
-get_char_addr:	ld h, 0				 				; calculate screenLoc = scan_line_00 + ((y*8) * 32)
+get_char_addr:	ld h, 0				 				; calculate screenLoc = char_line_00 + ((y*8) * 32)
 				ld l, (IX + 1)		  				; get the y coordinate
 
 				add hl, hl			  				; multiply it by 32*8 to get the row start
@@ -100,11 +100,11 @@ get_char_addr:	ld h, 0				 				; calculate screenLoc = scan_line_00 + ((y*8) * 3
 				add hl, hl
 				add hl, hl
 
-				ld bc, scan_line_000				; top of screen
-				add hl, bc			  				; scan_line_00 + (y * 8 * with)
+				ld bc, char_line_00					; top of screen
+				add hl, bc			  				; char_line_00 + (y * 8 * with)
 				ld b, 0			
 				ld c, (IX + 0)			
-				add hl, bc			  				; scan_line_00 + (y * with) + x
+				add hl, bc			  				; char_line_00 + (y * with) + x
 
 				;
 				; calculate attribute location = attributes start +x + (y*8)
@@ -140,44 +140,66 @@ get_char_addr:	ld h, 0				 				; calculate screenLoc = scan_line_00 + ((y*8) * 3
 ; IN:   HL -> Screen address of the character
 ;	   A  -> Character to pront (ascii)
 print_char:		push hl								; save screen address
-				cp 'A'								; greater than or equal to A?
-				jp nc, _isAlpha						; jump to print a..z
+				
+				; do the special cases first as they are all over the map ascii wise
+
+@tryColon:		cp ':'
+				jp nz, @tryMinus					; try matching a colon (:)
+				ld hl, system_font_colon
+				jr @print_from_hl
+
+@tryMinus:		cp '-'
+				jp nz, @tryComma					; try matching a minus (-)
+				ld hl, system_font_minus
+				jr @print_from_hl
+
+@tryComma:		cp ','
+				jp nz, @tryPeriod					; try matching a comma (,)
+				ld hl, system_font_comma
+				jr @print_from_hl
+
+
+@tryPeriod:		cp '.'
+				jp nz, @processRanges				; last chance is it a period, quit otherwise
+				ld hl, system_font_full_stop
+				jr @print_from_hl
+
+				; now do the range checks
+
+@processRanges:	cp 'A'								; greater than or equal to A?
+				jp nc, @isAlpha						; jump to print a..z
 
 				cp '0'								; Greater than or equal to 0
-				jp nc, _isDigit			
+				jp nc, @isDigit			
 
 				cp ' '								; Is it a space?
-				jp nz, _tryPeriod			  
+				jp nz, @tryColon			  
 				ld hl, system_font_space
-				jr _print_from_hl
+				jr @print_from_hl
 
-_tryPeriod:		cp '.'
-				ret nz								; last chance is it a period, quit otherwise
-				ld hl, system_font_full_stop
-				jr _print_from_hl
 
-_isDigit:		ld bc, system_font_09
+@isDigit:		ld bc, system_font_09
 				ld hl, 0
 				sub '0'								; gets offset from '0'
-				jp _offset_char
+				jp @offset_char
 
-_isAlpha:		ld bc, system_font_az				; address of first char in the a-z set
+@isAlpha:		ld bc, system_font_az				; address of first char in the a-z set
 				ld hl, 0			
 				sub 'A'								; get offset from A = 0
 			
-_offset_char:	ld l, a			
+@offset_char:	ld l, a			
 				add hl, hl							; multiply offset by 8
 				add hl, hl			
 				add hl, hl			
 				add hl, bc							; hl now points to first char in the character pix map
 			
-_print_from_hl:	push hl								; swap hl and de as hl is better at math
+@print_from_hl:	push hl								; swap hl and de as hl is better at math
 				pop  de								; de => font address
 				pop  hl								; hl => screen address passed in
 			
 print_raw:		ld b, 8								; hl = screen address of char, de = font address, copy 8 lines of the character
 
-_loop:			ld a, (de)
+@loop:			ld a, (de)
 				ld (hl), a	
 				inc de
 				push bc
@@ -185,6 +207,6 @@ _loop:			ld a, (de)
 				add hl, bc
 				pop bc
    
-				djnz _loop		 
+				djnz @loop		 
 				ret
 
