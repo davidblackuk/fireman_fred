@@ -8,9 +8,9 @@ level_02:
 	.byte sp_bot_02									; Bottom graphic
 	.byte magenta									; side and bottom colors
 	
-	.word char_line_19 + 15							; ambulance start position
-	.word char_line_19 + 27							; ambulance end position
-	.word char_line_06 + 8							; Fred's starting position
+	BufferAddress(15, 19)							; ambulance start position
+	BufferAddress(27, 19)							; ambulance end position
+	PositionFred(8, 6)								; freds start position in the back buffer and other variables	
 
 	; plat x, y, dir, sprite, length, attrs
 	.byte  1,  8, horizontal, sp_plt_02,  8, pBlue | green, plt_normal

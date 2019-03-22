@@ -5,6 +5,7 @@
 ;
 
 .include "./constants.z80.asm"
+.include "./macros.z80.asm"
 
  //Setup for ZX Spectrum (Z80 CPU mode)
     .target "z80"

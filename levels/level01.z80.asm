@@ -1,16 +1,15 @@
 ﻿;---------------------------------------------------V--------------------
 
 level_01:   
-	.byte black 							; tv border color
-	.byte pBlack | white  					; default attributes	
-	.byte sp_sid_01, sp_sid_01				; Left, right Side graphic
-	.byte sp_bot_01							; Bottom graphic
-	.byte red								; side and bottom colors
+	.byte black 									; tv border color
+	.byte pBlack | white  							; default attributes	
+	.byte sp_sid_01, sp_sid_01						; Left, right Side graphic
+	.byte sp_bot_01									; Bottom graphic
+	.byte red										; side and bottom colors
 
-	.word char_line_19 + 5					; ambulance start position
-	.word char_line_19 + 27					; ambulance end position
-	.word char_line_16 + 11					; Fred's starting position
-			
+	BufferAddress(5, 19)							; ambulance start position
+	BufferAddress(27, 19)							; ambulance end position
+	PositionFred(11, 16)							; freds start position in the back buffer  and other variables	
 
 first_platform_defn_gap: .equ * - level_01			; defines the offset used by the patform renderer
 	        ; plat x, y, dir, sprite, length, attrs
