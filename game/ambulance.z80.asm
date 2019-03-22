@@ -14,9 +14,10 @@
 initialize_ambulance:
     push hl
 
-    ld a, 1
-    ld (ambulance_sprite_data_1), a                         ; sprite enabled
-    ld (ambulance_sprite_data_2), a                         ; sprite enabled
+    ; sprites are enabled always
+    ld a, sprite_enabled
+    ld (ambulance_sprite_data_1), a                 
+    ld (ambulance_sprite_data_2), a                 
 
     ; sprite the first
     ; set low and current address to the definiton

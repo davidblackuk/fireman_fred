@@ -34,18 +34,18 @@ draw_platform:
 	call get_char_addr								; hl points to back buffer, bc to attr
 	ld (attributes_addr), bc						; store the start address of the platform in the attribute map
 	call initialize_platform_map_addr				; store the start address of the platform in the platform map
-	ld b, (ix + i_plt_len)
+	ld b, (ix + i_plt_len)							; get the length of the platform
 
-	ld a, (IX + i_plt_dir)
-	cp vertical
-	jp z, draw_vert
+	ld a, (IX + i_plt_dir)							; are we drawing vertically or horizontally?
+	cp vertical										;
+	jp z, draw_vert									; if we are vertical jump to the code to render that
 
 horiz_loop:
 	ld de, (pixmap_addr)
 	push hl
 	push bc
 	call print_raw									; hl = screen , de = pixmap
-	ld bc, 1	
+	ld bc, 1										; next platform character is 1 byte away in the attribute and map stores
 	call set_attribute								; set the attributes for the platform
 	call set_platform_map							; store the flags for this platform
 	pop bc
@@ -58,12 +58,12 @@ draw_vert:
 	push hl
 	push bc
 	call print_raw									; hl = screen , de = pixmap
-	ld bc, 32
+	ld bc, 32										; next platform character is 32 bytes away in the attribute and map stores
 	call set_attribute								; set the attributes for the platform
-	call set_platform_map								; store the flags for this platform
+	call set_platform_map							; store the flags for this platform
 	pop bc
 	pop hl
-	ld de, screen_width_chars * 8
+	ld de, screen_width_chars * 8					; next character cell below
 	add hl, de
 	djnz draw_vert
 	ret
@@ -137,11 +137,14 @@ initialize_platform_map_addr:
 ret
 
 
-	pixmap_addr:  	.word 0
-attributes_addr:  	.word 0
-platrom_map_addr:  	.word 0
+  	 pixmap_addr:  	.word 0							; position in the pixel back buffer for the platform we are rendering
+ attributes_addr:  	.word 0							; position in the attrribute map for the platform being drawn
+platrom_map_addr:  	.word 0							;  position in the platform map for the platform being drawn
 
-
-; TODO: Move me into upper memory
+;
+; stores the platform flags. indicating if a platform is 
+; normal (can jump through), solid (impovable) a conveyer
+; etc.
+;
 platform_map: .storage attributes_length
 

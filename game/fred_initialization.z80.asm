@@ -18,7 +18,7 @@ ld (fred_sprite), a                                 ; update process for frames 
     ld (fred_highest_address), hl
 
 
-    ; copy the background color of the level into our ambulance
+    ; copy the background color of the level into our man fred
     ; may need to mask bg and add white fg?
     ld a, (ix + i_lvl_attr);
     ld (fred_sprite_attrs), a

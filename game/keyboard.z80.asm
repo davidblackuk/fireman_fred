@@ -26,7 +26,7 @@ n_pressed:        .equ 5
 m_pressed:        .equ 6
 
 read_keys:
-    ld e, 0                                         ; build up ytthe mask in e
+    ld e, 0                                         ; build up the mask in e
     ld hl, key_map
     ld (hl), e                                      ; reset map to 0
 
