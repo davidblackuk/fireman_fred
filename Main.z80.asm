@@ -38,15 +38,20 @@ start:
 
 play:    
     ld hl, 0    
-next_level:    
+begin_level:    
     push hl
-	call start_game
+	call start_game                                 ; status returned in a
     pop hl
-    inc l
-    ld a, l
-    cp max_level
-    jp nz, next_level
-    jp start
+
+    cp level_complete_fail                          ; did we fail?
+    jp z, begin_level                               ; if so don't increment the level number
+
+    inc l                                           ; increment the level number
+    ld a, l                                         
+    cp max_level                                    
+    jp nz, begin_level                              ; continue if not passed the last level
+
+    jp start                                        ; go to the title screen
 
 
 

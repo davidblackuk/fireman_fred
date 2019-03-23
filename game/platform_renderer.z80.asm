@@ -134,7 +134,7 @@ initialize_platform_map_addr:
 	ld (platrom_map_addr), hl						; save it for later
 	pop de											; restore registers
 	pop hl
-ret
+	ret
 
 
   	 pixmap_addr:  	.word 0							; position in the pixel back buffer for the platform we are rendering
@@ -145,10 +145,44 @@ platrom_map_addr:  	.word 0							;  position in the platform map for the platfo
 ; Check if the specified position blocks fred from walking
 ; IN: HL: H = X (chars) L = Y (chars)
 ;
-; trashes  and hl de, MUST PRESERVE A a
+; trashes  and hl de, a
 ;
-; returns: Z indicates a block NZ means fine
+; returns: Z indicates a not blocked NZ means blocked
 check_if_blocked_walking:
+	call get_plaform_map_address
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret nz											; return if so
+	ld de, screen_width_chars
+	add hl, de										; hl = hl + screen_width_chars
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret												; return result in flags
+
+;
+; Check if the specified position can support fred
+; this can be a platform or a blocker or a conveyer (moy implemented yet)
+; IN: HL: H = X (chars) L = Y (chars)
+;
+; returns: NZ indicates it supports fred
+check_if_supports_fred:
+	call get_plaform_map_address
+	ld a, (hl)										; get the flags
+	and plt_blocker	| plt_normal					; check if supports
+	ret nz											; return if so
+	inc hl											; hl = hl + 1, newxt cell along
+	ld a, (hl)										; get the flags
+	and plt_blocker	| plt_normal					; check if blocked
+	ret												; return result in flags
+
+;
+; get the platform map address at char position H,L
+; IN: HL: H = X (chars) L = Y (chars)
+; out: HL has the platform map address
+; trashes  and hl de, a
+;
+; returns: Z indicates a not blocked NZ means blocked
+get_plaform_map_address:
 	ld d, 0											; de = x
 	ld e, h
 	ld h, 0											; hl = y
@@ -160,15 +194,7 @@ check_if_blocked_walking:
 	add hl, de										; hl = (x * 32) + y
 	ld de, platform_map								; get the platform map
 	add hl, de										; hl = platform_map + (x * 32) + y
-	ld a, (hl)										; get the flags
-	and plt_blocker									; check if blocked
-	ret nz											; return if so
-	ld de, screen_width_chars
-	add hl, de										; hl = hl + screen_width_chars
-	ld a, (hl)										; get the flags
-	and plt_blocker									; check if blocked
-	ret												; return result in flags
-
+	ret
 
 ;
 ; stores the platform flags. indicating if a platform is 

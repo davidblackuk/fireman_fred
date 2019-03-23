@@ -2,10 +2,23 @@
 ; This is the real meet of the game. the movement code for fred.
 ;
 move_fred:
+    ld a, (fred_state)
+    cp fred_is_walking
+    jp z, walk_fred    
+    cp fred_is_falling
+    jp z, drop_fred
+    ret
+
+walk_fred:
+    call test_fred_is_supported                     ; are we about to fall?
+    ld a, (fred_state)
+    cp fred_is_falling
+    jp z, drop_fred
+
     ld a, (key_map)                                 ; pick up what keys are pressed
     bit left_pressed, a                             ; test if left pressed
     jp z, try_right                                 ; if not check right
-call move_fred_left                                 ; otherwise move left
+    call move_fred_left                             ; otherwise move left
     ret
 try_right:  
     bit right_pressed, a                            ; test if right was pressed
@@ -117,12 +130,71 @@ ret nz                                              ; abort if not left
     ret
 
 
+test_fred_is_supported:     
+    ld a, (fred_char_y)                             ; pick up character y
+    ld l, a                                         ; put in l
+    inc l
+    inc l
+    ld a, (fred_char_x)                             ; get the character x
+    ld h, a                                         ; HL = new X,Y    
+    call check_if_supports_fred
+    jp z, set_falling
+    ld a, fred_is_walking
+    ld (fred_state), a
 
+    ld a, (fred_drop_steps)                         ; check the drop steps to see if we died
+    and %11110000
+    jp z, live_another_day
+    ld a, fred_is_dead
+    ld (fred_state), a
+    ret
+    
+live_another_day:
+    xor a
+    ld (fred_drop_steps), a 
+    ret
+
+set_falling:
+    ld a, fred_is_falling
+    ld (fred_state), a
+    ret
+
+;
+; Dropping
+;
+
+drop_fred:
+    call test_fred_is_supported                     ; are we still falling?
+    ld a, (fred_state)
+    cp fred_is_falling
+    ret nz                                          ; keep falling    
+
+    ld a, (fred_drop_steps)                         ; next drop
+    inc a                                           ; position is pixels * 2                                           
+    ld (fred_drop_steps), a                         ; store it
+
+    And %0011                                       ; if lowest 4 bits are zero
+    jp nz, mid_fall                                 ; we are enterin a new char row
+    ld a, (fred_char_y)                             ; set the variables to that new row
+    inc a                                           ;
+    ld (fred_char_y), a                             ; fred_char_y += 1
+
+mid_fall:
+    ld de, screen_width_chars * 2                   ; two pixel y jump
+    ld hl, (fred_current_address)                   ; Get the current screen address
+    add hl, de                                      ; drop in 2 pixel steps
+    ld (fred_current_address), hl                   ; and store in the sprite buffer.
+  
+    ret
 
 ; --------------------------------------------------
 ; variables for fred's move ment
 ; --------------------------------------------------
 
-; These variables are used to
+; These variables are used to locate fred in the world
 fred_char_x: .byte 0                                ; current character x
 fred_char_y .byte 0                                ; current character y
+
+; freds current state walking, falling or jumping
+fred_state: .byte 0
+fred_drop_steps: .byte 0
