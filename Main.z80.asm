@@ -58,10 +58,15 @@ next_level:
 .include "./levels/level03.z80.asm"
 .include "./levels/level04.z80.asm"
 
+.include "./levels/level99.z80.asm"
+
 ;
-; add new levels to this, the list of all levels
+; add new levels to this, the list of all levels, and
+; increment max_level in constants
 ;
-levels:  .word level_01, level_02, level_03, level_04
+levels:  .word level_99, 
+         .word level_01, level_02, level_03, 
+         .word level_04
 
 .include "functions.z80.asm"
 .include "./gfx/fonts.z80.asm"

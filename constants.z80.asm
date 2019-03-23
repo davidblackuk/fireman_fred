@@ -104,4 +104,4 @@ key_practice:   .equ 2
 ; Game constants 
 ; --------------------------------------
 
-max_level:      .equ 4
+max_level:      .equ 5
