@@ -8,15 +8,20 @@ initialize_fred:
     push hl
 
     ld a, sprite_owned | sprite_enabled             ; Enabled for drawing, but we own the
-ld (fred_sprite), a                                 ; update process for frames and position
+    ld (fred_sprite), a                             ; update process for frames and position
 
     ; set low and current address to the definiton
-    ld l, (IX + i_lvl_fred_start)
+    ld l, (IX + i_lvl_fred_start)                   
     ld h, (IX + i_lvl_fred_start + 1)
-    ld (fred_current_address), hl
-    ld (fred_lowest_address), hl
+    ld (fred_current_address), hl                   ; we set hi low and current to same value
+    ld (fred_lowest_address), hl                    ; as we control movement ourselves
     ld (fred_highest_address), hl
 
+    ; copy movement state
+    ld a, (ix + i_lvl_fred_x)                       ; pick up the column x of the start
+    ld (fred_char_x), a                             ; store it in the move module
+    ld a, (IX + i_lvl_fred_y)                       ; pick up the pixel row y
+    ld (fred_char_y), a                            ; store it in the move module
 
     ; copy the background color of the level into our man fred
     ; may need to mask bg and add white fg?

@@ -4,7 +4,7 @@
 
 
 
-level_99:   
+level_06:   
 	.byte black 									; tv border color
 	.byte pBlack | white  							; default attributes	
 	.byte sp_sid_06, sp_sid_06						; Left, right Side graphic
@@ -27,18 +27,10 @@ level_99:
 	.byte 13, 17, horizontal, sp_plt_06, 3, pBlack | yellow, plt_normal
 	.byte  4, 18, horizontal, sp_plt_06, 8, pBlack | white,  plt_normal
 
-	.byte  10, 15, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
-	.byte  10, 16, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
-
-	.byte  19, 15, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
-	.byte  19, 16, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
-
-
 	.byte  3, 16, vertical, sp_ladder,  5, pBlack | white, plt_ladder
 	.byte 14, 11, vertical, sp_ladder,  6, pBlack | white, plt_ladder
 	.byte 17,  5, vertical, sp_ladder,  8, pBlack | white, plt_ladder
 	.byte 28, 7, vertical, sp_ladder,  9, pBlack | white, plt_ladder
-
 
 
 	.byte last_definition

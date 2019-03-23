@@ -25,6 +25,7 @@ sp_plt_04: .equ 14
 sp_sid_06 .equ 15
 sp_bot_06 .equ 16
 sp_plt_06: .equ 17
+sp_plt_brk: .equ 18
 
 
 ; blank
@@ -208,3 +209,13 @@ third_plt_sprite:
 	.byte %01011110
 	.byte %00101100
 	.byte %00011000
+
+
+	.byte %11011101
+	.byte %00000000
+	.byte %01110111
+	.byte %00000000
+	.byte %11011101
+	.byte %00000000
+	.byte %01110111
+	.byte %00000000

@@ -19,8 +19,8 @@
     ; start X in characters stored for later
     .byte characterX
 
-    ; start Y in PIXELS stored for later
-    .word characterY * 8
+    ; start Y in characters stored for later
+    .byte characterY 
 
     // freds start address in tha back buffer
     BufferAddress(characterX, characterY)

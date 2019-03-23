@@ -58,6 +58,8 @@ next_level:
 .include "./levels/level03.z80.asm"
 .include "./levels/level04.z80.asm"
 
+.include "./levels/level06.z80.asm"
+
 .include "./levels/level99.z80.asm"
 
 ;
@@ -66,7 +68,8 @@ next_level:
 ;
 levels:  .word level_99, 
          .word level_01, level_02, level_03, 
-         .word level_04
+         .word level_04,
+         .word level_06
 
 .include "functions.z80.asm"
 .include "./gfx/fonts.z80.asm"

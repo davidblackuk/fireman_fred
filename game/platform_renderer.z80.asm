@@ -142,6 +142,35 @@ ret
 platrom_map_addr:  	.word 0							;  position in the platform map for the platform being drawn
 
 ;
+; Check if the specified position blocks fred from walking
+; IN: HL: H = X (chars) L = Y (chars)
+;
+; trashes  and hl de, MUST PRESERVE A a
+;
+; returns: Z indicates a block NZ means fine
+check_if_blocked_walking:
+	ld d, 0											; de = x
+	ld e, h
+	ld h, 0											; hl = y
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl										; hl = hl * 32 (screen_width_chars)
+	add hl, de										; hl = (x * 32) + y
+	ld de, platform_map								; get the platform map
+	add hl, de										; hl = platform_map + (x * 32) + y
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret nz											; return if so
+	ld de, screen_width_chars
+	add hl, de										; hl = hl + screen_width_chars
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret												; return result in flags
+
+
+;
 ; stores the platform flags. indicating if a platform is 
 ; normal (can jump through), solid (impovable) a conveyer
 ; etc.
