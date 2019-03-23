@@ -45,7 +45,9 @@ i_lvl_b_bord_chr:	.equ 4                          ; bottom border char
 i_lvl_bord_color:	.equ 5                          ; border char color
 i_lvl_amb_start:    .equ 6                          ; start x of the ambulance
 i_lvl_amb_end:      .equ 8                          ; end x of the ambulance
-i_lvl_fred_start    .equ 10                         ; freds starting position
+i_lvl_fred_x        .equ 10                         ; freds starting position character X
+i_lvl_fred_y        .equ 11                         ; freds starting position pixel Y
+i_lvl_fred_start    .equ 12                         ; freds starting position in back buffer
 
 ;
 ; Sprite buffer offsets
@@ -102,4 +104,4 @@ key_practice:   .equ 2
 ; Game constants 
 ; --------------------------------------
 
-max_level:      .equ 4
+max_level:      .equ 6

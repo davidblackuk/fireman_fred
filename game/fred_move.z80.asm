@@ -30,6 +30,23 @@ move_fred_right:
     ld (fred_current_frame), a
     ret;    
 @next_pixel_column
+
+    ld a, (fred_char_y)                             ; pick up character y
+    ld l, a                                         ; put in l
+    ld a, (fred_char_x)                             ; get the character x
+    inc a                                           ; calc next position
+    ld h, a                                         ; HL = new X,Y
+    inc h                                           ; the test is passed our 2 character sprite
+
+    push af
+    call check_if_blocked_walking                   ; can we enter that cell?
+    jp z, not_blocked_right                         ; yes we can, so process it
+    pop af                                          ; we cant move so return
+    ret                                             
+
+not_blocked_right:
+    pop af
+    ld (fred_char_x), a   
     xor a                                           ; Reset frame count to 0
     ld (fred_current_frame), a                      ; and store in the sprite buffer.
     ld hl, (fred_current_address)                   ; Get the current screen address
@@ -56,6 +73,23 @@ move_fred_left:
     ld (fred_current_frame), a
     ret;
 @prev_pixel_column
+    
+    ld a, (fred_char_y)                             ; pick up character y
+    ld l, a                                         ; put in l
+    ld a, (fred_char_x)                             ; get the character x
+    dec a                                           ; calc next position
+    ld h, a                                         ; HL = new X,Y
+    
+    push af
+    call check_if_blocked_walking                   ; can we enter that cell?
+    jp z, not_blocked_left                         ; yes we can, so process it
+    pop af                                          ; we cant move so return
+    ret                                             
+
+not_blocked_left:
+    pop af
+    ld (fred_char_x), a                             ; store for next time
+
     ld a, 3                                         ; Reset frame count to 3
     ld (fred_current_frame), a                      ; and store in the sprite buffer.
     ld hl, (fred_current_address)                   ; Get the current screen address
@@ -81,3 +115,14 @@ ret nz                                              ; abort if not left
     ld (fred_direction), a                          ; store the new direction
     call set_fred_facing_right                      ; update the fred graphics to the right facing ones
     ret
+
+
+
+
+; --------------------------------------------------
+; variables for fred's move ment
+; --------------------------------------------------
+
+; These variables are used to
+fred_char_x: .byte 0                                ; current character x
+fred_char_y .byte 0                                ; current character y

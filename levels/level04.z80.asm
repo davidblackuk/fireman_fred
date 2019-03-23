@@ -7,9 +7,9 @@ level_04:
 	.byte sp_bot_04						            ; Bottom graphic
 	.byte cyan						            	; side and bottom colors
 	
-	.word char_line_05 + 9							; ambulance start position
-	.word char_line_05 + 27							; ambulance end position
-	.word char_line_05 + 5							; Fred's starting position
+	BufferAddress(9, 5)								; ambulance start position
+	BufferAddress(27, 5)							; ambulance end position
+	PositionFred(5, 5)								; freds start position in the back buffer  and other variables	
 
 	; plat x, y, dir, sprite, length, attrs
 	.byte  1,  18, horizontal, sp_plt_04,  30, pBlack | cyan, plt_normal
@@ -33,79 +33,64 @@ level_04:
 
 
   
-	 .word char_line_11 + 6							; scr address
-	 .word char_line_09 + 6							; lowest scr address
-	 .word char_line_15 + 6							; highest scr address
-	 .word alien_smoke + sprite_bytes * 0			; frame 0
-	 .word alien_smoke + sprite_bytes * 1			; frame 1
-	 .word alien_smoke + sprite_bytes * 2			; frame 2
-	 .word alien_smoke + sprite_bytes * 3			; frame 3
+	.word char_line_11 + 6							; scr address
+	.word char_line_09 + 6							; lowest scr address
+	.word char_line_15 + 6							; highest scr address
+	SpriteGraphicAddresses(alien_smoke)				; set the sprite gfx
 	.byte 0											; start frame 
-	.byte pBlack | yellow								; attributes
+	.byte pBlack | yellow							; attributes
 	.byte vertical									; type
 	.byte down										; direction
-    .byte 0                                          ; frame skip
-    .byte 1                                          ; velocity (vertical)
+    .byte 0                                         ; frame skip
+    .byte 1                                         ; velocity (vertical)
 
-	 .word char_line_11 + 12							; scr address
-	 .word char_line_09 + 12							; lowest scr address
-	 .word char_line_15 + 12							; highest scr address
-	 .word alien_smoke + sprite_bytes * 0			; frame 0
-	 .word alien_smoke + sprite_bytes * 1			; frame 1
-	 .word alien_smoke + sprite_bytes * 2			; frame 2
-	 .word alien_smoke + sprite_bytes * 3			; frame 3
+	.word char_line_11 + 12							; scr address
+	.word char_line_09 + 12							; lowest scr address
+	.word char_line_15 + 12							; highest scr address
+	SpriteGraphicAddresses(alien_smoke)				; set the sprite gfx
 	.byte 2											; start frame 
-	.byte pBlack | yellow								; attributes
+	.byte pBlack | yellow							; attributes
 	.byte vertical									; type
-	.byte up										    ; direction
-    .byte 1                                          ; frame skip
-    .byte 1                                          ; velocity (vertical)
+	.byte up										; direction
+    .byte 1                                         ; frame skip
+    .byte 1                                         ; velocity (vertical)
 
-     .word char_line_09 + 20							; scr address
-	 .word char_line_09 + 20							; lowest scr address
-	 .word char_line_15 + 20							; highest scr address
-	 .word alien_smoke + sprite_bytes * 0			; frame 0
-	 .word alien_smoke + sprite_bytes * 1			; frame 1
-	 .word alien_smoke + sprite_bytes * 2			; frame 2
-	 .word alien_smoke + sprite_bytes * 3			; frame 3
+    .word char_line_09 + 20							; scr address
+	.word char_line_09 + 20							; lowest scr address
+	.word char_line_15 + 20							; highest scr address
+	SpriteGraphicAddresses(alien_smoke)				; set the sprite gfx
 	.byte 0											; start frame 
-	.byte pBlack | yellow								; attributes
+	.byte pBlack | yellow							; attributes
 	.byte vertical									; type
 	.byte down										; direction
-    .byte 1                                          ; frame skip
-    .byte 1                                          ; velocity (vertical)
+    .byte 1                                         ; frame skip
+    .byte 1                                         ; velocity (vertical)
 
-     .word char_line_11 + 24							; scr address
-	 .word char_line_11 + 22							; lowest scr address
-	 .word char_line_11 + 29							; highest scr address
-	 .word alien_bounce_ball + sprite_bytes * 0			; frame 0
-	 .word alien_bounce_ball + sprite_bytes * 1			; frame 1
-	 .word alien_bounce_ball + sprite_bytes * 2			; frame 2
-	 .word alien_bounce_ball + sprite_bytes * 3			; frame 3
+    .word char_line_11 + 24							; scr address
+	.word char_line_11 + 22							; lowest scr address
+	.word char_line_11 + 29							; highest scr address
+	SpriteGraphicAddresses(alien_bounce_ball)		; set the sprite gfx
 	.byte 0											; start frame 
 	.byte pBlack | cyan								; attributes
-	.byte horizontal									; type
+	.byte horizontal								; type
 	.byte up 										; direction
-    .byte 0                                          ; frame skip
-    .byte 1                                          ; velocity (vertical)
+    .byte 0                                         ; frame skip
+    .byte 1                                         ; velocity (vertical)
 
 
     ; -------------------------------------------------------------------------------------------------------------------------
 	; first victim
 
-     .word char_line_16 + 2							; scr address
-	 .word char_line_16 + 2							; lowest scr address
-	 .word char_line_16 + 2							; highest scr address
-	 .word victim_cat1 + sprite_bytes * 0		    	; frame 0
-	 .word victim_cat1 + sprite_bytes * 1		    	; frame 1
-	 .word victim_cat1 + sprite_bytes * 2		    	; frame 2
-	 .word victim_cat1 + sprite_bytes * 3		    	; frame 3
+    .word char_line_16 + 2							; scr address
+	.word char_line_16 + 2							; lowest scr address
+	.word char_line_16 + 2							; highest scr address
+	SpriteGraphicAddresses(victim_cat1)				; set the sprite gfx
 	.byte 0											; start frame 
 	.byte pBlack | white							; attributes
-	.byte none  									    ; type
+	.byte none  									; type
 	.byte none										; direction
-    .byte 2                                          ; frame skip
-    .byte 0                                          ; velocity (vertical)
+    .byte 2                                         ; frame skip
+    .byte 0                                         ; velocity (vertical)
 
 		
 	.byte last_definition							; mark last sprite

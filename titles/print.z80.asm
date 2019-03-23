@@ -29,7 +29,8 @@ pCyan		.equ cyan  << 3
 pYellow  	.equ yellow  << 3
 pWhite   	.equ white  << 3
 
-bright   	.equ %1000000
+bright   	.equ %01000000
+flash   	.equ %10000000
 
 ;
 ; Clears the physical screen

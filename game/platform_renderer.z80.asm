@@ -32,20 +32,22 @@ i_plt_flg:	.equ 6
 draw_platform:
 	call get_pixmap_addr
 	call get_char_addr								; hl points to back buffer, bc to attr
-	ld (attributes_addr), bc
-	ld b, (ix + i_plt_len)
+	ld (attributes_addr), bc						; store the start address of the platform in the attribute map
+	call initialize_platform_map_addr				; store the start address of the platform in the platform map
+	ld b, (ix + i_plt_len)							; get the length of the platform
 
-	ld a, (IX + i_plt_dir)
-	cp vertical
-	jp z, draw_vert
+	ld a, (IX + i_plt_dir)							; are we drawing vertically or horizontally?
+	cp vertical										;
+	jp z, draw_vert									; if we are vertical jump to the code to render that
 
 horiz_loop:
 	ld de, (pixmap_addr)
 	push hl
 	push bc
 	call print_raw									; hl = screen , de = pixmap
-	ld bc, 1	
-	call set_attribute
+	ld bc, 1										; next platform character is 1 byte away in the attribute and map stores
+	call set_attribute								; set the attributes for the platform
+	call set_platform_map							; store the flags for this platform
 	pop bc
 	pop hl
 	inc hl
@@ -56,11 +58,12 @@ draw_vert:
 	push hl
 	push bc
 	call print_raw									; hl = screen , de = pixmap
-	ld bc, 32
-	call set_attribute
+	ld bc, 32										; next platform character is 32 bytes away in the attribute and map stores
+	call set_attribute								; set the attributes for the platform
+	call set_platform_map							; store the flags for this platform
 	pop bc
 	pop hl
-	ld de, screen_width_chars * 8
+	ld de, screen_width_chars * 8					; next character cell below
 	add hl, de
 	djnz draw_vert
 	ret
@@ -77,6 +80,17 @@ set_attribute:
 	ld (attributes_addr), hl
 	ret
 
+;
+; Set the platform map flags for a platform
+; IN: bc contains the offset to add to get to the next attribute (1 or 32 = h or v) 
+; OUT: Trashes HL, A
+set_platform_map: 
+	ld hl, (platrom_map_addr)
+	ld a, (ix + i_plt_flg)
+	ld (hl), a
+	add hl, bc
+	ld (platrom_map_addr), hl
+	ret
 
 get_pixmap_addr: 
 	ld de, first_plt_sprite							; pixmap of first platform sprite
@@ -88,8 +102,6 @@ get_pixmap_addr:
 	add hl, de										; de = first_plt_sprite + (chr * 8)
 	ld (pixmap_addr), hl
 	ret
-
-
 
 ;
 ; clears the platform map.
@@ -103,9 +115,65 @@ cls_platform_map:
 	ldir
 	ret
 
-	pixmap_addr:  .word 0
-attributes_addr:  .word 0
+;
+; Stores the initial offset for the platform flag map ready to allow the creation of the map.
+; IN: BC contains the attribute address of the platfor relative to the background attribute map
+; OUT: BC is toast
+initialize_platform_map_addr:
+	push hl											; store used registers
+	push de
+
+	ld h, b											; hl = bc
+	ld l, c
+	ld de, attr_line_000							; de = start of attribute map
+	or a											; reset the carry flag
+	sbc hl, de										; hl = offset into the attribute map of original bc positio
+
+	ld de, platform_map								; set DE to the platformmap
+	add hl, de										; HL = address in the platform_map corresponding to the initial character
+	ld (platrom_map_addr), hl						; save it for later
+	pop de											; restore registers
+	pop hl
+ret
 
 
-; TODO: Move me into upper memory
-platform_map: .storage screen_width_chars * screen_height_chars
+  	 pixmap_addr:  	.word 0							; position in the pixel back buffer for the platform we are rendering
+ attributes_addr:  	.word 0							; position in the attrribute map for the platform being drawn
+platrom_map_addr:  	.word 0							;  position in the platform map for the platform being drawn
+
+;
+; Check if the specified position blocks fred from walking
+; IN: HL: H = X (chars) L = Y (chars)
+;
+; trashes  and hl de, MUST PRESERVE A a
+;
+; returns: Z indicates a block NZ means fine
+check_if_blocked_walking:
+	ld d, 0											; de = x
+	ld e, h
+	ld h, 0											; hl = y
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl										; hl = hl * 32 (screen_width_chars)
+	add hl, de										; hl = (x * 32) + y
+	ld de, platform_map								; get the platform map
+	add hl, de										; hl = platform_map + (x * 32) + y
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret nz											; return if so
+	ld de, screen_width_chars
+	add hl, de										; hl = hl + screen_width_chars
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret												; return result in flags
+
+
+;
+; stores the platform flags. indicating if a platform is 
+; normal (can jump through), solid (impovable) a conveyer
+; etc.
+;
+platform_map: .storage attributes_length
+
