@@ -32,13 +32,19 @@ initialize_fred:
     ; could be set from previous level
     xor a
     ld (fred_current_frame), a
-
+    ld (fred_drop_steps), a
+    
     ; always starts facing right
     ld a, right 
     ld (fred_direction), a
 
+    ld a, fred_is_walking
+    ld (fred_state), a
+
     ; set the sprites to the right facing ones
     call set_fred_facing_right
+
+
 
     pop hl
     ret

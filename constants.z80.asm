@@ -105,3 +105,21 @@ key_practice:   .equ 2
 ; --------------------------------------
 
 max_level:      .equ 6
+
+
+;
+; fred states
+;
+
+fred_is_walking: .equ %00000001
+fred_is_falling: .equ %00000010
+fred_is_jumping: .equ %00000100
+fred_is_dead:    .equ %10000000    
+
+
+;
+; game states
+;
+
+level_complete_sucess: .equ 1
+level_complete_fail: .equ 2

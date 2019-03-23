@@ -39,24 +39,26 @@ game_loop:
 
     call restore_attributes                         ; remove the effects of the sprite render to the initial attribute map
    
+	ld a, (fred_state)								; get freds state
+    cp fred_is_dead									; did we die?
+	jp z, @failed    								; we get to do the level over again	
+
     ; fake sucess / failure through key presses
     ld a, (key_map)
     bit n_pressed, a
-	jp nz, level_complete_sucess			
+	jp nz, @sucess			
 
-    bit m_pressed, a
-	jp nz, level_complete_failed	
 
 	bit down_pressed, a		
 	call nz, start_ambulance
 
 	jp game_loop
 
-level_complete_sucess:
-    ld a, 0
+@sucess:
+    ld a, level_complete_sucess
     ret
-level_complete_failed:
-    ld a, 1
+@failed:
+    ld a, level_complete_fail
     ret
 
 
