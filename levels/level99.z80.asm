@@ -6,10 +6,10 @@
 
 level_99:   
 	.byte black 									; tv border color
-	.byte pBlack | white  						; default attributes	
-	.byte sp_sid_01, sp_sid_01						; Left, right Side graphic
-	.byte sp_bot_01									; Bottom graphic
-	.byte pBlack | blue							; side and bottom colors
+	.byte pBlack | white  							; default attributes	
+	.byte sp_sid_06, sp_sid_06						; Left, right Side graphic
+	.byte sp_bot_06									; Bottom graphic
+	.byte pBlack | blue	| bright					; side and bottom colors
 
 	BufferAddress(6, 19)							; ambulance start position
 	BufferAddress(27, 19)							; ambulance end position
@@ -17,15 +17,15 @@ level_99:
 
 	        ; plat x, y, dir, sprite, length, attrs
 
-	.byte 12,  7, horizontal, sp_plt_01, 8, pBlack | magenta,  plt_normal
-	.byte  1,  9, horizontal, sp_plt_01, 6, pBlack | blue,	 plt_normal
-	.byte 25,  9, horizontal, sp_plt_01, 6, pBlack | blue,   plt_normal
-	.byte  7, 11, horizontal, sp_plt_01, 5, pBlack | red,	 plt_normal
-	.byte 20, 11, horizontal, sp_plt_01, 5, pBlack | red,    plt_normal
-	.byte 13, 13, horizontal, sp_plt_01, 6, pBlack | cyan,	 plt_normal
-	.byte 22, 16, horizontal, sp_plt_01, 9, pBlack | green,  plt_normal
-	.byte 13, 17, horizontal, sp_plt_01, 3, pBlack | yellow, plt_normal
-	.byte  4, 18, horizontal, sp_plt_01, 8, pBlack | white,  plt_normal
+	.byte 12,  7, horizontal, sp_plt_06, 8, pBlack | magenta,  plt_normal
+	.byte  1,  9, horizontal, sp_plt_06, 6, pBlack | blue,	 plt_normal
+	.byte 25,  9, horizontal, sp_plt_06, 6, pBlack | blue,   plt_normal
+	.byte  7, 11, horizontal, sp_plt_06, 5, pBlack | red,	 plt_normal
+	.byte 20, 11, horizontal, sp_plt_06, 5, pBlack | red,    plt_normal
+	.byte 13, 13, horizontal, sp_plt_06, 6, pBlack | cyan,	 plt_normal
+	.byte 22, 16, horizontal, sp_plt_06, 9, pBlack | green,  plt_normal
+	.byte 13, 17, horizontal, sp_plt_06, 3, pBlack | yellow, plt_normal
+	.byte  4, 18, horizontal, sp_plt_06, 8, pBlack | white,  plt_normal
 
 	.byte  3, 16, vertical, sp_ladder,  5, pBlack | white, plt_ladder
 	.byte 14, 11, vertical, sp_ladder,  6, pBlack | white, plt_ladder
@@ -86,7 +86,7 @@ level_99:
 	StationarySprite(15, 5)							; sprite start/end/current 
 	SpriteGraphicAddresses(victim_2)
 	.byte 0											; start frame 
-	.byte yellow									; attributes
+	.byte yellow 									; attributes
 	.byte none										; type
 	.byte none										; direction
 	.byte 1                                         ; frame skip
