@@ -36,3 +36,21 @@
     .word spriteStartAddress + sprite_bytes * 2    	; frame 2
     .word spriteStartAddress + sprite_bytes * 3    	; frame 3
 .endmacro
+
+;
+; inlines the back buffer addresses (start, current and end)
+; for a horizontal sprite,
+;
+.macro HorizontalSprite(startOffset, minX, y, length)    
+	BufferAddress(minX+startOffset, y)              ; scr address
+    BufferAddress(minX, y)						    ; lowest scr address   
+	BufferAddress(minX + length, y)				    ; highest scr address
+.endmacro
+
+;
+; Inline the backbuffer addresses for a stationary sprite
+;
+.macro StationarySprite(x, y)
+    HorizontalSprite(0, x, y, 0)
+.endmacro
+
