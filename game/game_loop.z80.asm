@@ -35,7 +35,7 @@ game_loop:
 	
 	call draw_sprites	
 	    
-	call add_debug_fred_char_coords_attribute
+	;call add_debug_fred_char_coords_attribute
 
     call transfer
 

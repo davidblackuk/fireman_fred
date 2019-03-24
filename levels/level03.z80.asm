@@ -99,7 +99,7 @@ level_03:
     .word char_line_10 + 1							; scr address
 	.word char_line_10 + 1							; lowest scr address
 	.word char_line_10 + 1							; highest scr address
-	SpriteGraphicAddresses(alien_bottle)			; set the sprite gfx
+	SpriteGraphicAddresses(victim_2)				; set the sprite gfx
 	.byte 0											; start frame 
 	.byte pBlue | magenta							; attributes
 	.byte none  									; type
@@ -110,7 +110,7 @@ level_03:
     .word char_line_10 + 29							; scr address
 	.word char_line_10 + 29							; lowest scr address
 	.word char_line_10 + 29							; highest scr address
-	SpriteGraphicAddresses(alien_bottle)			; set the sprite gfx
+	SpriteGraphicAddresses(victim_1)				; set the sprite gfx
 	.byte 0											; start frame 
 	.byte pBlue | magenta							; attributes
 	.byte none									    ; type
