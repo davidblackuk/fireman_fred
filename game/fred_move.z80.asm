@@ -2,6 +2,7 @@
 ; This is the real meet of the game. the movement code for fred.
 ;
 move_fred:
+    call test_keys    
     ld a, (fred_state)
     cp fred_is_walking
     jp z, walk_fred    
@@ -9,12 +10,42 @@ move_fred:
     jp z, drop_fred
     ret
 
-walk_fred:
-    call test_fred_is_supported                     ; are we about to fall?
-    ld a, (fred_state)
+test_keys:
+    ld a, (fred_state)                              ; if we are jumping then don't change
+    cp fred_is_jumping                              ; state until the jump is finished
+    ret z
     cp fred_is_falling
-    jp z, drop_fred
+    ret z                                           ; no change if falling either
+    ld a, (key_map)
 
+    bit left_pressed, a                             ; test if left pressed
+    jp z, @try_right                                ; if not check right
+    ld a, left                                      ; otherwise move left
+    ld (fred_walk_direction), a                     ; set the boi off to the left
+    ret
+@try_right:  
+    bit right_pressed, a                            ; test if right was pressed
+    jp z, @no_direction                              
+    ld a, left                                      ; otherwise move left
+    ld (fred_walk_direction), a                     ; set the boi off to the left
+@no_direction:
+    ld a, none
+    ld (fred_walk_direction), a                     ; set the boi off to the left
+    ret
+
+
+
+walk_fred:
+    ld a, (fred_state)                              ; get freds state
+    cp fred_is_jumping                              ; are we jumping
+    jp z, skip_fall_test                            ; if so, no check for falling to be done
+    
+    call test_fred_is_supported                     ; are we about to fall?
+    ld a, (fred_state)                              ; pick up tyhe potential new state
+    cp fred_is_falling                              ; are we infact falling?
+    jp z, drop_fred                                 ; if so, go off and do the fall
+
+skip_fall_test:                                     ; the start of the walk left/right code
     ld a, (key_map)                                 ; pick up what keys are pressed
     bit left_pressed, a                             ; test if left pressed
     jp z, try_right                                 ; if not check right
@@ -187,6 +218,8 @@ mid_fall:
   
     ret
 
+
+
 ; --------------------------------------------------
 ; variables for fred's move ment
 ; --------------------------------------------------
@@ -198,3 +231,7 @@ fred_char_y .byte 0                                ; current character y
 ; freds current state walking, falling or jumping
 fred_state: .byte 0
 fred_drop_steps: .byte 0
+
+fred_jump_step: .byte
+fred_walk_direction: .byte 0
+

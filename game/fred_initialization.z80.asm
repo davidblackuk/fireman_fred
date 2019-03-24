@@ -33,6 +33,7 @@ initialize_fred:
     xor a
     ld (fred_current_frame), a
     ld (fred_drop_steps), a
+    ld (fred_jump_step), a
     
     ; always starts facing right
     ld a, right 
