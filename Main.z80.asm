@@ -105,3 +105,4 @@ levels:  .word level_99,
 
 
 z_total_bytes: .equ *-start
+x_remaining_bytes .equ $ffff - *

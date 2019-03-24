@@ -137,25 +137,25 @@ test_fred_is_supported:
     inc l
     ld a, (fred_char_x)                             ; get the character x
     ld h, a                                         ; HL = new X,Y    
-    call check_if_supports_fred
-    jp z, set_falling
-    ld a, fred_is_walking
-    ld (fred_state), a
+call check_if_supports_fred                         ; check the map
+    jp z, set_falling                               ; not supported keep falling
+    ld a, fred_is_walking                           ; set state to walking BUT
+    ld (fred_state), a  
 
     ld a, (fred_drop_steps)                         ; check the drop steps to see if we died
-    and %11110000
-    jp z, live_another_day
-    ld a, fred_is_dead
-    ld (fred_state), a
+    and %11110000                                   ; more than 32*2 pixels ?
+    jp z, live_another_day                          ; No keep on trucking
+    ld a, fred_is_dead                              ; we dieed a terrible death
+    ld (fred_state), a                              ; that's this level over
     ret
     
 live_another_day:
-    xor a
-    ld (fred_drop_steps), a 
+    xor a                                           ; reset the drop steps for next time
+    ld (fred_drop_steps), a                         ; store it
     ret
 
 set_falling:
-    ld a, fred_is_falling
+    ld a, fred_is_falling                           ; set the state to falling
     ld (fred_state), a
     ret
 

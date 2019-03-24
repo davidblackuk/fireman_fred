@@ -27,11 +27,10 @@ level_99:
 	.byte 13, 17, horizontal, sp_plt_06, 3, pBlack | yellow, plt_normal
 	.byte  4, 18, horizontal, sp_plt_06, 8, pBlack | white,  plt_normal
 
-	.byte  10, 15, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
-	.byte  10, 16, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
-
-	.byte  19, 15, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
-	.byte  19, 16, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
+	.byte  17, 17, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
+	
+	.byte  19, 17, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
+	.byte  19, 18, horizontal, sp_plt_brk, 2, pYellow | red,  plt_blocker
 
 
 	.byte  3, 16, vertical, sp_ladder,  5, pBlack | white, plt_ladder
