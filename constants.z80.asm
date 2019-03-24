@@ -35,6 +35,14 @@ up:					.equ 1
 down:				.equ 2
 
 ;
+; fred direction
+;
+walk_left:  .equ %0001
+walk_right: .equ %0010
+walk_none:  .equ %0100
+
+
+;
 ; game level IX offsets
 ;
 i_lvl_border:		.equ 0                          ; tv border color

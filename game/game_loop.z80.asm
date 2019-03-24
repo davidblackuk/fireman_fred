@@ -35,6 +35,8 @@ game_loop:
 	
 	call draw_sprites	
 	    
+	call add_debug_fred_char_coords_attribute
+
     call transfer
 
     call restore_attributes                         ; remove the effects of the sprite render to the initial attribute map
@@ -80,6 +82,34 @@ initialize_screen:
 	ld a, (ix + i_lvl_border)						; set the border color from the level definition
 	call BORDER
 	ret
+
+add_debug_fred_char_coords_attribute:
+	ld a, (fred_char_y)
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld de, attr_line_000
+	add hl, de
+
+	ld a, (fred_char_x)
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld (hl), pWhite | red
+	inc hl
+	ld (hl), pWhite | red
+	ld de, screen_width_chars - 1
+	add hl, de
+	ld (hl), pWhite | red
+	inc hl
+	ld (hl), pWhite | red
+
+	ret
+
 
 ; address of the current level defn	
 currentLevel:  .word 0

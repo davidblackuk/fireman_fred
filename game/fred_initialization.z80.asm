@@ -34,6 +34,7 @@ initialize_fred:
     ld (fred_current_frame), a
     ld (fred_drop_steps), a
     ld (fred_jump_step), a
+    ld (fred_jump_pixel_offset), a
     
     ; always starts facing right
     ld a, right 
