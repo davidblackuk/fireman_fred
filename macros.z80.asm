@@ -54,3 +54,31 @@
     HorizontalSprite(0, x, y, 0)
 .endmacro
 
+;
+; divides hl by 32
+;
+.macro DivideHlBy32()
+
+    srl h                                           ; HL = HL / 2
+    rr l
+    srl h                                           ; HL = HL / 4
+    rr l
+    srl h                                           ; HL = HL / 8
+    rr l
+    srl h                                           ; HL = HL / 16
+    rr l
+    srl h                                           ; HL = HL / 32 
+    rr l                                            
+
+.endmacro
+
+.macro DivideHlBy8() 
+
+    srl h
+    rr l
+    srl h
+    rr l
+    srl h
+    rr l                                            ; hl = hl / 8 = char y
+
+.endmacro

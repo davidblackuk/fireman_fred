@@ -298,26 +298,11 @@ fred_pixel_address_to_charY
     or a
     sbc hl, de                                      ; subtract x coordinate to bet line start
 
-    srl h                                           ; HL = HL / 32 * 8
-    rr l
-    srl h
-    rr l
-    srl h
-    rr l
-    srl h
-    rr l
-    srl h
-    rr l                                            ; hl = hl / 32 = pixel y
+    
+    DivideHlBy32()                                  ; get the pixel Y
+    DivideHlBy8()                                   ; get the character Y
 
-    srl h
-    rr l
-    srl h
-    rr l
-    srl h
-    rr l                                            ; hl = hl / 8 = char y
-
-
-    ld a, l
+    ld a, l                                         ; L contains the Y (def < 256)
     LD (fred_char_y), a                             ; store the y coordinate
     ret
 
