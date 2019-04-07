@@ -37,7 +37,7 @@ ambulance_1_type: .byte horizontal                  ; type always horizontal
 ambulance_1_direction: .byte right                  ; direction 
     .byte 0                                         ; frame skip
     .byte 1                                         ; velocity 
-	.byte 0											; current frame skip
+	.byte 2											; current frame skip
 	.storage sprite_bytes							; copy of background
 
 
@@ -57,7 +57,7 @@ ambulance_2_direction: .byte right                  ; direction
     .byte 0                                         ; frame skip
     .byte 1                                         ; velocity (horizontal)
 
-	.byte 0											; current frame skip
+	.byte 2											; current frame skip
 	.storage sprite_bytes							; copy of background
 
 
