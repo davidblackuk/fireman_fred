@@ -80,7 +80,8 @@ i_sb_sp_curr_skip:  .equ 21
 ; Sprite buffer flags
 ;
 sprite_enabled      .equ %00000001                  ; sprite is anabled move and animate
-sprite_owned        .equ %10000000                  ; sprite is moved and animated by the owner (ie fred)
+sprite_owned        .equ %00000010                  ; sprite is moved and animated by the owner (ie fred)
+sprite_no_attrs     .equ %00000100                  ; do not restore attributes (sprite inherits background attrs)
 
 ; Platform flags
 plt_empty:   .equ 0	; no platform at this position

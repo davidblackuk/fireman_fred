@@ -52,10 +52,7 @@ jump_fred:
     call process_jump_step
     call fred_pixel_address_to_charY                
     
-    ; TODO
-    ; JUMP gets caught on the middle of blocks!
-    ; JUMP NOT TESTING ABOVE FOR BLOCKERS
-    ; jump still very 45 degrees
+
     call walk_fred
     ret
 

@@ -61,9 +61,8 @@ ambulance_2_direction: .byte right                  ; direction
 	.storage sprite_bytes							; copy of background
 
 
-
-fred_sprite:
-	.byte sprite_enabled | sprite_owned				; flags: 0 = off 1 = in use
+; always enabled / rendered (initially) | manually moved | fred inherits attributes from platforms etc 
+fred_sprite: .byte sprite_enabled | sprite_owned | sprite_no_attrs					
 fred_current_address: .word 0           			; current screen address
 fred_lowest_address:  .word 0           			; lowest screen address
 fred_highest_address: .word 0           			; highest screen address

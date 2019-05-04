@@ -94,26 +94,25 @@ set_attr:											; set the attribute bytes for our sprite
 
 ; var offset = screenAddress - screenBufferStart;
 	pop hl											; retrieve the back buffer address
+	
+	ld a, (ix + i_sb_flags)							; lets check if we are rendering attributes
+	and sprite_no_attrs								; fred inherits his attributes from the environment
+	ret nz											; stop if not rendering attributes
+	
+	
 	ld de, char_line_00                            	; hl = offset of sprt relative to screen top
 	sbc hl, de										
 
     push hl                                         ; save hl
 
-; var isFirstCharCellLine = (offset / 32 & 0b0111) == 0;
+; calculate a value indicating if the sprite starts exactly on a character cell top
+; if it does we render 2x2 attributes, otherwise it is 2x3: Psuedocode:
+; 	 isFirstCharCellLine = (offset / 32 & 0b0111) == 0;
 
-    srl h                                           ; calculate a value indicating if the
-    rr l                                            ; sprite starts exactly on a character cell top
-    srl h
-    rr l                                            ; if it does we render 2x2 attributes
-    srl h                                           ; otherwise it is 2x3
-    rr l
-    srl h
-    rr l
-    srl h
-    rr l
-
+	DivideHlBy32()
+    
     ld a, l
-    and %111
+    and %111										; mask lower 3 bits
     pop hl                                          ; get the offset back
     push af                                         ; we need this later
 

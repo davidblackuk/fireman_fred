@@ -7,8 +7,10 @@
 initialize_fred:
     push hl
 
-    ld a, sprite_owned | sprite_enabled             ; Enabled for drawing, but we own the
-    ld (fred_sprite), a                             ; update process for frames and position
+    ; Enabled for drawing, but we own the update process for frames and position
+    ; sprite_no_attrs means fred inherits attributes from the background
+    ld a, sprite_owned | sprite_enabled  | sprite_no_attrs            
+    ld (fred_sprite), a                             
 
     ; set low and current address to the definiton
     ld l, (IX + i_lvl_fred_start)                   

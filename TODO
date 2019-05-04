@@ -1,0 +1,4 @@
+    ; JUMP gets caught on the middle of blocks!
+    ; JUMP NOT TESTING ABOVE FOR BLOCKERS
+    ; jump still very 45 degrees
+    ; remove attributes from fred!
