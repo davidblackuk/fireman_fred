@@ -293,35 +293,36 @@ process_jump_step:
     ld (fred_current_address), hl                   ; store new address
     ret
 
+;
+; This is some what complicated by the existence of blocking platforms that can abort the jump
+;
 @jump_up:
+
 
     ld (fred_jump_dir), a
     or a											; reset the carry flag
 	sbc hl, de										; hl = new fred address
 
-    push hl ; save new screen position
+    push hl                                         ; save new screen position
 
-    call hl_as_screen_address_to_pixel_row
+    call hl_as_screen_address_to_pixel_row          ; get freds pixel Y
     DivideHlBy8()                                   ; l = the character Y
     
     ld a, (fred_char_x)
     ld h, a 
 
-    call get_plaform_map_address ; get platform map address of next pos
-    ld a, (hl)                   ; get attributes of platform
-    and plt_blocker              ; is is blocked?
+    call get_plaform_map_address                    ; get platform map address of next char cell we will be entering
+    ld a, (hl)                                      ; get map attributes of the platform cell
+    and plt_blocker                                 ; is is blocked?
 
-    ld (char_line_08 + 10), a ; TODO 
-
-    jp nz, @done_test
-    inc hl
-    ld a, (hl)
-    and plt_blocker
-    ld (char_line_08 + 11), a ; TODO 
+    jp nz, @done_test                               ; if so skip
+    inc hl                                          ; move to fred next x cell in the map
+    ld a, (hl)                                      ; load the map atributes
+    and plt_blocker                                 ; test if blocked    
 
 @done_test
-    pop hl                      ; restore new address
-    jp nz, reset_to_walking      ; if blocked  cancel the jump part of the animation
+    pop hl                                          ; restore next screen address
+    jp nz, reset_to_walking                         ; if blocked in either map cell, cancel the jump 
 
 
     ld (fred_current_address), hl   ; save new address
