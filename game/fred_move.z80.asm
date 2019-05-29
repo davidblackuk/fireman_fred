@@ -43,7 +43,18 @@ test_keys:
 check_if_jump_pressed:
     ld a, (key_map) 
     bit jump_pressed, a                             ; are we starting a jump (we never call this method is a jump is in progress)
-    ret z                                           ; if not check right
+    ret z                                           ; if not, bailout
+    
+    ; we are about to jump, check if blocked above
+    ld a, (fred_char_y)                             ; pick up character y
+    ld l, a                                         ; put in l
+    dec l                                           ; decremeent to get row above
+    ld a, (fred_char_x)                             ; get the character x
+    ld h, a                                         ; HL = new X,Y    
+    call check_if_blocked_jumping                   ; check the map
+    ret nz                                          ; blocked above no jump allowed
+
+
     ld a, fred_is_jumping                           ; the state flag for jumping
     ld (fred_state), a                              ; BOING!!
     ret
@@ -191,6 +202,17 @@ test_fred_is_supported:
     ld h, a                                         ; HL = new X,Y    
     call check_if_supports_fred                     ; check the map
     jp z, set_falling                               ; not supported keep falling
+
+    ; We know the attributes say fred is supporteed but we need to 
+    ; make sure fred hasn't jumped into the middle of a block, so
+    ; we check if fredY % 32 == 0 before proceeding
+
+    call fred_pixel_row_start                       ; get freds pixel row y
+
+    ld a, l                                         ; into a
+    and  0b111                                      ; test lowest 3 bits are zero 
+    jp nz, set_falling
+
     call reset_to_walking                           ; just in case we were in mid jump
     ld a, (fred_drop_steps)                         ; check the drop steps to see if we died
     and %11110000                                   ; more than 32*2 pixels ?
@@ -267,15 +289,42 @@ process_jump_step:
 
 @jump_down:                                         ; greater than 11 we are going down
     ld (fred_jump_dir), a                           ; store direction
-	add hl, de										; hl = offset into the attribute map of original bc positio
+	add hl, de										; hl = onew fred address
     ld (fred_current_address), hl                   ; store new address
     ret
 
 @jump_up:
+
     ld (fred_jump_dir), a
     or a											; reset the carry flag
-	sbc hl, de										; hl = offset into the attribute map of original bc positio
-    ld (fred_current_address), hl
+	sbc hl, de										; hl = new fred address
+
+    push hl ; save new screen position
+
+    call hl_as_screen_address_to_pixel_row
+    DivideHlBy8()                                   ; l = the character Y
+    
+    ld a, (fred_char_x)
+    ld h, a 
+
+    call get_plaform_map_address ; get platform map address of next pos
+    ld a, (hl)                   ; get attributes of platform
+    and plt_blocker              ; is is blocked?
+
+    ld (char_line_08 + 10), a ; TODO 
+
+    jp nz, @done_test
+    inc hl
+    ld a, (hl)
+    and plt_blocker
+    ld (char_line_08 + 11), a ; TODO 
+
+@done_test
+    pop hl                      ; restore new address
+    jp nz, reset_to_walking      ; if blocked  cancel the jump part of the animation
+
+
+    ld (fred_current_address), hl   ; save new address
     ret
 reset_to_walking:
     ld a, fred_is_walking
@@ -284,8 +333,19 @@ reset_to_walking:
     ld (fred_jump_step), a
     ret
 
-fred_pixel_address_to_charY
+
+
+fred_pixel_address_to_charY:
+    call fred_pixel_row_start
+    DivideHlBy8()                                   ; get the character Y
+    ld a, l                                         ; L contains the Y (def < 256)
+    LD (fred_char_y), a                             ; store the y coordinate
+    ret
+
+fred_pixel_row_start:
     ld hl, (fred_current_address)                   ; get address in the back buffer for fred
+
+hl_as_screen_address_to_pixel_row:
     ld de, char_line_00                             ; start address of the buffer
     or a
     sbc hl, de                                      ; HL = offset in the buffer of the start of fred
@@ -293,15 +353,11 @@ fred_pixel_address_to_charY
     ld e, a
     ld d, 0
     or a
-    sbc hl, de                                      ; subtract x coordinate to bet line start
-
-    
-    DivideHlBy32()                                  ; get the pixel Y
-    DivideHlBy8()                                   ; get the character Y
-
-    ld a, l                                         ; L contains the Y (def < 256)
-    LD (fred_char_y), a                             ; store the y coordinate
+    sbc hl, de                                      ; subtract x coordinate to get line start
+    DivideHlBy32()                                  ; get the pixel row Y
     ret
+
+
 
 ; --------------------------------------------------
 ; variables for fred's move ment

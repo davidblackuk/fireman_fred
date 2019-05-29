@@ -26,7 +26,7 @@ start_game:
 
 
 game_loop:
-    call read_keys
+    call read_keys									; call first, once per loop, the kemap map must be const throughout
 	call restore_backgrounds
 	
 	call move_fred
@@ -35,7 +35,7 @@ game_loop:
 	
 	call draw_sprites	
 	    
-	;call add_debug_fred_char_coords_attribute
+	; call add_debug_fred_char_coords_attribute
 
     call transfer
 

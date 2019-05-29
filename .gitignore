@@ -70,6 +70,10 @@ artifacts/
 *.svclog
 *.scc
 
+# Retro assembler files
+*.txt
+*.tap
+*.bin
 # Chutzpah Test files
 _Chutzpah*
 

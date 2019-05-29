@@ -160,8 +160,26 @@ check_if_blocked_walking:
 	ret												; return result in flags
 
 ;
+; Check if the specified position blocks fred from jumping
+; IN: HL: H = X (chars) L = Y (chars)
+;
+; trashes  and hl de, a
+;
+; returns: Z indicates a not blocked NZ means blocked
+check_if_blocked_jumping:
+	call get_plaform_map_address
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret nz											; return if so
+	inc hl
+	ld a, (hl)										; get the flags
+	and plt_blocker									; check if blocked
+	ret												; return result in flags
+
+
+;
 ; Check if the specified position can support fred
-; this can be a platform or a blocker or a conveyer (moy implemented yet)
+; this can be a platform or a blocker or a conveyer (not implemented yet)
 ; IN: HL: H = X (chars) L = Y (chars)
 ;
 ; returns: NZ indicates it supports fred
@@ -195,6 +213,9 @@ get_plaform_map_address:
 	ld de, platform_map								; get the platform map
 	add hl, de										; hl = platform_map + (x * 32) + y
 	ret
+
+
+
 
 ;
 ; stores the platform flags. indicating if a platform is 
