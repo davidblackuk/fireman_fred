@@ -28,7 +28,7 @@ start_game:
 game_loop:
     call read_keys									; call first, once per loop, the kemap map must be const throughout
 	call restore_backgrounds
-	
+
 	call move_fred
 	call move_sprites
 	call store_backgrounds
